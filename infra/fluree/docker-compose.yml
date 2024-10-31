@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+ fluree:
+    image: fluree/server:d5eb31b1c2be560a92a30176dc8b0e01973859ea
+    container_name: fluree
+    ports:
+      - ${FLUREE_PORT}:8090  # Fluree API port
+    volumes:
+      - fluree_data:/var/lib/fluree/db
+    networks:
+      - fluree
+      - common-ext
+    labels:
+      - 'traefik.enable=false'
+
+
+volumes:
+  fluree_data:
+    name: fluree-data-${ENVIRONMENT}
+
+networks:
+  fluree:
+    internal: true
+    name: fluree-${ENVIRONMENT}
+  proxy-net:
+    external:
+      name: proxy-net
+  common-ext:
+    external:
+      name: common-ext-${ENVIRONMENT}

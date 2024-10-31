@@ -47,6 +47,14 @@ stop-redis:
 	@ echo -e "$(BUILD_PRINT)Stopping the Redis services $(END_BUILD_PRINT)"
 	@ docker-compose -p common --file ./infra/redis/docker-compose.yml --env-file ${ENV_FILE} down
 
+start-fluree:
+	@ echo -e "$(BUILD_PRINT)Starting the Fluree services $(END_BUILD_PRINT)"
+	@ docker-compose -p common --file ./infra/fluree/docker-compose.yml --env-file ${ENV_FILE} up -d
+
+stop-fluree:
+	@ echo -e "$(BUILD_PRINT)Stopping the Fluree services $(END_BUILD_PRINT)"
+	@ docker-compose -p common --file ./infra/fluree/docker-compose.yml --env-file ${ENV_FILE} down
+
 #-----------------------------------------------------------------------------
 # TESTING
 #-----------------------------------------------------------------------------

@@ -39,7 +39,13 @@ stop-server-services: | stop-traefik
 #-----------------------------------------------------------------------------
 # PROJECT SERVICES
 #-----------------------------------------------------------------------------
+start-redis:
+	@ echo -e "$(BUILD_PRINT)Starting the Redis services $(END_BUILD_PRINT)"
+	@ docker-compose -p common --file ./infra/redis/docker-compose.yml --env-file ${ENV_FILE} up -d
 
+stop-redis:
+	@ echo -e "$(BUILD_PRINT)Stopping the Redis services $(END_BUILD_PRINT)"
+	@ docker-compose -p common --file ./infra/redis/docker-compose.yml --env-file ${ENV_FILE} down
 
 #-----------------------------------------------------------------------------
 # TESTING

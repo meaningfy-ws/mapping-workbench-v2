@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7.4.1
+    container_name: redis
+#    ports:
+#      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: ["redis-server", "--appendonly", "yes"]
+    networks:
+      - redis
+
+  redis-ui:
+    image: rediscommander/redis-commander:latest
+    container_name: redis-ui
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+#    ports:
+#      - "8081:8081"
+    depends_on:
+      - redis
+    labels:
+      #### Labels define the behavior and rules of the traefik proxy for this container ####
+      - "traefik.enable=true" # <== Enable traefik to proxy this container
+      - "traefik.http.routers.${ENVIRONMENT}-redis.rule=Host(`redis.${SUBDOMAIN}${DOMAIN}`)" # <== Your Domain Name goes here for the http rule
+      - "traefik.http.routers.${ENVIRONMENT}-redis.entrypoints=web" # <== Defining the entrypoint for http, **ref: line 30
+      - "traefik.http.routers.${ENVIRONMENT}-redis.middlewares=redirect@file" # <== This is a middleware to redirect to https
+      - "traefik.http.routers.${ENVIRONMENT}-redis-secured.rule=Host(`redis.${SUBDOMAIN}${DOMAIN}`)" # <== Your Domain Name for the https rule
+      - "traefik.http.routers.${ENVIRONMENT}-redis-secured.entrypoints=web-secured" # <== Defining entrypoint for https, **ref: line 31
+      - "traefik.http.routers.${ENVIRONMENT}-redis-secured.tls.certresolver=mytlschallenge" # <== Defining certsresolvers for https
+    networks:
+      - redis
+      - proxy-net
+
+volumes:
+  redis_data:
+    name: redis-data-${ENVIRONMENT}
+
+networks:
+  redis:
+    internal: true
+    name: redis-${ENVIRONMENT}
+  proxy-net:
+    external:
+      name: proxy-net

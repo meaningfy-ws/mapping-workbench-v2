@@ -1,4 +1,4 @@
-# My Bun Server
+# Fluree Proxy
 
 This repository contains a simple HTTP server built with Bun.
 

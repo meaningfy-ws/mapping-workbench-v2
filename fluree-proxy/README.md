@@ -6,7 +6,7 @@ This repository contains a simple HTTP server built with Bun.
 
 ### Prerequisites
 
-Ensure you have Bun installed on your system. If not, you can install it by following the instructions below.
+Ensure you have Bun installed on your system. Bun is primarily designed for Unix-like operating systems, such as Linux and macOS. On Windows, you can use Bun through the Windows Subsystem for Linux (WSL). If you haven't installed Bun yet, follow the instructions below.
 
 ### Installation
 

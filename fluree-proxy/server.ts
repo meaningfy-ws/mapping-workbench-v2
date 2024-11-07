@@ -9,13 +9,8 @@ const server = serve({
   port: 3000,
   async fetch(req: Request): Promise<Response> {
     try {
-      const response = await client.query({
-        // Define your query here
-        query: {
-          select: ["*"],
-          from: "collection"
-        }
-      });
+      const query = await req.json();
+      const response = await client.query(query);
       return new Response(JSON.stringify(response), { status: 200 });
     } catch (error) {
       return new Response("Error querying Fluree", { status: 500 });

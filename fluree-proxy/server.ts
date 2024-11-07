@@ -13,7 +13,8 @@ const server = serve({
       const response = await client.query(query);
       return new Response(JSON.stringify(response), { status: 200 });
     } catch (error) {
-      return new Response("Error querying Fluree", { status: 500 });
+      console.error("Error querying Fluree:", error);
+      return new Response(JSON.stringify({ error: "Error querying Fluree" }), { status: 500 });
     }
   },
 });

@@ -1,9 +1,25 @@
 import { serve } from "bun";
+import { FlureeClient } from "@fluree/fluree-client";
+
+const client = new FlureeClient({
+  url: "http://localhost:58090" // Updated Fluree database URL
+});
 
 const server = serve({
   port: 3000,
-  fetch(req: Request): Response {
-    return new Response("Hello World!");
+  async fetch(req: Request): Promise<Response> {
+    try {
+      const response = await client.query({
+        // Define your query here
+        query: {
+          select: ["*"],
+          from: "collection"
+        }
+      });
+      return new Response(JSON.stringify(response), { status: 200 });
+    } catch (error) {
+      return new Response("Error querying Fluree", { status: 500 });
+    }
   },
 });
 

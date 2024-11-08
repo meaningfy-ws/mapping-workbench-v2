@@ -15,7 +15,7 @@ async function testFlureeProxy() {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(query)
+      body: JSON.stringify(query, null, 2)
     });
 
     const data = await response.json();

@@ -25,26 +25,26 @@ const server = serve({
           }
         ]
       };
-      return new Response(JSON.stringify(routes), { status: 200, headers: { "Content-Type": "application/json" } });
+      return new Response(JSON.stringify(routes, null, 2), { status: 200, headers: { "Content-Type": "application/json" } });
     } else if (url.pathname === "/query") {
       try {
         const query = await req.json();
         const response = await client.query(query).send();
-        return new Response(JSON.stringify(response), { status: 200 });
+        return new Response(JSON.stringify(response, null, 2), { status: 200 });
       } catch (error) {
         console.error("Error querying Fluree:", error);
         const statusCode = error.response ? error.response.status : 500;
-        return new Response(JSON.stringify({ error: `Error querying Fluree, HTTP status code: ${statusCode}` }), { status: statusCode });
+        return new Response(JSON.stringify({ error: `Error querying Fluree, HTTP status code: ${statusCode}` }, null, 2), { status: statusCode });
       }
     } else if (url.pathname === "/transact") {
       try {
         const transaction = await req.json();
         const response = await client.transact(transaction).send();
-        return new Response(JSON.stringify(response), { status: 200 });
+        return new Response(JSON.stringify(response, null, 2), { status: 200 });
       } catch (error) {
         console.error("Error transacting with Fluree:", error);
         const statusCode = error.response ? error.response.status : 500;
-        return new Response(JSON.stringify({ error: `Error transacting with Fluree, HTTP status code: ${statusCode}` }), { status: statusCode });
+        return new Response(JSON.stringify({ error: `Error transacting with Fluree, HTTP status code: ${statusCode}` }, null, 2), { status: statusCode });
       }
     } else {
       return new Response("Not Found", { status: 404 });

@@ -17,7 +17,8 @@ const server = serve({
       return new Response(JSON.stringify(response), { status: 200 });
     } catch (error) {
       console.error("Error querying Fluree:", error);
-      return new Response(JSON.stringify({ error: "Error querying Fluree" }), { status: 500 });
+      const statusCode = error.response ? error.response.status : 500;
+      return new Response(JSON.stringify({ error: `Error querying Fluree, HTTP status code: ${statusCode}` }), { status: statusCode });
     }
   },
 });

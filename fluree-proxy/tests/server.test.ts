@@ -40,4 +40,27 @@ describe("Fluree Proxy Server", () => {
     expect(data).toBeDefined();
     // Add more assertions based on expected data structure
   });
-});
+  });
+
+  it("should handle a valid transact request", async () => {
+    const transaction = {
+      insert: {
+        name: "Derek",
+        species: "yeti",
+        favorite_food: "kale"
+      }
+    };
+
+    const response = await fetch("http://localhost:3000/transact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(transaction, null, 2)
+    });
+
+    expect(response.status).toBe(200);
+    const data = await response.json();
+    expect(data.commit).toBeDefined();
+    // Add more assertions based on expected data structure
+  });

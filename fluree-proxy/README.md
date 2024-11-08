@@ -44,7 +44,7 @@ Ensure you have Bun installed on your system. Bun is primarily designed for Unix
    curl http://localhost:3000
    ```
 
-   You should receive a "Hello World!" response, confirming the server is operational.
+   You should receive a response listing the available routes, confirming the server is operational.
 
 ### Accessing the Server
 

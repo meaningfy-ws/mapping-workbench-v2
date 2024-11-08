@@ -11,14 +11,19 @@ const client = await new FlureeClient({
 const server = serve({
   port: 3000,
   async fetch(req: Request): Promise<Response> {
-    try {
-      const query = await req.json();
-      const response = await client.query(query).send();
-      return new Response(JSON.stringify(response), { status: 200 });
-    } catch (error) {
-      console.error("Error querying Fluree:", error);
-      const statusCode = error.response ? error.response.status : 500;
-      return new Response(JSON.stringify({ error: `Error querying Fluree, HTTP status code: ${statusCode}` }), { status: statusCode });
+    const url = new URL(req.url);
+    if (url.pathname === "/query") {
+      try {
+        const query = await req.json();
+        const response = await client.query(query).send();
+        return new Response(JSON.stringify(response), { status: 200 });
+      } catch (error) {
+        console.error("Error querying Fluree:", error);
+        const statusCode = error.response ? error.response.status : 500;
+        return new Response(JSON.stringify({ error: `Error querying Fluree, HTTP status code: ${statusCode}` }), { status: statusCode });
+      }
+    } else {
+      return new Response("Not Found", { status: 404 });
     }
   },
 });

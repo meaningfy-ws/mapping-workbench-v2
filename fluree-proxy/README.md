@@ -71,15 +71,31 @@ To run the Fluree Proxy server using Docker, follow these steps:
    docker build -t fluree-proxy .
    ```
 
-2. **Run the Docker container**: Start the container with the following command, ensuring the database is accessible:
+2. **Run the Docker container**: Start the container in detached mode with the following command, ensuring the database is accessible:
 
    ```bash
-   docker run -p 3000:3000 -e DB_HOST=host.docker.internal fluree-proxy
+   docker run -d -p 3000:3000 -e DB_HOST=host.docker.internal fluree-proxy
    ```
 
    This command binds the application port (3000) to the host, allowing you to access the server at `http://localhost:3000`.
 
-### Running Tests
+   This command binds the application port (3000) to the host, allowing you to access the server at `http://localhost:3000`.
+
+3. **Stopping the Docker container**: If you need to stop the container and `Ctrl+C` doesn't work, use the following commands:
+
+   - List all running containers to find the container ID or name:
+
+     ```bash
+     docker ps
+     ```
+
+   - Use the container ID or name from the list to stop the container:
+
+     ```bash
+     docker stop <container_id_or_name>
+     ```
+
+   Replace `<container_id_or_name>` with the actual ID or name of your running container.
 
 To run the tests for the Fluree Proxy server, you can use the following command:
 

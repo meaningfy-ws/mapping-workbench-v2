@@ -19,6 +19,42 @@ describe("Fluree Proxy Server", () => {
     });
   });
 
+  it("should return 400 for a query request with an array body", async () => {
+    const query = [
+      { select: { '?s': ['*'] }, where: { '@id': '?s' } }
+    ];
+
+    const response = await fetch("http://localhost:3000/query", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(query, null, 2)
+    });
+
+    expect(response.status).toBe(400);
+    const data = await response.json();
+    expect(data.error).toBe("Request body must be a JSON object, not an array.");
+  });
+
+  it("should return 400 for a transact request with an array body", async () => {
+    const transaction = [
+      { insert: { name: "Derek", species: "yeti", favorite_food: "kale" } }
+    ];
+
+    const response = await fetch("http://localhost:3000/transact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(transaction, null, 2)
+    });
+
+    expect(response.status).toBe(400);
+    const data = await response.json();
+    expect(data.error).toBe("Request body must be a JSON object, not an array.");
+  });
+
   it("should handle a valid query request", async () => {
     const query = {
       select: { '?s': ['*'] },

@@ -13,8 +13,8 @@ COPY . .
 # Install dependencies
 RUN bun install
 
-# Expose the port the app runs on
-EXPOSE 3000
+# Expose the ports the app and database run on
+EXPOSE 3000 58090
 
 # Start the server
 CMD ["bun", "run", "server.ts"]

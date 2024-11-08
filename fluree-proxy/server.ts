@@ -2,7 +2,7 @@ import { serve } from "bun";
 import { FlureeClient } from "@fluree/fluree-client";
 
 const client = await new FlureeClient({
-  host: 'localhost',
+  host: 'host.docker.internal',
   port: 58090,
   ledger: 'cryptids',
   // create: true

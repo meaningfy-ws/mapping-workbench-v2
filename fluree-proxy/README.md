@@ -61,6 +61,12 @@ Ensure you have Bun installed on your system. Bun is primarily designed for Unix
    }
    ```
 
-### Accessing the Server
+### Running Tests
 
-You can also access the server by navigating to `http://localhost:3000` in your web browser.
+To run the tests for the Fluree Proxy server, you can use the following command:
+
+```bash
+bun test
+```
+
+This command will execute all the test cases defined in your project, ensuring that the server behaves as expected.

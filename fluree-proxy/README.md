@@ -44,7 +44,22 @@ Ensure you have Bun installed on your system. Bun is primarily designed for Unix
    curl http://localhost:3000
    ```
 
-   You should receive a response listing the available routes, confirming the server is operational.
+   You should receive a response listing the available routes, confirming the server is operational. The response will look like this:
+
+   ```json
+   {
+     "availableRoutes": [
+       {
+         "path": "/query",
+         "description": "POST request in FlureeQL for read (SELECT) queries"
+       },
+       {
+         "path": "/transact",
+         "description": "POST request in FlureeQL for write (INSERT) queries)"
+       }
+     ]
+   }
+   ```
 
 ### Accessing the Server
 

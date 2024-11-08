@@ -14,7 +14,12 @@ const server = serve({
     const url = new URL(req.url);
     if (url.pathname === "/") {
       const routes = {
-        availableRoutes: ["/query"]
+        availableRoutes: [
+          {
+            path: "/query",
+            description: "POST request in FlureeQL for read-only queries"
+          }
+        ]
       };
       return new Response(JSON.stringify(routes), { status: 200, headers: { "Content-Type": "application/json" } });
     } else if (url.pathname === "/query") {

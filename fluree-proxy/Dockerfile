@@ -1,24 +1,17 @@
-# Use a lightweight Node.js image as the base
-FROM node:18-alpine
-
-# Install Bun
-RUN curl -fsSL https://bun.sh/install | bash
-
-# Set the environment variable for Bun
-ENV BUN_INSTALL="/root/.bun"
-ENV PATH="$BUN_INSTALL/bin:$PATH"
+# Use the official Bun image as the base
+FROM oven/bun:latest
 
 # Create and set the working directory
 WORKDIR /app
 
-# Copy package.json and bun.lockb
-COPY package.json bun.lockb ./
+# Set the working directory
+WORKDIR /app
+
+# Copy the application code
+COPY . .
 
 # Install dependencies
 RUN bun install
-
-# Copy the rest of the application code
-COPY . .
 
 # Expose the port the app runs on
 EXPOSE 3000

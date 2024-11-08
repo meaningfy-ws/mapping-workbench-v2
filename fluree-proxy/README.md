@@ -61,6 +61,24 @@ Ensure you have Bun installed on your system. Bun is primarily designed for Unix
    }
    ```
 
+### Running with Docker
+
+To run the Fluree Proxy server using Docker, follow these steps:
+
+1. **Build the Docker image**: Use the following command to build the Docker image:
+
+   ```bash
+   docker build -t fluree-proxy .
+   ```
+
+2. **Run the Docker container**: Start the container with the following command, ensuring the database is accessible:
+
+   ```bash
+   docker run -p 3000:3000 -e DB_HOST=host.docker.internal fluree-proxy
+   ```
+
+   This command binds the application port (3000) to the host, allowing you to access the server at `http://localhost:3000`.
+
 ### Running Tests
 
 To run the tests for the Fluree Proxy server, you can use the following command:

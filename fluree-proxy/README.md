@@ -8,6 +8,10 @@ This repository contains a simple HTTP server built with Bun.
 
 Ensure you have Bun installed on your system. Bun is primarily designed for Unix-like operating systems, such as Linux and macOS. On Windows, you can use Bun through the Windows Subsystem for Linux (WSL). If you haven't installed Bun yet, follow the instructions below.
 
+#### Fluree Database
+
+Ensure you have the Fluree database installed and running. You can download the latest version from the [Fluree website](https://flur.ee/download). Follow the instructions provided to set up and start the database on your system. The default port for Fluree is 58090 or 8090, which should be accessible for the Fluree Proxy server to connect.
+
 ### Installation
 
 1. **Install Bun**: If you haven't installed Bun yet, run the following command:

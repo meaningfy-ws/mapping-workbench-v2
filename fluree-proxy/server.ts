@@ -29,6 +29,9 @@ const server = serve({
     } else if (url.pathname === "/query") {
       try {
         const query = await req.json();
+        if (Array.isArray(query)) {
+          return new Response(JSON.stringify({ error: "Request body must be a JSON object, not an array." }, null, 2), { status: 400 });
+        }
         const response = await client.query(query).send();
         return new Response(JSON.stringify(response, null, 2), { status: 200 });
       } catch (error) {
@@ -39,6 +42,9 @@ const server = serve({
     } else if (url.pathname === "/transact") {
       try {
         const transaction = await req.json();
+        if (Array.isArray(transaction)) {
+          return new Response(JSON.stringify({ error: "Request body must be a JSON object, not an array." }, null, 2), { status: 400 });
+        }
         const response = await client.transact(transaction).send();
         return new Response(JSON.stringify(response, null, 2), { status: 200 });
       } catch (error) {

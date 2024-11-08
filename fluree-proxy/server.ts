@@ -12,7 +12,12 @@ const server = serve({
   port: 3000,
   async fetch(req: Request): Promise<Response> {
     const url = new URL(req.url);
-    if (url.pathname === "/query") {
+    if (url.pathname === "/") {
+      const routes = {
+        availableRoutes: ["/query"]
+      };
+      return new Response(JSON.stringify(routes), { status: 200, headers: { "Content-Type": "application/json" } });
+    } else if (url.pathname === "/query") {
       try {
         const query = await req.json();
         const response = await client.query(query).send();

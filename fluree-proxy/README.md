@@ -97,7 +97,9 @@ To run the Fluree Proxy server using Docker, follow these steps:
 
    Replace `<container_id_or_name>` with the actual ID or name of your running container.
 
-To run the tests for the Fluree Proxy server, you can use the following command:
+### Testing
+
+To run the tests for the Fluree Proxy server, use the following command:
 
 ```bash
 bun test

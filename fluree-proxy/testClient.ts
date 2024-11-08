@@ -2,8 +2,11 @@ import fetch from "node-fetch";
 
 async function testFlureeProxy() {
   const query = {
-    select: ["*"],
-    from: "collection"
+    // from: "cryptids",
+    select: { '?s': ['*'] },
+    where: {
+      '@id': '?s',
+    },
   };
 
   try {

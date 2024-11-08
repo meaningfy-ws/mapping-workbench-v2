@@ -17,7 +17,11 @@ const server = serve({
         availableRoutes: [
           {
             path: "/query",
-            description: "POST request in FlureeQL for read-only queries"
+            description: "POST request in FlureeQL for read (SELECT) queries"
+          },
+          {
+            path: "/transact",
+            description: "POST request in FlureeQL for write (INSERT) queries)"
           }
         ]
       };
@@ -31,6 +35,16 @@ const server = serve({
         console.error("Error querying Fluree:", error);
         const statusCode = error.response ? error.response.status : 500;
         return new Response(JSON.stringify({ error: `Error querying Fluree, HTTP status code: ${statusCode}` }), { status: statusCode });
+      }
+    } else if (url.pathname === "/transact") {
+      try {
+        const transaction = await req.json();
+        const response = await client.transact(transaction).send();
+        return new Response(JSON.stringify(response), { status: 200 });
+      } catch (error) {
+        console.error("Error transacting with Fluree:", error);
+        const statusCode = error.response ? error.response.status : 500;
+        return new Response(JSON.stringify({ error: `Error transacting with Fluree, HTTP status code: ${statusCode}` }), { status: statusCode });
       }
     } else {
       return new Response("Not Found", { status: 404 });

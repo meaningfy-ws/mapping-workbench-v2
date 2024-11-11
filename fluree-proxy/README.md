@@ -65,6 +65,37 @@ Ensure you have the Fluree database installed and running. You can download the 
    }
    ```
 
+### Query Examples
+
+Here are some examples of how to use the Fluree Proxy server for querying and transacting data.
+
+#### Query Example
+
+To perform a read (SELECT) query, send a POST request to the `/query` endpoint with a JSON body. Here's an example:
+
+```json
+{
+  "select": { "?s": ["*"] },
+  "where": {
+    "@id": "?s"
+  }
+}
+```
+
+#### Transact Example
+
+To perform a write (INSERT) transaction, send a POST request to the `/transact` endpoint with a JSON body. Here's an example:
+
+```json
+{
+  "insert": {
+    "name": "Derek",
+    "species": "yeti",
+    "favorite_food": "kale"
+  }
+}
+```
+
 ### Running with Docker
 
 To run the Fluree Proxy server using Docker, follow these steps:

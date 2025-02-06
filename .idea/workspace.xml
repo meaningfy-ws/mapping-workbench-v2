@@ -4,18 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da3608ec-4e29-4966-90c4-751b7d4c97de" name="Changes" comment="MWB2-57: react typescript">
-      <change afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/projects/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/projects/project.tsx" afterDir="false" />
+    <list default="true" id="da3608ec-4e29-4966-90c4-751b7d4c97de" name="Changes" comment="MWB2-57: add table">
+      <change afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/models/project.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/sections/projects/edit.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/sections/projects/table.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/app/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/app/page.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/page.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/projects/project.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/projects/project.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +107,7 @@
       <option name="presentableId" value="Default" />
       <updated>1738831914996</updated>
       <workItem from="1738831916029" duration="2134000" />
-      <workItem from="1738834057754" duration="15659000" />
+      <workItem from="1738834057754" duration="16844000" />
     </task>
     <task id="LOCAL-00001" summary="MWB2-57: add next react app">
       <option name="closed" value="true" />
@@ -163,7 +157,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738849212182</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="MWB2-57: add table">
+      <option name="closed" value="true" />
+      <created>1738855634689</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1738855634689</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,7 +198,8 @@
     <MESSAGE value="MWB2-57: add next react app" />
     <MESSAGE value="MWB2-57: pagination" />
     <MESSAGE value="MWB2-57: react typescript" />
-    <option name="LAST_COMMIT_MESSAGE" value="MWB2-57: react typescript" />
+    <MESSAGE value="MWB2-57: add table" />
+    <option name="LAST_COMMIT_MESSAGE" value="MWB2-57: add table" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

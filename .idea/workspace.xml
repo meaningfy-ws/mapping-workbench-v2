@@ -5,25 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da3608ec-4e29-4966-90c4-751b7d4c97de" name="Changes" comment="MWB2-57: react typescript">
+      <change afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/projects/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/projects/project.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/public/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/public/logo192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/public/logo512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/public/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/public/robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/App.test.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/App.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/reportWebVitals.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/setupTests.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/app/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/app/page.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/page.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,8 +73,8 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app" />
-      <recent name="$PROJECT_DIR$/mapping-workbench/frontend/src" />
       <recent name="$PROJECT_DIR$/mapping-workbench/frontend/src/pages" />
+      <recent name="$PROJECT_DIR$/mapping-workbench/frontend/src" />
       <recent name="$PROJECT_DIR$/mapping-workbench/frontend/src/app" />
       <recent name="$PROJECT_DIR$/mapping-workbench/frontend/src/app/pages" />
     </key>
@@ -121,7 +113,7 @@
       <option name="presentableId" value="Default" />
       <updated>1738831914996</updated>
       <workItem from="1738831916029" duration="2134000" />
-      <workItem from="1738834057754" duration="11465000" />
+      <workItem from="1738834057754" duration="15659000" />
     </task>
     <task id="LOCAL-00001" summary="MWB2-57: add next react app">
       <option name="closed" value="true" />
@@ -147,7 +139,31 @@
       <option name="project" value="LOCAL" />
       <updated>1738847825309</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="MWB2-57: react typescript">
+      <option name="closed" value="true" />
+      <created>1738849173409</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1738849173409</updated>
+    </task>
+    <task id="LOCAL-00005" summary="MWB2-57: react typescript">
+      <option name="closed" value="true" />
+      <created>1738849183327</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1738849183327</updated>
+    </task>
+    <task id="LOCAL-00006" summary="MWB2-57: react typescript">
+      <option name="closed" value="true" />
+      <created>1738849212182</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1738849212182</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

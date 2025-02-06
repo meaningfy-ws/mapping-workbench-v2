@@ -4,7 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da3608ec-4e29-4966-90c4-751b7d4c97de" name="Changes" comment="MWB2-57: pagination" />
+    <list default="true" id="da3608ec-4e29-4966-90c4-751b7d4c97de" name="Changes" comment="MWB2-57: react typescript">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/App.test.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/App.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/reportWebVitals.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/setupTests.ts" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -101,7 +121,7 @@
       <option name="presentableId" value="Default" />
       <updated>1738831914996</updated>
       <workItem from="1738831916029" duration="2134000" />
-      <workItem from="1738834057754" duration="9918000" />
+      <workItem from="1738834057754" duration="11465000" />
     </task>
     <task id="LOCAL-00001" summary="MWB2-57: add next react app">
       <option name="closed" value="true" />
@@ -119,7 +139,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738845434959</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="MWB2-57: react typescript">
+      <option name="closed" value="true" />
+      <created>1738847825309</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1738847825309</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -151,7 +179,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="MWB2-57: add next react app" />
     <MESSAGE value="MWB2-57: pagination" />
-    <option name="LAST_COMMIT_MESSAGE" value="MWB2-57: pagination" />
+    <MESSAGE value="MWB2-57: react typescript" />
+    <option name="LAST_COMMIT_MESSAGE" value="MWB2-57: react typescript" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

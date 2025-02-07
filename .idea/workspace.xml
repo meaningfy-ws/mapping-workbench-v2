@@ -4,12 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da3608ec-4e29-4966-90c4-751b7d4c97de" name="Changes" comment="MWB2-57: add table">
-      <change afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/models/project.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/sections/projects/edit.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/sections/projects/table.tsx" afterDir="false" />
+    <list default="true" id="da3608ec-4e29-4966-90c4-751b7d4c97de" name="Changes" comment="MWB2-57: add drawer">
+      <change afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/api.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fluree-proxy/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/fluree-proxy/server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fluree-proxy/tests/server.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/fluree-proxy/tests/server.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/next.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/models/project.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/models/project.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/projects/project.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/projects/project.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/sections/projects/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/sections/projects/edit.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/App.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/reportWebVitals.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/my-app/src/setupTests.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +128,7 @@
       <option name="presentableId" value="Default" />
       <updated>1738831914996</updated>
       <workItem from="1738831916029" duration="2134000" />
-      <workItem from="1738834057754" duration="16844000" />
+      <workItem from="1738834057754" duration="36085000" />
     </task>
     <task id="LOCAL-00001" summary="MWB2-57: add next react app">
       <option name="closed" value="true" />
@@ -165,7 +186,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738855634689</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="MWB2-57: add drawer">
+      <option name="closed" value="true" />
+      <created>1738856823127</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1738856823127</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -199,7 +228,8 @@
     <MESSAGE value="MWB2-57: pagination" />
     <MESSAGE value="MWB2-57: react typescript" />
     <MESSAGE value="MWB2-57: add table" />
-    <option name="LAST_COMMIT_MESSAGE" value="MWB2-57: add table" />
+    <MESSAGE value="MWB2-57: add drawer" />
+    <option name="LAST_COMMIT_MESSAGE" value="MWB2-57: add drawer" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

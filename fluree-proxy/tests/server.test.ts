@@ -2,7 +2,7 @@ import fetch from "node-fetch";
 
 describe("Fluree Proxy Server", () => {
   it("should return available routes at the root endpoint", async () => {
-    const response = await fetch("http://localhost:3000/");
+    const response = await fetch("http://localhost:8000/");
     expect(response.status).toBe(200);
     const data = await response.json();
     expect(data).toEqual({
@@ -24,7 +24,7 @@ describe("Fluree Proxy Server", () => {
       { select: { '?s': ['*'] }, where: { '@id': '?s' } }
     ];
 
-    const response = await fetch("http://localhost:3000/query", {
+    const response = await fetch("http://localhost:8000/query", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -42,7 +42,7 @@ describe("Fluree Proxy Server", () => {
       { insert: { name: "Derek", species: "yeti", favorite_food: "kale" } }
     ];
 
-    const response = await fetch("http://localhost:3000/transact", {
+    const response = await fetch("http://localhost:8000/transact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -63,7 +63,7 @@ describe("Fluree Proxy Server", () => {
       },
     };
 
-    const response = await fetch("http://localhost:3000/query", {
+    const response = await fetch("http://localhost:8000/query", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -87,7 +87,7 @@ describe("Fluree Proxy Server", () => {
       }
     };
 
-    const response = await fetch("http://localhost:3000/transact", {
+    const response = await fetch("http://localhost:8000/transact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

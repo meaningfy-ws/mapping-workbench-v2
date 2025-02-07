@@ -3,15 +3,19 @@ import { FlureeClient } from "@fluree/fluree-client";
 
 const dbHost = process.env.DB_HOST || 'localhost';
 
+console.log('im in')
+
 const client = await new FlureeClient({
   host: dbHost,
   port: 58090,
-  ledger: 'cryptids',
-  // create: true
+  ledger: 'fluree-jld/38702809297855',
+  create: true
 }).connect();
 
+console.log('connected')
+
 const server = serve({
-  port: 3000,
+  port: 8000,
   async fetch(req: Request): Promise<Response> {
     const url = new URL(req.url);
     if (url.pathname === "/") {
@@ -60,4 +64,4 @@ const server = serve({
   },
 });
 
-console.log("Server is running at http://localhost:3000");
+console.log("Server is running at http://localhost:8000");

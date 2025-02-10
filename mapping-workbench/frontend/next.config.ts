@@ -1,21 +1,17 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
-};
-//
-module.exports = {
-  async rewrites() {
-    return [
-      {
-        source: '/localhost',
-        destination: '/localhost',
-      },
-    ]
-  },
+const nextConfig = {
+    async headers() {
+        return [
+            {
+                // matching all API routes
+                source: "/api/:path*",
+                headers: [
+                    // other headers omitted for brevity...
+                    {key: "Cross-Origin-Opener-Policy", value: "same-origin"},
+                    {key: "Referrer-Policy", value: "strict-origin-when-cross-origin"}
+                ]
+            }
+        ]
+    }
 }
 
-module.exports.rewrites()
-
-
-export default nextConfig;
+module.exports = nextConfig

@@ -1,10 +1,9 @@
 import {useEffect, useState} from "react";
-import Project from "@/models/project";
-import {Button, Drawer, Stack, TextField, Typography} from "@mui/material";
-import {addProjectApi, deleteProjectApi} from "@/pages/app/api";
-import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
-import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
+import Project from "@/models/project";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
+import {Button, Drawer, Stack, TextField, Typography} from "@mui/material";
 
 
 interface ProjectDrawerProps extends Project {
@@ -15,10 +14,14 @@ interface EditDrawerProps {
     open: boolean;
     values: ProjectDrawerProps;
 
+    handleAdd(values:ProjectDrawerProps): void;
+
+    handleEdit(values:ProjectDrawerProps): void;
+
     handleClose(open: boolean): void;
 }
 
-const EditDrawer = ({open, values, handleClose}: EditDrawerProps) => {
+const EditDrawer = ({open, values, handleAdd, handleEdit, handleClose}: EditDrawerProps) => {
     const initialValues = {
         '@id': '',
         title: '',
@@ -36,15 +39,6 @@ const EditDrawer = ({open, values, handleClose}: EditDrawerProps) => {
             setDefaultValues(values ?? initialValues)
     }, [open])
 
-    const {['@id']: projectId, ...projectValues} = defaultValues
-
-    const handleAdd = () => addProjectApi(projectValues)
-
-    const handleUpdate = () => {
-        deleteProjectApi(projectId)
-            .then(handleAdd)
-
-    }
 
     const handleChange = (input: string, value: string) => {
         setDefaultValues(prevState => ({...prevState, [input]: value}))
@@ -69,7 +63,7 @@ const EditDrawer = ({open, values, handleClose}: EditDrawerProps) => {
                     />
                 </LocalizationProvider>
             </Stack>
-            <Button onClick={values['@id'] ? handleUpdate : handleAdd}>{values['@id'] ? 'Edit' : 'Add'}</Button>
+            <Button onClick={() =>values['@id'] ? handleEdit(defaultValues) : handleAdd(defaultValues)}>{values['@id'] ? 'Edit' : 'Add'}</Button>
         </Drawer>
     )
 }

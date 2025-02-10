@@ -4,15 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da3608ec-4e29-4966-90c4-751b7d4c97de" name="Changes" comment="MWB2-57: add working fluree conection">
-      <change afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/api/delete.ts" afterDir="false" />
+    <list default="true" id="da3608ec-4e29-4966-90c4-751b7d4c97de" name="Changes" comment="MWB2-57: add update and delete">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fluree-proxy/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/fluree-proxy/server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/models/project.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/models/project.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/api/get.js" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/api/get.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/api.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/projects/project.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/projects/project.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/sections/projects/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/sections/projects/edit.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/sections/projects/table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/sections/projects/table.tsx" afterDir="false" />
@@ -114,7 +107,7 @@
       <updated>1738831914996</updated>
       <workItem from="1738831916029" duration="2134000" />
       <workItem from="1738834057754" duration="39144000" />
-      <workItem from="1739125499250" duration="29283000" />
+      <workItem from="1739125499250" duration="32360000" />
     </task>
     <task id="LOCAL-00001" summary="MWB2-57: add next react app">
       <option name="closed" value="true" />
@@ -196,7 +189,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739189259707</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="MWB2-57: add update and delete">
+      <option name="closed" value="true" />
+      <created>1739201598776</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1739201598776</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -233,7 +234,8 @@
     <MESSAGE value="MWB2-57: add drawer" />
     <MESSAGE value="MWB2-57: prepare api" />
     <MESSAGE value="MWB2-57: add working fluree conection" />
-    <option name="LAST_COMMIT_MESSAGE" value="MWB2-57: add working fluree conection" />
+    <MESSAGE value="MWB2-57: add update and delete" />
+    <option name="LAST_COMMIT_MESSAGE" value="MWB2-57: add update and delete" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

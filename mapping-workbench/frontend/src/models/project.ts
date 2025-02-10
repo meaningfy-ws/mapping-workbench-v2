@@ -5,6 +5,7 @@ class Project {
     start_date: Date;
     end_date: Date;
     "@type": string;
+    "@id"?:string;
 
     constructor(title: string, identifier: string, start_date: Date, end_date: Date, type: string, description?: string) {
         this.title = title;

@@ -1,13 +1,22 @@
 import {useEffect, useState} from "react";
-import {Button, Stack} from "@mui/material";
+import {Button, Stack, Typography} from "@mui/material";
 import EditDrawer from "@/sections/projects/edit";
 import ProjectsTable from "@/sections/projects/table";
-import {getByTypeApi} from "@/pages/app/api";
+import {deleteProjectApi, getByTypeApi} from "@/pages/app/api";
+import Project from '../../../models/project'
 
+interface ToggleDrawerShowProps {
+    show?: boolean
+}
 
-const Project = () => {
-    const [toggleDrawer, setToggleDrawer] = useState(false)
+interface ToggleDrawerProps extends Project, ToggleDrawerShowProps {
+}
+
+const ProjectPage = () => {
+    const [toggleDrawer, setToggleDrawer] = useState<ToggleDrawerProps | ToggleDrawerShowProps>({show: false})
     const [projects, setProjects] = useState([])
+
+    console.log(toggleDrawer)
 
     useEffect(() => {
         getByTypeApi('project')
@@ -15,14 +24,31 @@ const Project = () => {
             .catch(err => console.error(err))
     }, [])
 
-    return <Stack>
+    const handleAdd = () => {
+        setToggleDrawer({show: true})
+    }
+
+    const onEdit = (row: Project) => {
+        setToggleDrawer({...row, show: true})
+    }
+
+    const onDelete = (id: string) => {
+        deleteProjectApi(id)
+    }
+
+    const {show, ...values} = toggleDrawer
+
+    return <Stack sx={{m: 3}}>
+        <Typography variant='h4'>Project</Typography>
         <Stack direction='row' justifyContent='end' sx={{mb: 2}}>
-            <Button onClick={() => setToggleDrawer(true)}>Add</Button>
-            <Button onClick={() => setToggleDrawer(true)}>Edit</Button>
+            <Button onClick={handleAdd}>Add</Button>
         </Stack>
-        <ProjectsTable data={projects}/>
-        <EditDrawer open={toggleDrawer} handleClose={() => setToggleDrawer(false)}/>
+        <ProjectsTable data={projects}
+                       handleEdit={onEdit}
+                       handleDelete={onDelete}/>
+        <EditDrawer open={!!show}
+                    values={values} handleClose={() => setToggleDrawer({show: false})}/>
     </Stack>
 }
 
-export default Project
+export default ProjectPage

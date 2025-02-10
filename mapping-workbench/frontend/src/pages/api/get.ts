@@ -1,4 +1,6 @@
- const handler = async (req, res) => {
+import {NextApiRequest, NextApiResponse} from "next";
+
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const {type} = JSON.parse(req.body)
 
     const query = {
@@ -9,9 +11,6 @@
         },
     };
 
-
-    console.log('in here handler')
-
     const response = await fetch("http://localhost:8000/query", {
         method: "POST",
         headers: {
@@ -19,7 +18,6 @@
         },
         body: JSON.stringify(query, null, 2)
     });
-
 
     const data = await response.json()
 

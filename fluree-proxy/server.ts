@@ -3,16 +3,12 @@ import {FlureeClient} from "@fluree/fluree-client";
 
 const dbHost = process.env.DB_HOST || 'localhost';
 
-console.log('im in')
-
 const client = await new FlureeClient({
     host: dbHost,
     port: 58090,
-    ledger: 'fluree-jld/38702809297855_12',
+    ledger: 'fluree-jld/38702809297855_13',
     create: true
 }).connect();
-
-console.log('connected')
 
 const server = serve({
     port: 8000,

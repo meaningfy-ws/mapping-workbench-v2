@@ -1,9 +1,13 @@
 import {useEffect, useState} from "react";
+
+import AddIcon from '@mui/icons-material/Add';
+
 import {Button, Stack, Typography} from "@mui/material";
+
+import Project from '../../../models/project'
 import EditDrawer from "@/sections/projects/edit";
 import ProjectsTable from "@/sections/projects/table";
 import {addProjectApi, deleteProjectApi, getByTypeApi} from "@/pages/app/api";
-import Project from '../../../models/project'
 
 interface ToggleDrawerShowProps {
     show?: boolean
@@ -35,38 +39,45 @@ const ProjectPage = () => {
     const onDelete = (id: string) => {
         return deleteProjectApi(id)
             .then(() => getData())
+            .catch(err => console.error(err))
     }
 
-    const onAdd = (values) =>
+    const onAdd = (values: ToggleDrawerProps) =>
         addProjectApi(values)
             .then(() => {
                 getData()
                 setToggleDrawer({show: false})
             })
+            .catch(err => console.error(err))
 
-    const onUpdate = (values) => {
+    const onUpdate = (values: ToggleDrawerProps) => {
         const {['@id']: projectId, ...other} = values
 
-        deleteProjectApi(projectId)
-            .then(() =>
-                onAdd(other)
-                    .then(() => getData())
-            )
+        if (projectId)
+            deleteProjectApi(projectId)
+                .then(() =>
+                    onAdd(other)
+                        .then(() => getData())
+                        .catch(err => console.error(err))
+                )
+                .catch(err => console.error(err))
     }
 
     const {show, ...values} = toggleDrawer
 
+    const existingValues = Object.keys(values).length > 0 ? values as ToggleDrawerProps : undefined
+    console.log('existingValues', existingValues)
+
     return <Stack sx={{m: 3}}>
         <Typography variant='h4'>Project</Typography>
         <Stack direction='row' justifyContent='end' sx={{mb: 2}}>
-            <Button onClick={onOpenAddDrawer}>Add</Button>
-            <Button onClick={getData}>Refresh</Button>
+            <Button startIcon={<AddIcon/>} onClick={onOpenAddDrawer}>Add</Button>
         </Stack>
         <ProjectsTable data={projects}
                        handleEdit={onOpenEditDrawer}
                        handleDelete={onDelete}/>
         <EditDrawer open={!!show}
-                    values={values}
+                    values={existingValues}
                     handleEdit={onUpdate}
                     handleAdd={onAdd}
                     handleClose={() => setToggleDrawer({show: false})}/>

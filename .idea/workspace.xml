@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da3608ec-4e29-4966-90c4-751b7d4c97de" name="Changes" comment="MWB2-57: add update and delete">
+    <list default="true" id="da3608ec-4e29-4966-90c4-751b7d4c97de" name="Changes" comment="MWB2-57: add refresh">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/projects/project.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/projects/project.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/sections/projects/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/sections/projects/edit.tsx" afterDir="false" />
@@ -30,7 +30,7 @@
   }
 }</component>
   <component name="GithubDefaultAccount">
-    <option name="defaultAccountId" value="f95181d1-3811-4032-8009-a9bacdb1f7cd" />
+    <option name="defaultAccountId" value="52636cf5-16e6-48f1-a8bd-54c4953eb8f0" />
   </component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
@@ -107,7 +107,7 @@
       <updated>1738831914996</updated>
       <workItem from="1738831916029" duration="2134000" />
       <workItem from="1738834057754" duration="39144000" />
-      <workItem from="1739125499250" duration="32360000" />
+      <workItem from="1739125499250" duration="42239000" />
     </task>
     <task id="LOCAL-00001" summary="MWB2-57: add next react app">
       <option name="closed" value="true" />
@@ -197,7 +197,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739201598776</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="MWB2-57: add refresh">
+      <option name="closed" value="true" />
+      <created>1739204666163</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1739204666163</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -235,7 +243,8 @@
     <MESSAGE value="MWB2-57: prepare api" />
     <MESSAGE value="MWB2-57: add working fluree conection" />
     <MESSAGE value="MWB2-57: add update and delete" />
-    <option name="LAST_COMMIT_MESSAGE" value="MWB2-57: add update and delete" />
+    <MESSAGE value="MWB2-57: add refresh" />
+    <option name="LAST_COMMIT_MESSAGE" value="MWB2-57: add refresh" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,22 +1,20 @@
 import {useEffect, useState} from "react";
 import dayjs from "dayjs";
+
 import Project from "@/models/project";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {Button, Drawer, Stack, TextField, Typography} from "@mui/material";
 
 
-interface ProjectDrawerProps extends Project {
-    '@id': string;
-}
 
 interface EditDrawerProps {
     open: boolean;
-    values: ProjectDrawerProps;
+    values?: Project;
 
-    handleAdd(values:ProjectDrawerProps): void;
+    handleAdd(values: Project): void;
 
-    handleEdit(values:ProjectDrawerProps): void;
+    handleEdit(values: Project): void;
 
     handleClose(open: boolean): void;
 }
@@ -32,7 +30,7 @@ const EditDrawer = ({open, values, handleAdd, handleEdit, handleClose}: EditDraw
         '@type': ''
     }
 
-    const [defaultValues, setDefaultValues] = useState<ProjectDrawerProps>(initialValues)
+    const [defaultValues, setDefaultValues] = useState<Project>(initialValues)
 
     useEffect(() => {
         if (open)
@@ -44,26 +42,31 @@ const EditDrawer = ({open, values, handleAdd, handleEdit, handleClose}: EditDraw
         setDefaultValues(prevState => ({...prevState, [input]: value}))
     }
 
+    const isEdit = !!values?.['@id']
+
     return (
         <Drawer open={open} onClose={handleClose} anchor='right'>
             <Stack sx={{p: 2, pt: 2}} gap={2}>
-                <Typography variant='h5'>{values['@id'] ? 'Edit Project' : 'Add project'}</Typography>
-                <TextField value={defaultValues.title} placeholder={'title'}
+                <Typography variant='h5'>{isEdit ? 'Edit Project' : 'Add project'}</Typography>
+                <TextField value={defaultValues.title} label='Title'
                            onChange={e => handleChange('title', e.target.value)}/>
-                <TextField value={defaultValues.identifier} placeholder={'identifier'}
+                <TextField value={defaultValues.identifier} label='Identifier'
                            onChange={e => handleChange('identifier', e.target.value)}/>
-                <TextField value={defaultValues.description} placeholder={'description'}
+                <TextField value={defaultValues.description} label='Description'
                            onChange={e => handleChange('description', e.target.value)}/>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker onChange={e => handleChange('start_date', e?.toString() ?? "")}
+                                label='Start Date'
                                 value={dayjs(defaultValues.start_date)}
                     />
                     <DatePicker onChange={e => handleChange('end_date', e?.toString() ?? '')}
+                                label='End Date'
                                 value={dayjs(defaultValues.end_date)}
                     />
                 </LocalizationProvider>
             </Stack>
-            <Button onClick={() =>values['@id'] ? handleEdit(defaultValues) : handleAdd(defaultValues)}>{values['@id'] ? 'Edit' : 'Add'}</Button>
+            <Button
+                onClick={() => isEdit ? handleEdit(defaultValues) : handleAdd(defaultValues)}>{isEdit ? 'Edit' : 'Add'}</Button>
         </Drawer>
     )
 }

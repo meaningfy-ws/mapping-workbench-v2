@@ -42,31 +42,29 @@ const ProjectPage = () => {
             .catch(err => console.error(err))
     }
 
-    const onAdd = (values: ToggleDrawerProps) =>
+    const onAdd = (values: ToggleDrawerProps) => {
+        console.log('onAdd')
         addProjectApi(values)
             .then(() => {
                 getData()
                 setToggleDrawer({show: false})
             })
             .catch(err => console.error(err))
+    }
 
     const onUpdate = (values: ToggleDrawerProps) => {
         const {['@id']: projectId, ...other} = values
 
+        console.log('onUpdate')
         if (projectId)
             deleteProjectApi(projectId)
-                .then(() =>
-                    onAdd(other)
-                        .then(() => getData())
-                        .catch(err => console.error(err))
-                )
+                .then(() => onAdd(other))
                 .catch(err => console.error(err))
     }
 
     const {show, ...values} = toggleDrawer
 
     const existingValues = Object.keys(values).length > 0 ? values as ToggleDrawerProps : undefined
-    console.log('existingValues', existingValues)
 
     return <Stack sx={{m: 3}}>
         <Typography variant='h4'>Project</Typography>

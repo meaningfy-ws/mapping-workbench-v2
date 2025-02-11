@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da3608ec-4e29-4966-90c4-751b7d4c97de" name="Changes" comment="MWB2-57: add refresh">
+    <list default="true" id="da3608ec-4e29-4966-90c4-751b7d4c97de" name="Changes" comment="MWB2-57: fix types">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/projects/project.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/pages/app/projects/project.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/sections/projects/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/sections/projects/edit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapping-workbench/frontend/src/sections/projects/table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/mapping-workbench/frontend/src/sections/projects/table.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +108,7 @@
       <updated>1738831914996</updated>
       <workItem from="1738831916029" duration="2134000" />
       <workItem from="1738834057754" duration="39144000" />
-      <workItem from="1739125499250" duration="42239000" />
+      <workItem from="1739125499250" duration="47517000" />
     </task>
     <task id="LOCAL-00001" summary="MWB2-57: add next react app">
       <option name="closed" value="true" />
@@ -205,7 +206,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739204666163</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="MWB2-57: fix types">
+      <option name="closed" value="true" />
+      <created>1739263553227</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1739263553227</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,7 +253,8 @@
     <MESSAGE value="MWB2-57: add working fluree conection" />
     <MESSAGE value="MWB2-57: add update and delete" />
     <MESSAGE value="MWB2-57: add refresh" />
-    <option name="LAST_COMMIT_MESSAGE" value="MWB2-57: add refresh" />
+    <MESSAGE value="MWB2-57: fix types" />
+    <option name="LAST_COMMIT_MESSAGE" value="MWB2-57: fix types" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

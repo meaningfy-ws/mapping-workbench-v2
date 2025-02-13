@@ -5,16 +5,33 @@ import {FlureeClient} from "@fluree/fluree-client"
 
 
 const PORT = 3000;
+const FLUREE_LEDGER = 'cryptids12'
 const FLUREE_HOST = process.env.DB_HOST || 'localhost';
 const FLUREE_PORT = 58090
 
-console.log('here fluree must start')
+console.log('STARTING FLUREE')
+
+const checkLedgerExists = async () => {
+  try {
+    const response = await fetch(`${FLUREE_HOST}/fdb/${FLUREE_LEDGER}/health`);
+
+    if (response.ok) {
+      const data = await response.json();
+      return data.status === 'running'; // Check if the ledger is running
+    }
+
+    return false; // If response is not OK, ledger does not exist
+  } catch (error) {
+    console.error('Error checking ledger:', error);
+    return false; // Handle errors gracefully
+  }
+};
 
 const fluree = await new FlureeClient({
   host: FLUREE_HOST,
   port: FLUREE_PORT,
-  ledger: 'cryptids9',
-  create: true
+  ledger: 'cryptids12',
+  create: !checkLedgerExists()
 }).connect();
 
 console.log("FLUREE", fluree)
@@ -36,10 +53,9 @@ app.prepare().then(() => {
 
   server.post("/api/fluree/get", async (req, res) => {
     try {
+      console.log('inn fluree')
       const query = req.body;
-      console.log(query,req.body)
       const response = await fluree.query(query).send();
-      console.log(response)
       res.json(response);
     } catch (error) {
       res.status(500).json({error: error.message});
@@ -50,7 +66,6 @@ app.prepare().then(() => {
     try {
       const query = req.body;
       const response = await fluree.transact(query).send();
-      console.log('response of transaction',response)
       res.json(response);
     } catch (error) {
       res.status(500).json({error: error.message});

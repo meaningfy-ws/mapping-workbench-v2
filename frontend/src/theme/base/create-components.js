@@ -19,7 +19,7 @@ export const createComponents = () => {
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: '12px',
+          borderRadius: '4px',
           textTransform: 'none',
         },
         sizeSmall: {
@@ -45,7 +45,7 @@ export const createComponents = () => {
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: 20,
+          borderRadius: 8,
         },
       },
     },

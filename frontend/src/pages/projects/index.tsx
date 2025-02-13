@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import { Seo } from 'src/components/seo';
 import { usePageView } from 'src/hooks/use-page-view';
 import { Layout as AppLayout } from 'src/layouts';
-import { ProductListTable } from 'src/sections/projects/table';
+import { ProjectListTable } from 'src/sections/projects/table';
 import { addProject, deleteProject, getProjects } from '../../api/projects';
 import EditDrawer from '../../sections/projects/edit';
 import { Project } from '../../models/project';
@@ -91,6 +91,7 @@ const useProductsStore = (searchState) => {
 const Page = () => {
   const productsSearch = useProductsSearch();
   const productsStore = useProductsStore(productsSearch.state);
+  const [menuAnchor, setMenuAnchor] = useState<EventTarget | null>(null);
 
   usePageView();
 
@@ -104,7 +105,7 @@ const Page = () => {
     setEditValues(values);
   };
 
-  const onAdd = (values) => {
+  const onAdd = (values: Project) => {
     addProject(values).then(() => {
       productsStore.handleProductsGet();
       setEditOpen(false);
@@ -121,7 +122,7 @@ const Page = () => {
 
   return (
     <>
-      <Seo title="Dashboard: Product List" />
+      <Seo title="Projects List" />
       <Box
         component="main"
         sx={{
@@ -155,13 +156,15 @@ const Page = () => {
             </Stack>
             <Card>
               {/*<ProductListSearch onFiltersChange={productsSearch.handleFiltersChange} />*/}
-              <ProductListTable
+              <ProjectListTable
                 onPageChange={productsSearch.handlePageChange}
                 onRowsPerPageChange={productsSearch.handleRowsPerPageChange}
                 page={productsSearch.state.page}
                 items={productsStore.products}
                 count={productsStore.productsCount}
                 rowsPerPage={productsSearch.state.rowsPerPage}
+                menuAnchor={menuAnchor}
+                setMenuAnchor={setMenuAnchor}
                 handleEditOpen={handleEditOpen}
                 handleDelete={onDelete}
               />

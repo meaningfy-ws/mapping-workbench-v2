@@ -1,4 +1,4 @@
-import { useState, MouseEvent } from 'react';
+import {useState, MouseEvent, ChangeEvent} from 'react';
 
 import PropTypes from 'prop-types';
 
@@ -15,8 +15,22 @@ import TablePagination from '@mui/material/TablePagination';
 import { Scrollbar } from 'src/components/scrollbar';
 import { MenuActionButton, MenuActions } from '../../components/menu-actions';
 import ConfirmDialog from '../../components/dialog/confirm-dialog';
+import { Project } from '../../models/project';
 
-export const ProductListTable = (props) => {
+interface ProjectListTableProps {
+  count: number;
+  items: Project[];
+  onPageChange: (e: MouseEvent| null, page: number) => void;
+  onRowsPerPageChange: (e: ChangeEvent) => void;
+  page: number;
+  rowsPerPage: number;
+  menuAnchor: EventTarget | null;
+  setMenuAnchor: (e:  EventTarget | null) => void;
+  handleEditOpen: (item: Project) => void;
+  handleDelete: (id: string) => void;
+}
+
+export const ProjectListTable = (props: ProjectListTableProps) => {
   const {
     count = 0,
     items = [],
@@ -24,27 +38,24 @@ export const ProductListTable = (props) => {
     onRowsPerPageChange,
     page = 0,
     rowsPerPage = 0,
+    menuAnchor = null,
+    setMenuAnchor = () => {},
     handleEditOpen = () => {},
-    handleDelete = () => {}
+    handleDelete = () => {},
   } = props;
 
-  const [anchorEl, setAnchorEl] = useState(null);
   const [confirmOpen, setConfirmOpen] = useState(false);
 
-  const handleActionsClick = (event: MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+
 
   const handleClose = () => {
-    setAnchorEl(null);
+    setMenuAnchor(null);
   };
 
-  const handleOpenEditor = (item) => {
+  const handleOpenEditor = (item: Project) => {
     handleClose();
     handleEditOpen(item);
   };
-
-
 
   return (
     <>
@@ -61,8 +72,7 @@ export const ProductListTable = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {items.map((item) => {
-              console.log(item);
+            {items.map((item: Project) => {
               return (
                 <TableRow
                   hover
@@ -71,10 +81,13 @@ export const ProductListTable = (props) => {
                   <TableCell>{item.title}</TableCell>
                   <TableCell>{item.identifier}</TableCell>
                   <TableCell>{item.description}</TableCell>
-                  <TableCell>{item.start_at}</TableCell>
-                  <TableCell>{item.end_at}</TableCell>
+                  <TableCell>{item.start_date.toString()}</TableCell>
+                  <TableCell>{item.end_date.toString()}</TableCell>
                   <TableCell align="right">
-                    <MenuActions>
+                    <MenuActions
+                      anchor={menuAnchor}
+                      setAnchor={setMenuAnchor}
+                    >
                       <MenuActionButton
                         id="view_last_state_button"
                         onClick={() => handleOpenEditor(item)}
@@ -93,7 +106,7 @@ export const ProductListTable = (props) => {
                       title="Delete It?"
                       open={confirmOpen}
                       setOpen={setConfirmOpen}
-                      onConfirm={() =>handleDelete(item['@id'])}
+                      onConfirm={() => handleDelete(item['@id'])}
                       // footer={confirmDialogFooter}
                     >
                       <>Are you sure you want to delete it?</>
@@ -119,13 +132,15 @@ export const ProductListTable = (props) => {
   );
 };
 
-ProductListTable.propTypes = {
-  count: PropTypes.number,
-  items: PropTypes.array,
-  onPageChange: PropTypes.func,
-  onRowsPerPageChange: PropTypes.func,
-  page: PropTypes.number,
-  rowsPerPage: PropTypes.number,
-  handleEditOpen: PropTypes.func,
-  handleDelete: PropTypes.func
-};
+// ProjectListTable.propTypes = {
+//   count: PropTypes.number,
+//   items: PropTypes.array,
+//   onPageChange: PropTypes.func,
+//   onRowsPerPageChange: PropTypes.func,
+//   page: PropTypes.number,
+//   menuAnchor: PropTypes.object,
+//   setMenuAnchor: PropTypes.func,
+//   rowsPerPage: PropTypes.number,
+//   handleEditOpen: PropTypes.func,
+//   handleDelete: PropTypes.func,
+// };

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import {ReactElement, useCallback, useEffect, useState} from 'react';
 
 import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
@@ -15,6 +15,7 @@ import { ProjectListTable } from 'src/sections/projects/table';
 import { addProject, deleteProject, getProjects } from '../../api/projects';
 import EditDrawer from '../../sections/projects/edit';
 import { Project } from '../../models/project';
+import toast from 'react-hot-toast';
 
 const useProductsSearch = () => {
   const [state, setState] = useState({
@@ -89,16 +90,15 @@ const useProductsStore = (searchState) => {
 };
 
 const Page = () => {
+
   const productsSearch = useProductsSearch();
   const productsStore = useProductsStore(productsSearch.state);
-  const [menuAnchor, setMenuAnchor] = useState<EventTarget | null>(null);
+  const [menuAnchor, setMenuAnchor] = useState<[EventTarget, string] | null>(null);
 
   usePageView();
 
   const [editOpen, setEditOpen] = useState(false);
-  const [editValues, setEditValues] = useState(undefined);
-
-  console.log(editValues);
+  const [editValues, setEditValues] = useState<Project | undefined>();
 
   const handleEditOpen = (values?: Project) => {
     setEditOpen(true);
@@ -106,29 +106,48 @@ const Page = () => {
   };
 
   const onAdd = (values: Project) => {
-    addProject(values).then(() => {
-      productsStore.handleProductsGet();
-      setEditOpen(false);
-    });
+    addProject(values)
+      .then(() => {
+        productsStore.handleProductsGet();
+        setEditOpen(false);
+        setEditValues(undefined);
+        toast.success('Project Created');
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error(err);
+      });
   };
 
   const onDelete = (id) => {
-    deleteProject(id).then(() => {
-      productsStore.handleProductsGet();
-    });
+    deleteProject(id)
+      .then(() => {
+        productsStore.handleProductsGet();
+        toast.success('Project Deleted');
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error(err);
+      });
   };
 
-  const onEdit = () => {};
+  const onEdit = (values: Project) => {
+    deleteProject(values['@id']).then(() =>
+      addProject(values).then(() => {
+        productsStore.handleProductsGet();
+        setEditOpen(false);
+        setEditValues(undefined);
+        toast.success('Project Updated');
+      })
+    );
+  };
 
   return (
     <>
       <Seo title="Projects List" />
       <Box
         component="main"
-        sx={{
-          flexGrow: 1,
-          py: 8,
-        }}
+        sx={{ flexGrow: 1, py: 8 }}
       >
         <Container maxWidth="xl">
           <Stack spacing={4}>
@@ -145,7 +164,6 @@ const Page = () => {
                 direction="row"
                 spacing={3}
               >
-                <Button onClick={productsStore.handleProductsGet}>request</Button>
                 <Button
                   onClick={() => handleEditOpen()}
                   startIcon={<AddIcon />}
@@ -182,6 +200,6 @@ const Page = () => {
     </>
   );
 };
-Page.getLayout = (page) => <AppLayout>{page}</AppLayout>;
+Page.getLayout = (page:ReactElement) => <AppLayout>{page}</AppLayout>;
 
 export default Page;

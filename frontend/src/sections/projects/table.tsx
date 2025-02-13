@@ -1,6 +1,4 @@
-import {useState, MouseEvent, ChangeEvent} from 'react';
-
-import PropTypes from 'prop-types';
+import { useState, MouseEvent, ChangeEvent } from 'react';
 
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
@@ -20,12 +18,12 @@ import { Project } from '../../models/project';
 interface ProjectListTableProps {
   count: number;
   items: Project[];
-  onPageChange: (e: MouseEvent| null, page: number) => void;
+  onPageChange: (e: MouseEvent | null, page: number) => void;
   onRowsPerPageChange: (e: ChangeEvent) => void;
   page: number;
   rowsPerPage: number;
-  menuAnchor: EventTarget | null;
-  setMenuAnchor: (e:  EventTarget | null) => void;
+  menuAnchor: [EventTarget, string] | null;
+  setMenuAnchor: (e: [EventTarget, string] | null) => void;
   handleEditOpen: (item: Project) => void;
   handleDelete: (id: string) => void;
 }
@@ -46,13 +44,12 @@ export const ProjectListTable = (props: ProjectListTableProps) => {
 
   const [confirmOpen, setConfirmOpen] = useState(false);
 
-
-
   const handleClose = () => {
     setMenuAnchor(null);
   };
 
   const handleOpenEditor = (item: Project) => {
+    console.log('handleOpenEditor', item);
     handleClose();
     handleEditOpen(item);
   };
@@ -85,8 +82,8 @@ export const ProjectListTable = (props: ProjectListTableProps) => {
                   <TableCell>{item.end_date.toString()}</TableCell>
                   <TableCell align="right">
                     <MenuActions
-                      anchor={menuAnchor}
-                      setAnchor={setMenuAnchor}
+                      anchor={menuAnchor && item['@id'] === menuAnchor[1] && menuAnchor[0]}
+                      setAnchor={(e) => setMenuAnchor([e, item['@id']])}
                     >
                       <MenuActionButton
                         id="view_last_state_button"
@@ -131,16 +128,3 @@ export const ProjectListTable = (props: ProjectListTableProps) => {
     </>
   );
 };
-
-// ProjectListTable.propTypes = {
-//   count: PropTypes.number,
-//   items: PropTypes.array,
-//   onPageChange: PropTypes.func,
-//   onRowsPerPageChange: PropTypes.func,
-//   page: PropTypes.number,
-//   menuAnchor: PropTypes.object,
-//   setMenuAnchor: PropTypes.func,
-//   rowsPerPage: PropTypes.number,
-//   handleEditOpen: PropTypes.func,
-//   handleDelete: PropTypes.func,
-// };

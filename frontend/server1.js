@@ -18,23 +18,23 @@ app.prepare().then(() => {
   server.get("/api/hello", (req, res) => {
     res.json({message: "Hello from Express!"});
   });
-
-  const client = new FlureeClient({
-    host: dbHost,
-    port: 58090,
-    ledger: 'cryptids1',
-    // create: true
-  }).connect();
-
-  server.post("/api/fluree/get", async (req, res) => {
-    try {
-      const {ledger, query} = req.body;
-      const response = await client.query(ledger, query);
-      res.json(response);
-    } catch (error) {
-      res.status(500).json({error: error.message});
-    }
-  });
+  //
+  // const client = new FlureeClient({
+  //   host: dbHost,
+  //   port: 58090,
+  //   ledger: 'cryptids1',
+  //   // create: true
+  // }).connect();
+  //
+  // server.post("/api/fluree/get", async (req, res) => {
+  //   try {
+  //     const {ledger, query} = req.body;
+  //     const response = await client.query(ledger, query);
+  //     res.json(response);
+  //   } catch (error) {
+  //     res.status(500).json({error: error.message});
+  //   }
+  // });
 
   //   } else if (url.pathname === "/transact") {
   //     try {

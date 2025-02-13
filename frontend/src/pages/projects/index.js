@@ -112,9 +112,14 @@ const Page = () => {
         '@type': 'projects',
       },
     };
+    const transact = {insert: {
+        "@type": 'projects',
+        "name": 'name'
+      }
+    }
 
     const handleGet = () =>
-      fetch('/query',
+      fetch('/api/fluree/get',
         {
           method: "POST",
           headers: {
@@ -122,7 +127,20 @@ const Page = () => {
           },
           body: JSON.stringify(query, null, 2)
         })
+        .then(res => console.log(res))
     usePageView();
+
+    const handlePost = () => {
+       fetch('/api/fluree/add',
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(transact, null, 2)
+        })
+        .then(res => console.log(res))
+    }
 
     return (
       <>
@@ -173,6 +191,7 @@ const Page = () => {
                   direction="row"
                   spacing={3}
                 >
+                  <Button onClick={handlePost}>add</Button>
                   <Button onClick={handleGet}>request</Button>
                   <Button
                     component={RouterLink}

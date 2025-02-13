@@ -8,6 +8,8 @@
 
 Run any of the `test_*` files with a Python or TypeScript interpreter, depending on the file extension (`*.py` vs. `*.ts`).
 
+Note: There is no TS test yet.
+
 # How to Run
 
 Dataclass:
@@ -25,7 +27,6 @@ gen-pydantic <linkml-yaml> > <output>.py
 TypeScript:
 
 ```sh
-```sh
 gen-typescript <linkml-yaml> > <output>.ts
 ```
 
@@ -39,13 +40,13 @@ gen-typescript <linkml-yaml> > <output>.ts
 
 ## TypeScript
 
-1. TypeScript has limited type support as compared to Python, both because of its JavaScript foundation, and possible bugs.
-    - Enums are _defined but not referenced_ by the slots/attributes which have them as range.
-    - Dates are not translated correctly, end up as `date` instead of `Date`.
-    - Unsupported types `uri` and `decimal` are translated into `string` but nevertheless this throws a warning.
+TypeScript has limited type support as compared to Python, both because of its JavaScript foundation, and possible bugs.
 
-        ```sh
-        $ gen-typescript personinfo/personinfo_v0.01.yaml > personinfo_typescript.ts 
-        WARNING:linkml.generators.typescriptgen:Unknown type.base: uri
-        WARNING:linkml.generators.typescriptgen:Unknown type.base: decimal
-        ```
+1. Enums are _defined but not referenced_ by the slots/attributes which have them as range.
+2. Dates are not translated correctly, end up as `date` instead of `Date`.
+3. Unsupported types `uri` and `decimal` are translated into `string` but nevertheless this throws a warning:
+    ```sh
+    $ gen-typescript personinfo/personinfo_v0.01.yaml > personinfo_typescript.ts
+    WARNING:linkml.generators.typescriptgen:Unknown type.base: uri
+    WARNING:linkml.generators.typescriptgen:Unknown type.base: decimal
+    ```

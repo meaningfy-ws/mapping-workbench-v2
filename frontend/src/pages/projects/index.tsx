@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 
 import { Seo } from 'src/components/seo';
 import { usePageView } from 'src/hooks/use-page-view';
-import { Layout as DashboardLayout } from 'src/layouts/dashboard';
+import { Layout as AppLayout } from 'src/layouts';
 import { ProductListTable } from 'src/sections/projects/table';
 import { addProject, deleteProject, getProjects } from '../../api/projects';
 import EditDrawer from '../../sections/projects/edit';
@@ -146,7 +146,7 @@ const Page = () => {
               >
                 <Button onClick={productsStore.handleProductsGet}>request</Button>
                 <Button
-                  onClick={handleEditOpen}
+                  onClick={() => handleEditOpen()}
                   startIcon={<AddIcon />}
                 >
                   Add
@@ -179,6 +179,6 @@ const Page = () => {
     </>
   );
 };
-Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
+Page.getLayout = (page) => <AppLayout>{page}</AppLayout>;
 
 export default Page;

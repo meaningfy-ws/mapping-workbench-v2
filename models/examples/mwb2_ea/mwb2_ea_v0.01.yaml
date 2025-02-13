@@ -1,0 +1,86 @@
+id: http://data.europa.eu/a4g/ontology
+name: MWB2
+description: Modified by hand from model2owl export of a model created using Enterprise Architect 7
+prefixes:
+  linkml: https://w3id.org/linkml/
+  # at-voc: http://publications.europa.eu/resource/authority/ # relevant only when using Semantic Enums
+
+imports: # model2owl needs to add this instead of the below custom types
+  - linkml:types
+default_range: string
+
+#types:
+#  String:
+#    base: xsd:string
+#  boolean:
+#    base: xsd:boolean
+#  integer:
+#    base: xsd:integer
+
+classes:
+  Person:
+    class_uri: schema:Person
+    description: Some person
+    attributes:
+      name:
+        slot_uri: schema:name
+        description: 
+        range: string # model2owl needs to translate String to string
+        required: true
+      givenName:
+        slot_uri: schema:givenName
+        description: 
+        range: string
+      familyName:
+        slot_uri: schema:familyName
+        description: 
+        # range: string # otherwise string is default, so no need to define
+      email:
+        slot_uri: schema:email
+        description: 
+        range: uri
+        required: true
+      projects: # TODO: model2owl suffixes the target class name, i.e. projectsProject, which is wrong
+        slot_uri: schema:projects
+        range: Project
+        multivalued: true
+      hasRole:
+        slot_uri: schema:hasRole
+        range: Roles
+        required: true
+        multivalued: false
+
+  Project:
+    class_uri: schema:Project
+    description: 
+    attributes:
+      title:
+        slot_uri: schema:title
+        description: 
+        required: true
+      identifier:
+        slot_uri: schema:identifier
+        description: 
+        range: uri # this may not be required if identifier = true
+        required: true
+        # identifier: true
+      description:
+        slot_uri: schema:description
+        description: 
+      code:
+        slot_uri: schema:code
+        description: 
+        range: integer
+        required: true
+
+enums:
+  Roles:
+    description: 
+    # uri: at-voc:Roles # the enum can't refer to a URI as a pointer to a vocab,
+    # but the individual keys can, see "Semantic Enumerations"
+    # https://linkml.io/linkml/schemas/enums.html
+    permissible_values:
+      ADMIN:
+        description: admin role
+      USER:
+        description: user role

@@ -1,24 +1,20 @@
 import { useCallback, useEffect, useState } from 'react';
-import PlusIcon from '@untitled-ui/icons-react/build/esm/Plus';
+
+import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Container from '@mui/material/Container';
-import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
-import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
 
-import { BreadcrumbsSeparator } from 'src/components/breadcrumbs-separator';
-import { RouterLink } from 'src/components/router-link';
 import { Seo } from 'src/components/seo';
 import { usePageView } from 'src/hooks/use-page-view';
 import { Layout as DashboardLayout } from 'src/layouts/dashboard';
-import { paths } from 'src/paths';
-import { ProductListSearch } from 'src/sections/dashboard/product/product-list-search';
 import { ProductListTable } from 'src/sections/projects/table';
-import {addProjects, getProjects} from '../../api/projects';
+import { addProject, deleteProject, getProjects } from '../../api/projects';
+import EditDrawer from '../../sections/projects/edit';
+import { Project } from '../../models/project';
 
 const useProductsSearch = () => {
   const [state, setState] = useState({
@@ -96,13 +92,32 @@ const Page = () => {
   const productsSearch = useProductsSearch();
   const productsStore = useProductsStore(productsSearch.state);
 
-
-
   usePageView();
 
-  const handlePost = () => {
-    addProjects()
+  const [editOpen, setEditOpen] = useState(false);
+  const [editValues, setEditValues] = useState(undefined);
+
+  console.log(editValues);
+
+  const handleEditOpen = (values?: Project) => {
+    setEditOpen(true);
+    setEditValues(values);
   };
+
+  const onAdd = (values) => {
+    addProject(values).then(() => {
+      productsStore.handleProductsGet();
+      setEditOpen(false);
+    });
+  };
+
+  const onDelete = (id) => {
+    deleteProject(id).then(() => {
+      productsStore.handleProductsGet();
+    });
+  };
+
+  const onEdit = () => {};
 
   return (
     <>
@@ -122,48 +137,17 @@ const Page = () => {
               spacing={4}
             >
               <Stack spacing={1}>
-                <Typography variant="h4">Products</Typography>
-                <Breadcrumbs separator={<BreadcrumbsSeparator />}>
-                  <Link
-                    color="text.primary"
-                    component={RouterLink}
-                    href={paths.dashboard.index}
-                    variant="subtitle2"
-                  >
-                    Dashboard
-                  </Link>
-                  <Link
-                    color="text.primary"
-                    component={RouterLink}
-                    href={paths.dashboard.products.index}
-                    variant="subtitle2"
-                  >
-                    Products
-                  </Link>
-                  <Typography
-                    color="text.secondary"
-                    variant="subtitle2"
-                  >
-                    List
-                  </Typography>
-                </Breadcrumbs>
+                <Typography variant="h4">Projects</Typography>
               </Stack>
               <Stack
                 alignItems="center"
                 direction="row"
                 spacing={3}
               >
-                <Button onClick={handlePost}>add</Button>
                 <Button onClick={productsStore.handleProductsGet}>request</Button>
                 <Button
-                  component={RouterLink}
-                  href={paths.dashboard.products.create}
-                  startIcon={
-                    <SvgIcon>
-                      <PlusIcon />
-                    </SvgIcon>
-                  }
-                  variant="contained"
+                  onClick={handleEditOpen}
+                  startIcon={<AddIcon />}
                 >
                   Add
                 </Button>
@@ -178,10 +162,19 @@ const Page = () => {
                 items={productsStore.products}
                 count={productsStore.productsCount}
                 rowsPerPage={productsSearch.state.rowsPerPage}
+                handleEditOpen={handleEditOpen}
+                handleDelete={onDelete}
               />
             </Card>
           </Stack>
         </Container>
+        <EditDrawer
+          handleAdd={onAdd}
+          handleEdit={onEdit}
+          open={editOpen}
+          values={editValues}
+          handleClose={() => setEditOpen(false)}
+        />
       </Box>
     </>
   );

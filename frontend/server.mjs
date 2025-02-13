@@ -51,9 +51,8 @@ app.prepare().then(() => {
     res.json({message: "Hello from Express!"});
   });
 
-  server.post("/api/fluree/get", async (req, res) => {
+  server.post("/api/fluree/query", async (req, res) => {
     try {
-      console.log('inn fluree')
       const query = req.body;
       const response = await fluree.query(query).send();
       res.json(response);
@@ -62,7 +61,7 @@ app.prepare().then(() => {
     }
   });
 
-  server.post("/api/fluree/add", async (req, res) => {
+  server.post("/api/fluree/transact", async (req, res) => {
     try {
       const query = req.body;
       const response = await fluree.transact(query).send();

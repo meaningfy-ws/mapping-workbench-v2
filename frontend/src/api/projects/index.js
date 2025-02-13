@@ -19,19 +19,29 @@ const transact = {
   },
 };
 
-export const addProjects = async () => {
-  const response = await fetch('/api/fluree/add', {
+export const addProject = async (values) => {
+  const response = await fetch('/api/fluree/transact', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(transact, null, 2),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ insert: { ...values, '@type': 'projects' } }, null, 2),
+  });
+  return await response.json();
+};
+
+export const deleteProject = async (id) => {
+  const response = await fetch('/api/fluree/transact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        delete: {"@id": id, '?p0': '?o0'},
+        where: {"@id": id, '?p0': '?o0'},
+    }, null, 2),
   });
   return await response.json();
 };
 
 export const getProjects = async () => {
-  const response = await fetch('/api/fluree/get', {
+  const response = await fetch('/api/fluree/query', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

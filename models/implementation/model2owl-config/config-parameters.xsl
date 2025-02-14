@@ -19,15 +19,56 @@
 
     <!-- a set of prefix-baseURI definitions -->
     <xsl:variable name="namespacePrefixes" select="fn:doc('namespaces.xml')"/>
+    <!--    set default namespace interpretation for lexical Qnames that are not prefix:localSegment or :localSegment. If this
+    is set to true localSegment will transform to :localSegment-->
+    <xsl:variable name="defaultNamespaceInterpretation" select="fn:true()"/>
 
-
-    <!-- Ontology base URI, configure as necessary. Do not use a trailing local delimiter 
+    <!-- Ontology base URI, configure as necessary. Do not use a trailing local delimiter
         like in the namespace definition-->
     <!--<xsl:variable name="base-uri" select="'http://publications.europa.eu/ontology/ePO'"/>-->
     <xsl:variable name="base-ontology-uri" select="'http://meaningfy.ws/mbw/'"/>
+    <xsl:variable name="base-shape-uri" select="'http://data.europa.eu/a4g/data-shape'"/>
+    <xsl:variable name="base-restriction-uri" select="$base-ontology-uri"/>
+    <!--    Shapes Module URI-->
+    <xsl:variable name="shapeArtefactURI"
+        select="fn:concat($base-shape-uri,$defaultDelimiter, $moduleReference, '-shape')"/>
+    <!--    Restrictions Module URI-->
+    <xsl:variable name="restrictionsArtefactURI"
+        select="fn:concat($base-restriction-uri, $defaultDelimiter, $moduleReference, '-restriction')"/>
+    <!--    Core Module URI-->
+    <xsl:variable name="coreArtefactURI"
+        select="fn:concat($base-ontology-uri, $defaultDelimiter, $moduleReference)"/>
+
+    <!-- when a delimiter is missing in the base URI of a namespace, use this default value-->
+    <xsl:variable name="defaultDelimiter" select="'#'"/>
+
+    <!-- types of elements and names for attribute types that are acceptable to produce object properties -->
+    <xsl:variable name="acceptableTypesForObjectProperties"
+        select="('epo:Identifier', 'rdfs:Literal')"/>
+    <!--    the type of attributes which takes values from a controlled list-->
+    <xsl:variable name="controlledListType" select="'epo:Code'"/>
+    <!-- Acceptable stereotypes -->
+    <xsl:variable name="stereotypeValidOnAttributes" select="()"/>
+    <xsl:variable name="stereotypeValidOnObjects" select="()"/>
+    <xsl:variable name="stereotypeValidOnGeneralisations"
+        select="('Disjoint', 'Equivalent', 'Complete')"/>
+    <xsl:variable name="stereotypeValidOnAssociations" select="()"/>
+    <xsl:variable name="stereotypeValidOnDependencies" select="('Disjoint', 'disjoint', 'join')"/>
+    <xsl:variable name="stereotypeValidOnClasses" select="('Abstract')"/>
+    <xsl:variable name="stereotypeValidOnDatatypes" select="()"/>
+    <xsl:variable name="stereotypeValidOnEnumerations" select="()"/>
+    <xsl:variable name="stereotypeValidOnPackages" select="()"/>
+    <xsl:variable name="abstractClassesStereotypes" select="('Abstract', 'abstract class', 'abstract')"/>
+
+
 
     <!--    dct:title-->
     <xsl:variable name="ontologyTitleCore" select="'MWB'"/>
+
+        <!--    dct:description-->
+    <xsl:variable name="ontologyDescriptionCore"
+        select="
+        'Mapping Workbench project v2'"/>
 
     
 

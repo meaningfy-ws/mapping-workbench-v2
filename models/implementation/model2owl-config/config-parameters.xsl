@@ -19,6 +19,9 @@
 
     <!-- a set of prefix-baseURI definitions -->
     <xsl:variable name="namespacePrefixes" select="fn:doc('namespaces.xml')"/>
+
+        <!-- XSD datatypes that conform to OWL2 requirements   -->
+    <xsl:variable name="xsdAndRdfDataTypes" select="fn:doc('xsdAndRdfDataTypes.xml')"/>
     <!--    set default namespace interpretation for lexical Qnames that are not prefix:localSegment or :localSegment. If this
     is set to true localSegment will transform to :localSegment-->
     <xsl:variable name="defaultNamespaceInterpretation" select="fn:true()"/>
@@ -59,8 +62,11 @@
     <xsl:variable name="stereotypeValidOnEnumerations" select="()"/>
     <xsl:variable name="stereotypeValidOnPackages" select="()"/>
     <xsl:variable name="abstractClassesStereotypes" select="('Abstract', 'abstract class', 'abstract')"/>
+    <!--Allowed characters for a normalized string-->
+    <xsl:variable name="allowedStrings" select="'^[\w\d-_:]+$'"/>
 
-
+    <!--    This section contains the variables used to build the ontology metadata-->
+    <xsl:variable name="moduleReference" select="'core'"/>
 
     <!--    dct:title-->
     <xsl:variable name="ontologyTitleCore" select="'MWB'"/>

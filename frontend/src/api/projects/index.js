@@ -41,7 +41,7 @@ export const deleteProject = async (id) => {
 };
 
 export const getProjects = async () => {
-  const response = await fetch('/api/fluree/query', {
+  const response = await fetch('http://localhost:8080/api/products', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

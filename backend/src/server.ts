@@ -1,16 +1,12 @@
-import express, { Application } from 'express';
-import cors from 'cors';
-import productRoutes from './routes/products';
+import express from "express";
+const app = express();
+const port = "8080";
 
-const app: Application = express();
-const PORT = process.env.PORT || 5000;
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+  console.log("Response sent");
+});
 
-app.use(cors());
-app.use(express.json());
-
-// Routes
-app.use('/api/products', productRoutes);
-
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
 });

@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const PORT = 3000;
-const FLUREE_LEDGER = 'cryptids12'
+const FLUREE_LEDGER = 'cryptids'
 const FLUREE_HOST = process.env.DB_HOST || 'localhost';
 const FLUREE_PORT = 58090
 
@@ -28,7 +28,7 @@ const checkLedgerExists = async () => {
 const fluree = await new FlureeClient({
   host: FLUREE_HOST,
   port: FLUREE_PORT,
-  ledger: 'cryptids12',
+  ledger: 'cryptids',
   create: !checkLedgerExists()
 }).connect()
 

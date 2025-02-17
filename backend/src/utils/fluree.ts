@@ -4,14 +4,16 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const PORT = 3000;
-const FLUREE_LEDGER = 'cryptids'
+const FLUREE_LEDGER = 'cryptids5'
 const FLUREE_HOST = process.env.DB_HOST || 'localhost';
 const FLUREE_PORT = 58090
 
 const checkLedgerExists = async () => {
   try {
-    const response = await fetch(`${FLUREE_HOST}/fdb/${FLUREE_LEDGER}/health`);
+    console.log('before fetch',`${FLUREE_HOST}/fdb/${FLUREE_LEDGER}/health`)
+    const response = await fetch(`http://${FLUREE_HOST}:8090/fdb/${FLUREE_LEDGER}/health`);
 
+    console.log('after fetch',response)
     if (response.ok) {
       const data = await response.json();
       return data.status === 'running'; // Check if the ledger is running
@@ -28,8 +30,8 @@ const checkLedgerExists = async () => {
 const fluree = await new FlureeClient({
   host: FLUREE_HOST,
   port: FLUREE_PORT,
-  ledger: 'cryptids',
-  create: !checkLedgerExists()
+  ledger: FLUREE_LEDGER,
+  create: false
 }).connect()
 
 /**
@@ -52,7 +54,7 @@ export const queryLedger = async (query: object) => {
  */
 export const transactLedger = async (transaction: object) => {
   try {
-    return await fluree.transact(transaction);
+    return await fluree.transact(transaction).send();
   } catch (error) {
     throw new Error(`Transaction failed: ${(error as Error).message}`);
   }

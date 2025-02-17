@@ -20,33 +20,26 @@ const transact = {
 };
 
 export const addProject = async (values) => {
-  const response = await fetch('/api/fluree/transact', {
+  const response = await fetch('http://localhost:8080/api/projects', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ insert: { ...values, '@type': 'projects' } }, null, 2),
+    body: JSON.stringify(values, null, 2),
   });
   return await response.json();
 };
 
 export const deleteProject = async (id) => {
-  const response = await fetch('/api/fluree/transact', {
-    method: 'POST',
+  const response = await fetch('http://localhost:8080/api/projects', {
+    method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-        delete: {"@id": id, '?p0': '?o0'},
-        where: {"@id": id, '?p0': '?o0'},
-    }, null, 2),
+    body: JSON.stringify({ id }, null, 2),
   });
   return await response.json();
 };
 
 export const getProjects = async () => {
-  const response = await fetch('http://localhost:8080/api/products', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(query, null, 2),
+  const response = await fetch('http://localhost:8080/api/projects', {
+    method: 'GET',
   });
   return await response.json();
 };

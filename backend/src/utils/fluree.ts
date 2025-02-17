@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const PORT = 3000;
-const FLUREE_LEDGER = 'cryptids5'
+const FLUREE_LEDGER = 'cryptids10'
 const FLUREE_HOST = process.env.DB_HOST || 'localhost';
 const FLUREE_PORT = 58090
 

@@ -1,4 +1,4 @@
-import {ReactElement, useCallback, useEffect, useState} from 'react';
+import { ReactElement, useCallback, useEffect, useState } from 'react';
 
 import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
@@ -12,7 +12,7 @@ import { Seo } from 'src/components/seo';
 import { usePageView } from 'src/hooks/use-page-view';
 import { Layout as AppLayout } from 'src/layouts';
 import { ProjectListTable } from 'src/sections/projects/table';
-import { addProject, deleteProject, getProjects } from '../../api/projects';
+import { addProject, deleteProject, getProjects, updateProject } from '../../api/projects';
 import EditDrawer from '../../sections/projects/edit';
 import { Project } from '../../models/project';
 import toast from 'react-hot-toast';
@@ -90,7 +90,6 @@ const useProductsStore = (searchState) => {
 };
 
 const Page = () => {
-
   const productsSearch = useProductsSearch();
   const productsStore = useProductsStore(productsSearch.state);
   const [menuAnchor, setMenuAnchor] = useState<[EventTarget, string] | null>(null);
@@ -119,7 +118,7 @@ const Page = () => {
       });
   };
 
-  const onDelete = (id) => {
+  const onDelete = (id: string) => {
     deleteProject(id)
       .then(() => {
         productsStore.handleProductsGet();
@@ -132,14 +131,20 @@ const Page = () => {
   };
 
   const onEdit = (values: Project) => {
-    deleteProject(values['@id']).then(() =>
-      addProject(values).then(() => {
+    // deleteProject(values['@id']).then(() =>
+    //   addProject(values).then(() => {
+    //     productsStore.handleProductsGet();
+    updateProject(values)
+      .then(() => {
         productsStore.handleProductsGet();
         setEditOpen(false);
         setEditValues(undefined);
         toast.success('Project Updated');
       })
-    );
+      .catch((err) => {
+        console.error(err);
+        toast.error(err);
+      });
   };
 
   return (
@@ -200,6 +205,6 @@ const Page = () => {
     </>
   );
 };
-Page.getLayout = (page:ReactElement) => <AppLayout>{page}</AppLayout>;
+Page.getLayout = (page: ReactElement) => <AppLayout>{page}</AppLayout>;
 
 export default Page;

@@ -5,6 +5,7 @@ import {jwtDecode, JwtPayload} from "jwt-decode";
 interface User {
     id: number;
     email: string;
+    name?: string;
     password: string;
 }
 
@@ -21,9 +22,10 @@ export const decodeJWT = (req: AuthRequest, res: Response, next: NextFunction): 
     console.log(token)
     if (token)
         try {
-            const decoded = jwtDecode<JwtPayload>(token.replace("Bearer ", ""));
-            req.user = decoded; // Attach the decoded data to req.user
-            next(); // Proceed to the next middleware
+            const decode: User = jwtDecode(token.replace("Bearer ", ""));
+            const {email, name, id} = decode
+            // next(); // Proceed to the next middleware
+            res.status(200).json({email, name, id})
         } catch (error) {
             res.status(400).json({message: "Invalid Token"});
         }

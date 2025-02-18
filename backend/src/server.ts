@@ -66,8 +66,8 @@ export const transactLedger = async (transaction: object) => {
     }
 };
 
-app.post('/api/login', userLogin)
 app.get('/api/me', authenticateUser, decodeJWT)
+app.post('/api/login', userLogin)
 app.use('/api/projects', authenticateUser, projects)
 
 app.listen(port, () => {

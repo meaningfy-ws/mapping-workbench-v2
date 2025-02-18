@@ -1,26 +1,15 @@
-import { get, post } from '../app/index';
+import { deletE, get, post, update } from '../app/index';
 
 export const addProject = async (values) => {
-  return post('api/projects', values);
+  return post('/api/projects', values);
 };
 
 export const deleteProject = async (id) => {
-  const response = await fetch('api/projects', {
-    method: 'DELETE',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id }, null, 2),
-  });
-  return await response.json();
+  return deletE('/api/projects', { id });
 };
 
 export const updateProject = async (values) => {
-  console.log('updateProject ui', values);
-  const response = await fetch('api/projects', {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(values, null, 2),
-  });
-  return await response.json();
+  return update('/api/projects', values);
 };
 
 export const getProjects = async () => {

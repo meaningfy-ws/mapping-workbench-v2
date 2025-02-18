@@ -84,16 +84,16 @@ const create = (endpoint, data, headers = null) => {
   return post(endpoint, data, null, headers);
 };
 
-const patch = (endpoint, data, headers = {}) => {
-  return request(METHOD.PATCH as Method, endpoint, data, null, headers);
+const put = (endpoint, data, headers = {}) => {
+  return request(METHOD.PUT as Method, endpoint, data, null, headers);
 };
 
 const update = (endpoint, data, headers = {}) => {
-  return patch(endpoint, data, headers);
+  return put(endpoint, data, headers);
 };
 
 const deletE = (endpoint, data = null) => {
   return request(METHOD.DELETE as Method, endpoint, data);
 };
 
-export { deletE, update, patch, create, post, get };
+export { deletE, update, put, create, post, get };

@@ -55,7 +55,7 @@ const Page = () => {
         await signUp(values.email, values.name, values.password);
 
         if (isMounted()) {
-          router.push(returnTo || paths.dashboard.index);
+          router.push(returnTo || paths.index);
         }
       } catch (err) {
         console.error(err);

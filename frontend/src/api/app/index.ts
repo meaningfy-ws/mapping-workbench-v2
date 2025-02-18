@@ -8,9 +8,11 @@ const METHOD = {
   DELETE: 'delete',
 };
 
+const address = 'http://localhost:8080'
+
 const getUrl = (endpoint) => {
   // return `${this.config.address}${this.config.baseUrl}$
-  return endpoint;
+  return `${address}${endpoint}`;
 };
 
 const request = async (
@@ -44,7 +46,7 @@ const request = async (
     config['params'] = params;
     config['paramsSerializer'] = { indexes: null };
   }
-  // let $this = this;
+
   return axios
     .request(config)
     .then((response) => response.data)

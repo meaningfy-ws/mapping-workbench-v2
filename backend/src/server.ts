@@ -3,6 +3,7 @@ import cors from "cors"
 import projects from "./routes/projects.js";
 import {FlureeClient} from "@fluree/fluree-client";
 import authenticateUser from "./middleware/authMiddleware.js";
+import {userLogin} from "./controllers/userController.js";
 
 const port = "8080";
 
@@ -71,6 +72,7 @@ app.get("/", (req, res) => {
     console.log("Response sent");
 });
 
+app.post('/api/login', userLogin)
 app.use('/api/projects', authenticateUser, projects)
 
 app.listen(port, () => {

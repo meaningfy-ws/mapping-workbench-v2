@@ -1,7 +1,7 @@
 import { get, post } from '../app/index';
 
 export const addProject = async (values) => {
-  return post('http://localhost:8080/api/projects', values)
+  return post('http://localhost:8080/api/projects', values);
 };
 
 export const deleteProject = async (id) => {
@@ -24,7 +24,7 @@ export const updateProject = async (values) => {
 };
 
 export const getProjects = async () => {
-  return get('http://localhost:8080/api/projects')
+  return get('/api/projects', null);
 };
 
 const projectsApi = { getProjects };

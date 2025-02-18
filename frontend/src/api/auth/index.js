@@ -3,6 +3,7 @@ import { decode, JWT_EXPIRES_IN, JWT_SECRET, sign } from 'src/utils/jwt';
 import { wait } from 'src/utils/wait';
 
 import { users } from './data';
+import { post } from '../app/index';
 
 const STORAGE_KEY = 'users';
 
@@ -36,32 +37,37 @@ const persistUser = (user) => {
 
 class AuthApi {
   async signIn(request) {
-    const { email, password } = request;
-
-    await wait(500);
-
-    return new Promise((resolve, reject) => {
-      try {
-        // Merge static users (data file) with persisted users (browser storage)
-        const mergedUsers = [...users, ...getPersistedUsers()];
-
-        // Find the user
-        const user = mergedUsers.find((user) => user.email === email);
-
-        if (!user || user.password !== password) {
-          reject(new Error('Please check your email and password'));
-          return;
-        }
-
-        // Create the access token
-        const accessToken = sign({ userId: user.id }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
-
-        resolve({ accessToken });
-      } catch (err) {
+    try {
+      const res = await post('/api/login', request);
+      return { accessToken: res };
+    } catch (err) {
         console.error('[Auth Api]: ', err);
-        reject(new Error('Internal server error'));
-      }
-    });
+    }
+
+    // await wait(500);
+    //
+    // return new Promise((resolve, reject) => {
+    //   try {
+    //     // Merge static users (data file) with persisted users (browser storage)
+    //     const mergedUsers = [...users, ...getPersistedUsers()];
+    //
+    //     // Find the user
+    //     const user = mergedUsers.find((user) => user.email === email);
+    //
+    //     if (!user || user.password !== password) {
+    //       reject(new Error('Please check your email and password'));
+    //       return;
+    //     }
+    //
+    //     // Create the access token
+    //     const accessToken = sign({ userId: user.id }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
+    //
+    //     resolve({ accessToken });
+    //   } catch (err) {
+    //     console.error('[Auth Api]: ', err);
+    //     reject(new Error('Internal server error'));
+    //   }
+    // });
   }
 
   async signUp(request) {

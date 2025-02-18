@@ -1,4 +1,5 @@
 import axios, { Method } from 'axios';
+import { STORAGE_KEY as ACCESS_TOKEN_STORAGE_KEY } from 'src/contexts/auth/jwt/auth-provider';
 
 const METHOD = {
   GET: 'get',
@@ -8,11 +9,23 @@ const METHOD = {
   DELETE: 'delete',
 };
 
-const address = 'http://localhost:8080'
+const address = 'http://localhost:8080';
 
 const getUrl = (endpoint) => {
   // return `${this.config.address}${this.config.baseUrl}$
   return `${address}${endpoint}`;
+};
+
+const sessionStorage = () => window.sessionStorage;
+
+const getAccessToken = () => {
+  return sessionStorage().getItem(ACCESS_TOKEN_STORAGE_KEY);
+};
+
+const addAuth = (headers = null) => {
+  headers = headers || {};
+  headers['Authorization'] = `Bearer ${getAccessToken()}`;
+  return headers;
 };
 
 const request = async (
@@ -28,7 +41,7 @@ const request = async (
   //     return;
   // }
 
-  // headers = this.addAuth(headers);
+  headers = addAuth(headers);
 
   let config = {
     method: method,
@@ -46,6 +59,7 @@ const request = async (
     config['params'] = params;
     config['paramsSerializer'] = { indexes: null };
   }
+  console.log(config);
 
   return axios
     .request(config)
@@ -53,7 +67,7 @@ const request = async (
     .catch((error) => {
       console.log(method, 'REQUEST', error.response?.status);
       // $this.processError(error);
-      console.log(error, 'error');
+      console.error(error, 'error');
       throw error;
     });
 };
@@ -82,5 +96,4 @@ const deletE = (endpoint, data = null) => {
   return request(METHOD.DELETE as Method, endpoint, data);
 };
 
-
-export { deletE, update, patch, create, post, get };;
+export { deletE, update, patch, create, post, get };

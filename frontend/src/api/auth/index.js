@@ -3,7 +3,7 @@ import { decode, JWT_EXPIRES_IN, JWT_SECRET, sign } from 'src/utils/jwt';
 import { wait } from 'src/utils/wait';
 
 import { users } from './data';
-import { post } from '../app/index';
+import { get } from '../app/index';
 
 const STORAGE_KEY = 'users';
 
@@ -41,7 +41,7 @@ class AuthApi {
       const res = await post('/api/login', request);
       return { accessToken: res };
     } catch (err) {
-        console.error('[Auth Api]: ', err);
+      console.error('[Auth Api]: ', err);
     }
 
     // await wait(500);
@@ -109,38 +109,44 @@ class AuthApi {
     });
   }
 
-  me(request) {
+  async me(request) {
     const { accessToken } = request;
 
-    return new Promise((resolve, reject) => {
-      try {
-        // Decode access token
-        const decodedToken = decode(accessToken);
-
-        // Merge static users (data file) with persisted users (browser storage)
-        const mergedUsers = [...users, ...getPersistedUsers()];
-
-        // Find the user
-        const { userId } = decodedToken;
-        const user = mergedUsers.find((user) => user.id === userId);
-
-        if (!user) {
-          reject(new Error('Invalid authorization token'));
-          return;
-        }
-
-        resolve({
-          id: user.id,
-          avatar: user.avatar,
-          email: user.email,
-          name: user.name,
-          plan: user.plan,
-        });
-      } catch (err) {
-        console.error('[Auth Api]: ', err);
-        reject(new Error('Internal server error'));
-      }
-    });
+    try {
+      const res = await get('/api/me');
+      return res;
+    } catch (err) {
+      console.error(err);
+    }
+    // return new Promise((resolve, reject) => {
+    //   try {
+    //     // Decode access token
+    //     const decodedToken = decode(accessToken);
+    //
+    //     // Merge static users (data file) with persisted users (browser storage)
+    //     const mergedUsers = [...users, ...getPersistedUsers()];
+    //
+    //     // Find the user
+    //     const { userId } = decodedToken;
+    //     const user = mergedUsers.find((user) => user.id === userId);
+    //
+    //     if (!user) {
+    //       reject(new Error('Invalid authorization token'));
+    //       return;
+    //     }
+    //
+    //     resolve({
+    //       id: user.id,
+    //       avatar: user.avatar,
+    //       email: user.email,
+    //       name: user.name,
+    //       plan: user.plan,
+    //     });
+    //   } catch (err) {
+    //     console.error('[Auth Api]: ', err);
+    //     reject(new Error('Internal server error'));
+    //   }
+    // });
   }
 }
 

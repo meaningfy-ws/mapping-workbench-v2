@@ -1,11 +1,11 @@
 import { get, post } from '../app/index';
 
 export const addProject = async (values) => {
-  return post('http://localhost:8080/api/projects', values);
+  return post('api/projects', values);
 };
 
 export const deleteProject = async (id) => {
-  const response = await fetch('http://localhost:8080/api/projects', {
+  const response = await fetch('api/projects', {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id }, null, 2),
@@ -15,7 +15,7 @@ export const deleteProject = async (id) => {
 
 export const updateProject = async (values) => {
   console.log('updateProject ui', values);
-  const response = await fetch('http://localhost:8080/api/projects', {
+  const response = await fetch('api/projects', {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(values, null, 2),

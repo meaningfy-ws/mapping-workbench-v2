@@ -5,7 +5,7 @@ import { authApi } from 'src/api/auth';
 import { Issuer } from 'src/utils/auth';
 import { AuthContext, initialState } from './auth-context';
 
-const STORAGE_KEY = 'accessToken';
+export const STORAGE_KEY = 'accessToken';
 
 var ActionType;
 (function (ActionType) {

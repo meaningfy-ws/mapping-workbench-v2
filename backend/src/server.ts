@@ -3,7 +3,7 @@ import cors from "cors"
 import projects from "./routes/projects.js";
 import {FlureeClient} from "@fluree/fluree-client";
 import authenticateUser from "./middleware/authMiddleware.js";
-import {userLogin} from "./controllers/userController.js";
+import {decodeJWT, userLogin} from "./controllers/userController.js";
 
 const port = "8080";
 
@@ -66,13 +66,8 @@ export const transactLedger = async (transaction: object) => {
     }
 };
 
-
-app.get("/", (req, res) => {
-    res.send("Hello World!");
-    console.log("Response sent");
-});
-
 app.post('/api/login', userLogin)
+app.get('/api/me', authenticateUser, decodeJWT)
 app.use('/api/projects', authenticateUser, projects)
 
 app.listen(port, () => {

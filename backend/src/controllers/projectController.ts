@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {queryLedger, transactLedger} from "../utils/fluree.js";
+import {queryLedger, transactLedger} from "../server.js";
 import {Project} from "../models/project.js";
 
 

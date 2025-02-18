@@ -1,12 +1,7 @@
-// import { deepCopy } from 'src/utils/deep-copy';
+import { get, post } from '../app/index';
 
 export const addProject = async (values) => {
-  const response = await fetch('http://localhost:8080/api/projects', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(values, null, 2),
-  });
-  return await response.json();
+  return post('http://localhost:8080/api/projects', values)
 };
 
 export const deleteProject = async (id) => {
@@ -19,7 +14,7 @@ export const deleteProject = async (id) => {
 };
 
 export const updateProject = async (values) => {
-  console.log('updateProject ui', values)
+  console.log('updateProject ui', values);
   const response = await fetch('http://localhost:8080/api/projects', {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
@@ -29,10 +24,7 @@ export const updateProject = async (values) => {
 };
 
 export const getProjects = async () => {
-  const response = await fetch('http://localhost:8080/api/projects', {
-    method: 'GET',
-  });
-  return await response.json();
+  return get('http://localhost:8080/api/projects')
 };
 
 const projectsApi = { getProjects };

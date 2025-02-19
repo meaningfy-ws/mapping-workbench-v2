@@ -21,7 +21,7 @@ const secret = process.env.JWT_SECRET ?? 'devias-top-secret-key'
 
 const __dirname = path.resolve()
 
-const usersFile = path.join(__dirname,"src/data/users.json");
+const usersFile = path.join(__dirname, "src/data/users.json");
 console.log(usersFile)
 
 export const loadUsers = async (): Promise<User[]> => {
@@ -56,11 +56,16 @@ export const decodeJWT = (req: AuthRequest, res: Response, next: NextFunction): 
 };
 
 export const userLogin = (req: Request, res: Response): void => {
-    console.log('login', req.body)
     const {email, password} = req.body;
 
-    const user = users.find((u) => u.email === email && u.password === password);
+    const user = users.find((u) => u.email === email);
     if (!user) {
+        res.status(400).json({message: "Invalid credentials"});
+        return
+    }
+
+    const isMatch = bcrypt.compareSync(password, user.password);
+    if (!isMatch) {
         res.status(400).json({message: "Invalid credentials"});
         return
     }
@@ -68,9 +73,6 @@ export const userLogin = (req: Request, res: Response): void => {
     const token = jwt.sign({id: user.id, email: user.email}, secret as string, {expiresIn: "1h"});
     res.json(token);
 };
-
-
-
 
 
 export const userRegister = (req: Request, res: Response): void => {

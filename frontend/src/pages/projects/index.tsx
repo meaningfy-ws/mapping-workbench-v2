@@ -1,4 +1,5 @@
 import { ReactElement, useCallback, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
@@ -15,7 +16,6 @@ import { ProjectListTable } from 'src/sections/projects/table';
 import { addProject, deleteProject, getProjects, updateProject } from '../../api/projects';
 import EditDrawer from '../../sections/projects/edit';
 import { Project } from '../../models/project';
-import toast from 'react-hot-toast';
 
 const useProductsSearch = () => {
   const [state, setState] = useState({

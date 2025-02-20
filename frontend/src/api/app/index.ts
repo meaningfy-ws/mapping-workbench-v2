@@ -8,12 +8,9 @@ const METHOD = {
   PUT: 'put',
   DELETE: 'delete',
 };
-
-const address = 'http://localhost:8080';
-
 const getUrl = (endpoint) => {
   // return `${this.config.address}${this.config.baseUrl}$
-  return `${address}${endpoint}`;
+  return `${process.env.MW_BACKEND_HOST}:${process.env.MW_BACKEND_PORT}${endpoint}`;
 };
 
 const sessionStorage = () => window.sessionStorage;

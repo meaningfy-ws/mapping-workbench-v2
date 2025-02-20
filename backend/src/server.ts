@@ -1,11 +1,15 @@
 import express from "express";
 import cors from "cors"
-import projects from "./routes/projects.js";
+import dotenv from 'dotenv'
 import {FlureeClient} from "@fluree/fluree-client";
+
+import projects from "./routes/projects.js";
 import authenticateUser from "./middleware/authMiddleware.js";
 import {decodeJWT, userLogin, userRegister} from "./controllers/userController.js";
 
-const port = "8080";
+dotenv.config()
+
+const PORT = process.env.MW_BACKEND_PORT;
 
 const app = express();
 
@@ -13,13 +17,13 @@ app.use(cors())
 app.use(express.json())
 
 
-const FLUREE_LEDGER = 'cryptids12'
-const FLUREE_HOST = process.env.DB_HOST || 'localhost';
-const FLUREE_PORT = 58090
+const FLUREE_LEDGER = process.env.FLUREE_LEDGER
+const FLUREE_HOST = process.env.FLUREE_HOST
+const FLUREE_PORT = parseInt(process.env.FLUREE_PORT ?? '58090')
 
 const checkLedgerExists = async () => {
     try {
-        const response = await fetch(`http://${FLUREE_HOST}:8090/fdb/${FLUREE_LEDGER}/health`);
+        const response = await fetch(`http://${FLUREE_HOST}:${FLUREE_PORT}/fdb/${FLUREE_LEDGER}/health`);
 
         if (response.ok) {
             const data = await response.json();
@@ -68,9 +72,9 @@ export const transactLedger = async (transaction: object) => {
 
 app.post('/api/me', decodeJWT)
 app.post('/api/login', userLogin)
-app.post('/api/register',userRegister)
+app.post('/api/register', userRegister)
 app.use('/api/projects', authenticateUser, projects)
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+app.listen(PORT, () => {
+    console.log(`Example app listening on port ${PORT}`);
 });

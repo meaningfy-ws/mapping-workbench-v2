@@ -1,9 +1,9 @@
-import express, {Request, Response, NextFunction} from "express";
+import {Request, Response, NextFunction} from "express";
+import path from "path";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import {jwtDecode, JwtPayload} from "jwt-decode";
-import path from "path";
 import fs from 'fs/promises'
-import bcrypt from "bcryptjs";
 
 interface User {
     id: number;

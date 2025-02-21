@@ -4,6 +4,9 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import {jwtDecode, JwtPayload} from "jwt-decode";
 import fs from 'fs/promises'
+import dotenv from "dotenv";
+
+dotenv.config()
 
 interface User {
     id: number;
@@ -17,12 +20,11 @@ interface AuthRequest extends Request {
 }
 
 
-const secret = process.env.JWT_SECRET ?? 'devias-top-secret-key'
+const secret = process.env.JWT_SECRET
 
 const __dirname = path.resolve()
 
 const usersFile = path.join(__dirname, "src/data/users.json");
-console.log(usersFile)
 
 export const loadUsers = async (): Promise<User[]> => {
     try {
@@ -42,8 +44,6 @@ const users: User[] = await loadUsers();
 
 export const decodeJWT = (req: AuthRequest, res: Response, next: NextFunction): void => {
     const token = req.body.accessToken;
-    console.log(req.body.accessToken)
-    console.log('token', token)
     if (token)
         try {
             const decode: User = jwtDecode(token);

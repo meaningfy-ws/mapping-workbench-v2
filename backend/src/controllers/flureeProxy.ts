@@ -1,25 +1,12 @@
+import {Request, Response} from 'express';
 import {FlureeClient} from "@fluree/fluree-client";
 import dotenv from "dotenv";
 
 dotenv.config()
 
-
 const FLUREE_LEDGER = process.env.FLUREE_LEDGER
 const FLUREE_HOST = process.env.FLUREE_HOST
 const FLUREE_PORT = parseInt(process.env.FLUREE_PORT ?? '58090')
-
-export const getByType = (type: string) => ({
-                select: {'?s': ['*']},
-                where: {
-                    '@id': '?s',
-                    '@type': type,
-                },
-            })
-
-export const deleteById = (id: string) => ({
-                delete: {'@id': id, '?p0': '?o0'},
-                where: {'@id': id, '?p0': '?o0'},
-            })
 
 const checkLedgerExists = async () => {
     try {
@@ -44,12 +31,32 @@ const flureeProxy = await new FlureeClient({
     create: !checkLedgerExists()
 }).connect()
 
+export const getRequest =
+    async (req: Request, res: Response): Promise<void> => {
+        try {
+            const response = await queryLedger({...req.body});
+            res.json(response);
+        } catch (error) {
+            res.status(500).json({error: (error as Error).message});
+        }
+    };
+
+
+export const postRequest =
+      async (req: Request, res: Response): Promise<void> => {
+        try {
+            const response = await transactLedger({...req.body});
+            res.json(response);
+        } catch (error) {
+            res.status(500).json({error: (error as Error).message});
+        }
+    };
 /**
  * Query the Fluree ledger
  * @param query - FlureeQL query object
  * @returns Query result
  */
-export const queryLedger = async (query: object) => {
+const queryLedger = async (query: object) => {
     try {
         return await flureeProxy.query(query).send();
     } catch (error) {
@@ -62,7 +69,7 @@ export const queryLedger = async (query: object) => {
  * @param transaction - Transaction object
  * @returns Transaction result
  */
-export const transactLedger = async (transaction: object) => {
+const transactLedger = async (transaction: object) => {
     try {
         return await flureeProxy.transact(transaction).send();
     } catch (error) {

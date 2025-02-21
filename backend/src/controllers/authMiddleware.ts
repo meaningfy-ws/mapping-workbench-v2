@@ -1,12 +1,14 @@
 import {Request, Response, NextFunction} from "express";
 import jwt, {JwtPayload} from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config()
 
 interface AuthRequest extends Request {
     user?: JwtPayload | string; // Attach user payload after verification
 }
 
 const secret = process.env.JWT_SECRET
-
 
 const authenticateUser = (req: AuthRequest, res: Response, next: NextFunction): void => {
     const token = req.header("Authorization");

@@ -8,6 +8,19 @@ const FLUREE_LEDGER = process.env.FLUREE_LEDGER
 const FLUREE_HOST = process.env.FLUREE_HOST
 const FLUREE_PORT = parseInt(process.env.FLUREE_PORT ?? '58090')
 
+export const getByType = (type: string) => ({
+                select: {'?s': ['*']},
+                where: {
+                    '@id': '?s',
+                    '@type': type,
+                },
+            })
+
+export const deleteById = (id: string) => ({
+                delete: {'@id': id, '?p0': '?o0'},
+                where: {'@id': id, '?p0': '?o0'},
+            })
+
 const checkLedgerExists = async () => {
     try {
         const response = await fetch(`http://${FLUREE_HOST}:${FLUREE_PORT}/fdb/${FLUREE_LEDGER}/health`);

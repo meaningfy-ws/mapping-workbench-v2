@@ -5,7 +5,7 @@ interface AuthRequest extends Request {
     user?: JwtPayload | string; // Attach user payload after verification
 }
 
-const secret = process.env.JWT_SECRET ?? 'devias-top-secret-key'
+const secret = process.env.JWT_SECRET
 
 
 const authenticateUser = (req: AuthRequest, res: Response, next: NextFunction): void => {

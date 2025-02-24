@@ -5,7 +5,7 @@ import { authApi } from 'src/api/auth';
 import { Issuer } from 'src/utils/auth';
 import { AuthContext, initialState } from './auth-context';
 
-const STORAGE_KEY = 'accessToken';
+export const STORAGE_KEY = 'accessToken';
 
 var ActionType;
 (function (ActionType) {
@@ -103,7 +103,9 @@ export const AuthProvider = (props) => {
 
   const signIn = useCallback(
     async (email, password) => {
-      const { accessToken } = await authApi.signIn({ email, password });
+      const res = await authApi.signIn({ email, password });
+      console.log(res);
+      const { accessToken } = res;
       const user = await authApi.me({ accessToken });
 
       sessionStorage.setItem(STORAGE_KEY, accessToken);

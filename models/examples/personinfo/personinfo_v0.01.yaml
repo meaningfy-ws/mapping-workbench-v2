@@ -1,0 +1,77 @@
+id: https://w3id.org/linkml/examples/personinfo
+name: personinfo
+description: Produced with the help of Google Gemini
+prefixes:
+  linkml: https://w3id.org/linkml/
+  schema: http://schema.org/
+imports:
+  - linkml:types
+enums:
+  GenderEnum:
+    permissible_values:
+      male:
+        description: Male gender
+      female:
+        description: Female gender
+      non_binary:
+        description: Non-binary gender
+  EmploymentStatusEnum:
+    permissible_values:
+      full_time:
+        description: Full-time employment
+      part_time:
+        description: Part-time employment
+      contract:
+        description: Contract-based employment
+      unemployed:
+        description: Unemployed
+classes:
+  Person:
+    class_uri: schema:Person
+    attributes:
+      id:
+        identifier: true
+      full_name:
+        required: true
+        range: string
+      age:
+        range: integer
+        minimum_value: 0
+        maximum_value: 200
+      gender:
+        range: GenderEnum
+      birth_date:
+        range: date
+        required: true
+      website:
+        range: uri
+      salary:
+        range: decimal
+  Address:
+    class_uri: schema:PostalAddress
+    attributes:
+      street_address:
+        range: string
+      city:
+        range: string
+      postal_code:
+        range: string
+  Employment:
+    class_uri: schema:Employment
+    attributes:
+      employer:
+        range: string
+      start_date:
+        range: date
+      end_date:
+        range: date
+      status:
+        range: EmploymentStatusEnum
+slots:
+  address:
+    domain: Person
+    range: Address
+  employment_history:
+    domain: Person
+    multivalued: true
+    range: Employment

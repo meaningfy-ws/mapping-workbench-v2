@@ -1,54 +1,29 @@
-// import { deepCopy } from 'src/utils/deep-copy';
-
-const query = {
-  select: { '?s': ['*'] },
-  where: {
-    '@id': '?s',
-    '@type': 'projects',
-  },
-};
-
-const transact = {
-  insert: {
-    '@type': 'projects',
-    title: 'title',
-    identifier: 'identifier',
-    description: 'description',
-    start_date: new Date(),
-    end_date: new Date(),
-  },
-};
+import { post } from '../app/index';
 
 export const addProject = async (values) => {
-  const response = await fetch('/api/fluree/transact', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ insert: { ...values, '@type': 'projects' } }, null, 2),
-  });
-  return await response.json();
+  return post('/api/post', { insert: { ...values, '@type': 'projects' } });
 };
 
 export const deleteProject = async (id) => {
-  const response = await fetch('/api/fluree/transact', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-        delete: {"@id": id, '?p0': '?o0'},
-        where: {"@id": id, '?p0': '?o0'},
-    }, null, 2),
+  return post('/api/post', {
+    delete: { '@id': id, '?p0': '?o0' },
+    where: { '@id': id, '?p0': '?o0' },
   });
-  return await response.json();
+};
+
+export const updateProject = async (values) => {
+  const { '@id': id, ...other } = values;
+  return deleteProject(id).then((res) => addProject(other));
 };
 
 export const getProjects = async () => {
-  const response = await fetch('/api/fluree/query', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+  return post('/api/get', {
+    select: { '?s': ['*'] },
+    where: {
+      '@id': '?s',
+      '@type': 'projects',
     },
-    body: JSON.stringify(query, null, 2),
   });
-  return await response.json();
 };
 
 const projectsApi = { getProjects };

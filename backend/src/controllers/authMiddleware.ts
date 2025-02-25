@@ -8,7 +8,7 @@ interface AuthRequest extends Request {
     user?: JwtPayload | string; // Attach user payload after verification
 }
 
-const secret = process.env.JWT_SECRET
+const secret = process.env.JWT_SECRET ?? ''
 
 const authenticateUser = (req: AuthRequest, res: Response, next: NextFunction): void => {
     const token = req.header("Authorization");
@@ -19,7 +19,7 @@ const authenticateUser = (req: AuthRequest, res: Response, next: NextFunction): 
     }
 
     try {
-        const verified = jwt.verify(token.replace("Bearer ", ""), secret as string);
+        const verified = jwt.verify(token.replace("Bearer ", ""), secret);
         req.user = verified;
         next();
     } catch (error) {

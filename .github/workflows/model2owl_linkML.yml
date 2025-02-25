@@ -68,7 +68,7 @@ jobs:
           if [ -z "$(git status --porcelain)" ]; then
           echo "::set-output name=push::false"
           else
-          git commit -m "Adding linkML files"
+          git commit -m "[CI] Add UML->LinkML model2owl export"
           echo "::set-output name=push::true"
           fi
         shell: bash

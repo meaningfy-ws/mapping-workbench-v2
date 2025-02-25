@@ -272,7 +272,7 @@
                              visibility="public" supplier="EAID_F37A1D2C_F229_4d73_8EB2_0531DAE23F06"
                              client="EAID_DD0B7158_D347_4685_BE32_01BB13E9AD40"/>
             <packagedElement xmi:type="uml:Enumeration" xmi:id="EAID_3CF0BD6B_1B97_4669_8A29_791DF00C4809"
-                             name="mwb:FIleExtension" visibility="public">
+                             name="mwb:FileExtension" visibility="public">
                 <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="EAID_C1CBFF34_A13D_4cb4_A508_47A0810A9A71"
                               name="TTL" visibility="public"/>
                 <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="EAID_83867E0E_BD5C_46c1_8225_2FEEE62EA8C7"
@@ -795,7 +795,7 @@
                 </links>
             </element>
             <element xmi:idref="EAID_3CF0BD6B_1B97_4669_8A29_791DF00C4809" xmi:type="uml:Enumeration"
-                     name="mwb:FIleExtension" scope="public">
+                     name="mwb:FileExtension" scope="public">
                 <model package="EAPK_8E54A08D_575E_40db_88DE_69B36BDE16E3" tpos="0" ea_localid="328"
                        ea_eleType="element"/>
                 <properties isSpecification="false" sType="Enumeration" nType="0" scope="public" isRoot="false"
@@ -1269,7 +1269,7 @@
                     <tags/>
                 </source>
                 <target xmi:idref="EAID_3CF0BD6B_1B97_4669_8A29_791DF00C4809">
-                    <model ea_localid="328" type="Enumeration" name="mwb:FIleExtension"/>
+                    <model ea_localid="328" type="Enumeration" name="mwb:FileExtension"/>
                     <role name="mwb:hasExtension" visibility="Public" targetScope="instance"/>
                     <type aggregation="none" containment="Unspecified"/>
                     <constraints/>

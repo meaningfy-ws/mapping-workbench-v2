@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { authApi } from 'src/api/auth';
 import { Issuer } from 'src/utils/auth';
+import { HTTPException } from '../../../api/app/exceptions';
 import { AuthContext, initialState } from './auth-context';
 
 export const STORAGE_KEY = 'accessToken';
@@ -101,24 +102,53 @@ export const AuthProvider = (props) => {
     []
   );
 
-  const signIn = useCallback(
-    async (email, password) => {
+  // const signIn = useCallback(
+  //   async (email, password) => {
+  //     const res = await authApi.signIn({ email, password });
+  //     console.log(res);
+  //     const { accessToken } = res;
+  //     const user = await authApi.me({ accessToken });
+  //
+  //     sessionStorage.setItem(STORAGE_KEY, accessToken);
+  //
+  //     dispatch({
+  //       type: ActionType.SIGN_IN,
+  //       payload: {
+  //         user,
+  //       },
+  //     });
+  //   },
+  //   [dispatch]
+  // );
+
+  const signIn = async (email, password) => {
+    // const loadingToastId = toast.loading("Logging in...");
+    try {
       const res = await authApi.signIn({ email, password });
-      console.log(res);
-      const { accessToken } = res;
-      const user = await authApi.me({ accessToken });
 
-      sessionStorage.setItem(STORAGE_KEY, accessToken);
+      console.log('res',res)
+      if (res?.accessToken) {
+        const { accessToken } = res;
+        const user = await authApi.me({ accessToken });
 
-      dispatch({
-        type: ActionType.SIGN_IN,
-        payload: {
-          user,
-        },
-      });
-    },
-    [dispatch]
-  );
+        sessionStorage.setItem(STORAGE_KEY, accessToken);
+        if (user !== null) {
+          dispatch({
+            type: ActionType.SIGN_IN,
+            payload: {
+              user,
+            },
+          });
+        }
+      }
+    } catch (e) {
+      // toast.error(e.message)
+      console.log(e)
+      throw new HTTPException(e);
+    } finally {
+      // toast.dismiss(loadingToastId);
+    }
+  };
 
   const signUp = useCallback(
     async (email, name, password) => {

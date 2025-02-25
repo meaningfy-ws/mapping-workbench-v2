@@ -3,7 +3,7 @@
          xmlns:umldi="http://www.omg.org/spec/UML/20131001/UMLDI" xmlns:dc="http://www.omg.org/spec/UML/20131001/UMLDC"
          xmlns:thecustomprofile="http://www.sparxsystems.com/profiles/thecustomprofile/1.0"
          xmlns:TerminologyProfile="http://www.sparxsystems.com/profiles/TerminologyProfile/1.0">
-    <xmi:Documentation exporter="Enterprise Architect" exporterVersion="6.5" exporterID="1702"/>
+    <xmi:Documentation exporter="Enterprise  Architect" exporterVersion="6.5" exporterID="1702"/>
     <uml:Model xmi:type="uml:Model" name="EA_Model" visibility="public">
         <packagedElement xmi:type="uml:Package" xmi:id="EAPK_8E54A08D_575E_40db_88DE_69B36BDE16E3" name="Models"
                          visibility="public">

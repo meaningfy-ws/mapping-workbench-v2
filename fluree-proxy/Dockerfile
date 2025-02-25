@@ -17,4 +17,4 @@ RUN bun install
 EXPOSE 3000 58090
 
 # Start the server
-CMD ["bun", "run", "server.ts"]
+CMD ["bun", "run", "server.js"]

@@ -145,7 +145,6 @@ classes:
 enums:
   FileExtension:
     description: 
-    uri: mwb:FileExtension
     permissible_values:
       TTL:
         description: 
@@ -153,7 +152,6 @@ enums:
         description: 
   Role:
     description: 
-    uri: mwb:Role
     permissible_values:
       ADMIN:
         description: example role

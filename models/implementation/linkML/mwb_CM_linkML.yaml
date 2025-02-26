@@ -1,0 +1,161 @@
+id: http://meaningfy.ws/mbw/
+name: MWB
+description: Mapping Workbench project v2
+prefixes: 
+  mwb: http://meaningfy.ws/mbw/
+  linkml: https://w3id.org/linkml/
+
+imports:
+  - linkml:types
+default_range: string
+
+classes:
+  OntologyFile:
+    class_uri: mwb:OntologyFile
+    is_a: Resource
+    description: 
+
+  Project:
+    class_uri: mwb:Project
+    description: 
+    attributes:
+      description:
+        slot_uri: mwb:description
+        description: 
+        range: string
+        required: false
+        multivalued: false
+      identifier:
+        slot_uri: mwb:identifier
+        description: 
+        range: uri
+        required: true
+        multivalued: false
+      title:
+        slot_uri: mwb:title
+        description: 
+        range: string
+        required: true
+        multivalued: false
+      hasResources:
+        slot_uri: mwb:hasResources
+        range: Resource
+        required: false
+        multivalued: true
+
+  Resource:
+    class_uri: mwb:Resource
+    description: 
+    attributes:
+      content:
+        slot_uri: mwb:content
+        description: 
+        range: string
+        required: true
+        multivalued: false
+      name:
+        slot_uri: mwb:name
+        description: 
+        range: string
+        required: true
+        multivalued: false
+      assignedTo:
+        slot_uri: mwb:assignedTo
+        range: ResourceCollection
+        required: false
+        multivalued: true
+      hasExtension:
+        slot_uri: mwb:hasExtension
+        range: FileExtension
+        required: true
+        multivalued: true
+
+  ResourceCollection:
+    class_uri: mwb:ResourceCollection
+    description: 
+    attributes:
+      name:
+        slot_uri: mwb:name
+        description: 
+        range: string
+        required: true
+        multivalued: false
+
+  SHACLFile:
+    class_uri: mwb:SHACLFile
+    is_a: Resource
+    description: 
+
+  SPARQLFile:
+    class_uri: mwb:SPARQLFile
+    is_a: Resource
+    description: 
+
+  TestDataFile:
+    class_uri: mwb:TestDataFile
+    is_a: Resource
+    description: 
+
+  User:
+    class_uri: mwb:User
+    description: 
+    attributes:
+      email:
+        slot_uri: mwb:email
+        description: 
+        range: uri
+        required: true
+        multivalued: false
+      familyName:
+        slot_uri: mwb:familyName
+        description: 
+        range: string
+        required: true
+        multivalued: false
+      givenName:
+        slot_uri: mwb:givenName
+        description: 
+        range: string
+        required: true
+        multivalued: false
+      isVerified:
+        slot_uri: mwb:isVerified
+        description: 
+        range: boolean
+        required: true
+        multivalued: false
+      name:
+        slot_uri: mwb:name
+        description: 
+        range: string
+        required: true
+        multivalued: false
+      projects:
+        slot_uri: mwb:projects
+        range: Project
+        required: false
+        multivalued: true
+      hasRole:
+        slot_uri: mwb:hasRole
+        range: Role
+        required: true
+        multivalued: false
+
+
+enums:
+  FileExtension:
+    description: 
+    permissible_values:
+      TTL:
+        description: 
+      RQ:
+        description: 
+  Role:
+    description: 
+    permissible_values:
+      ADMIN:
+        description: example role
+      USER:
+        description: 
+      GUEST:
+        description: 

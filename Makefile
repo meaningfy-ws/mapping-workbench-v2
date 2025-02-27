@@ -13,6 +13,8 @@ ENV_FILE := .env
 PROJECT_PATH = $(shell pwd)
 HOSTNAME = $(shell hostname)
 CAROOT = $(shell pwd)/infra/traefik/certs
+NAME := mapping_workbench
+DOCKER_PROJECT := ${NAME}_${ENVIRONMENT}
 
 
 
@@ -59,8 +61,18 @@ stop-fluree:
 # TESTING
 #-----------------------------------------------------------------------------
 
+start-backend:
+	@ echo "Starting the BACKEND"
+	@ docker-compose -p ${DOCKER_PROJECT} --file ./infra/backend/docker-compose.yml --env-file ${ENV_FILE} up -d
 
+stop-backend:
+	@ echo "Stopping the BACKEND"
+	@ docker-compose -p ${DOCKER_PROJECT} --file ./infra/backend/docker-compose.yml --env-file ${ENV_FILE} down
 
+build-backend:
+	@ echo "Building the BACKEND"
+	@ docker-compose -p ${DOCKER_PROJECT} --file ./infra/backend/docker-compose.yml --env-file ${ENV_FILE} build --progress plain --no-cache --force-rm
+	@ docker-compose -p ${DOCKER_PROJECT} --file ./infra/backend/docker-compose.yml --env-file ${ENV_FILE} up -d --force-recreate
 #-----------------------------------------------------------------------------
 # VAULT SERVICES
 #-----------------------------------------------------------------------------

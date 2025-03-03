@@ -17,7 +17,7 @@ import { addProject, deleteProject, getProjects, updateProject } from '../../api
 import EditDrawer from '../../sections/projects/edit';
 import { Project } from '../../models/project';
 
-const useProjectsSearch = () => {
+const useProductsSearch = () => {
   const [state, setState] = useState({
     filters: {
       name: undefined,
@@ -58,18 +58,18 @@ const useProjectsSearch = () => {
   };
 };
 
-const useProjectsStore = (searchState) => {
+const useProductsStore = (searchState) => {
   const [state, setState] = useState({
-    projects: [],
-    projectsCount: 0,
+    products: [],
+    productsCount: 0,
   });
 
-  const handleProjectsGet = useCallback(async () => {
+  const handleProductsGet = useCallback(async () => {
     getProjects()
       .then((res) =>
         setState({
-          projects: res,
-          projectsCount: res.length,
+          products: res,
+          productsCount: res.length,
         })
       )
       .catch((err) => console.error(err));
@@ -77,21 +77,21 @@ const useProjectsStore = (searchState) => {
 
   useEffect(
     () => {
-      handleProjectsGet();
+      handleProductsGet();
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [searchState]
   );
 
   return {
-    handleProjectsGet,
+    handleProductsGet,
     ...state,
   };
 };
 
 const Page = () => {
-  const projectsSearch = useProjectsSearch();
-  const projectsStore = useProjectsStore(projectsSearch.state);
+  const productsSearch = useProductsSearch();
+  const productsStore = useProductsStore(productsSearch.state);
   const [menuAnchor, setMenuAnchor] = useState<[EventTarget, string] | null>(null);
 
   usePageView();
@@ -107,7 +107,7 @@ const Page = () => {
   const onAdd = (values: Project) => {
     addProject(values)
       .then(() => {
-        projectsStore.handleProjectsGet();
+        productsStore.handleProductsGet();
         setEditOpen(false);
         setEditValues(undefined);
         toast.success('Project Created');
@@ -121,7 +121,7 @@ const Page = () => {
   const onDelete = (id: string) => {
     deleteProject(id)
       .then(() => {
-        projectsStore.handleProjectsGet();
+        productsStore.handleProductsGet();
         toast.success('Project Deleted');
       })
       .catch((err) => {
@@ -133,10 +133,10 @@ const Page = () => {
   const onEdit = (values: Project) => {
     // deleteProject(values['@id']).then(() =>
     //   addProject(values).then(() => {
-    //     projectsStore.handleprojectsGet();
+    //     productsStore.handleProductsGet();
     updateProject(values)
       .then(() => {
-        projectsStore.handleProjectsGet();
+        productsStore.handleProductsGet();
         setEditOpen(false);
         setEditValues(undefined);
         toast.success('Project Updated');
@@ -162,7 +162,7 @@ const Page = () => {
               spacing={4}
             >
               <Stack spacing={1}>
-                <Typography variant="h4">Projects</Typography>
+                <Typography variant="h4">Mapping Resources</Typography>
               </Stack>
               <Stack
                 alignItems="center"
@@ -178,14 +178,14 @@ const Page = () => {
               </Stack>
             </Stack>
             <Card>
-              {/*<ProductListSearch onFiltersChange={projectsSearch.handleFiltersChange} />*/}
+              {/*<ProductListSearch onFiltersChange={productsSearch.handleFiltersChange} />*/}
               <ProjectListTable
-                onPageChange={projectsSearch.handlePageChange}
-                onRowsPerPageChange={projectsSearch.handleRowsPerPageChange}
-                page={projectsSearch.state.page}
-                items={projectsStore.projects}
-                count={projectsStore.projectsCount}
-                rowsPerPage={projectsSearch.state.rowsPerPage}
+                onPageChange={productsSearch.handlePageChange}
+                onRowsPerPageChange={productsSearch.handleRowsPerPageChange}
+                page={productsSearch.state.page}
+                items={productsStore.products}
+                count={productsStore.productsCount}
+                rowsPerPage={productsSearch.state.rowsPerPage}
                 menuAnchor={menuAnchor}
                 setMenuAnchor={setMenuAnchor}
                 handleEditOpen={handleEditOpen}

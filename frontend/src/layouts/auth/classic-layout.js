@@ -58,7 +58,7 @@ export const Layout = (props) => {
                   width: 24,
                 }}
               >
-                <Logo />
+                <Logo size={32} />
               </Box>
               <Box
                 sx={{
@@ -73,7 +73,7 @@ export const Layout = (props) => {
                   },
                 }}
               >
-                Devias Kit <span>PRO</span>
+                Mapping <span>WorkBench</span> 2
               </Box>
             </Stack>
           </Stack>

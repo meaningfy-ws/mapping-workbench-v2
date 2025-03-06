@@ -34,7 +34,7 @@ const options = [
                 width: 12,
               }}
             >
-              <Logo />
+              <Logo size={12}/>
             </Box>
             <Box
               sx={{
@@ -119,7 +119,7 @@ const options = [
                 width: 12,
               }}
             >
-              <Logo />
+              <Logo size={12}/>
             </Box>
             <Box
               sx={{

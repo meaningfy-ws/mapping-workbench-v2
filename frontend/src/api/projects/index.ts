@@ -13,8 +13,9 @@ export const deleteProject = async (id:string) => {
 };
 
 export const updateProject = async (values:Project) => {
-  const { '@id': id, ...other } = values;
-  return deleteProject(id).then((res) => addProject(other));
+  // const { '@id': id, ...other } = values;
+  // return deleteProject(id).then((res) => addProject(other));
+  addProject(values)
 };
 
 export const getProjects = async () => {

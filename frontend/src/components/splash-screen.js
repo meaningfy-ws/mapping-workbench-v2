@@ -22,8 +22,8 @@ export const SplashScreen = () => (
     <Box
       sx={{
         display: 'inline-flex',
-        height: 48,
-        width: 48,
+        height: 256,
+        width: 256,
       }}
     >
       <Logo />

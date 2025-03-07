@@ -57,9 +57,6 @@ stop-fluree:
 	@ echo -e "$(BUILD_PRINT)Stopping the Fluree services $(END_BUILD_PRINT)"
 	@ docker-compose -p common --file ./infra/fluree/docker-compose.yml --env-file ${ENV_FILE} down
 
-#-----------------------------------------------------------------------------
-# TESTING
-#-----------------------------------------------------------------------------
 
 start-backend:
 	@ echo "Starting the BACKEND"
@@ -73,6 +70,26 @@ build-backend:
 	@ echo "Building the BACKEND"
 	@ docker-compose -p ${DOCKER_PROJECT} --file ./infra/backend/docker-compose.yml --env-file ${ENV_FILE} build --progress plain --no-cache --force-rm
 	@ docker-compose -p ${DOCKER_PROJECT} --file ./infra/backend/docker-compose.yml --env-file ${ENV_FILE} up -d --force-recreate
+
+
+build-frontend:
+	@ echo "Building the FRONTEND"
+	@ docker-compose -p ${DOCKER_PROJECT} --file ./infra/frontend/docker-compose.yml --env-file ${ENV_FILE} build --progress plain --no-cache --force-rm
+	@ docker-compose -p ${DOCKER_PROJECT} --file ./infra/frontend/docker-compose.yml --env-file ${ENV_FILE} up -d --force-recreate
+
+start-frontend:
+	@ echo "Starting the FRONTEND"
+	@ docker-compose -p ${DOCKER_PROJECT} --file ./infra/frontend/docker-compose.yml --env-file ${ENV_FILE} up -d
+
+stop-frontend:
+	@ echo "Stopping the FRONTEND"
+	@ docker-compose -p ${DOCKER_PROJECT} --file ./infra/frontend/docker-compose.yml --env-file ${ENV_FILE} down
+
+#-----------------------------------------------------------------------------
+# TESTING
+#-----------------------------------------------------------------------------
+
+
 #-----------------------------------------------------------------------------
 # VAULT SERVICES
 #-----------------------------------------------------------------------------

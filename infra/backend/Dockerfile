@@ -21,7 +21,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies before copying other files
-RUN npm install  # ✅ Ensure dependencies are installed
+RUN npm install  #
 
 # Copy application files
 COPY . ./
@@ -30,7 +30,7 @@ COPY . ./
 RUN ls -la node_modules || true
 
 # Expose the port (ensure default is set)
-EXPOSE ${PORT:-8000}
+EXPOSE ${PORT}
 
 
 

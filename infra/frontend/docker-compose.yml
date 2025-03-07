@@ -1,0 +1,31 @@
+version: '3.10'
+
+services:
+  frontend:
+    container_name: mw-frontend-${ENVIRONMENT}
+    build:
+      context: ../../frontend/  # Adjust this path to where your frontend code is
+      dockerfile: ../infra/frontend/Dockerfile
+#    ports:
+#      - "3000:3000"  # Adjust based on the frontend's default port
+    networks:
+      - proxy-net
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT}
+      - HOST=${MW_FRONTEND_SERVER_HOST}
+      - API_ADDRESS=https://api.mw.${SUBDOMAIN}${DOMAIN}
+      - MW_BACKEND_ADDRESS=${MW_BACKEND_ADDRESS}
+      - MW_FRONTEND_SERVER_PORT=${MW_FRONTEND_SERVER_PORT}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mw-frontend-${ENVIRONMENT}.rule=Host(`mw.${SUBDOMAIN}${DOMAIN}`)"
+      - "traefik.http.routers.mw-frontend-${ENVIRONMENT}.entrypoints=web"
+      - "traefik.http.routers.mw-frontend-${ENVIRONMENT}-secured.rule=Host(`mw.${SUBDOMAIN}${DOMAIN}`)"
+      - "traefik.http.routers.mw-frontend-${ENVIRONMENT}-secured.entrypoints=web-secured"
+      - "traefik.http.routers.mw-frontend-${ENVIRONMENT}-secured.tls=true"
+      - "traefik.http.routers.mw-frontend-${ENVIRONMENT}-secured.tls.certresolver=mytlschallenge"
+
+networks:
+  proxy-net:
+    external:
+      name: proxy-net

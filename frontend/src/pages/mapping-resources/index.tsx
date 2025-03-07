@@ -38,7 +38,7 @@ const Page = () => {
   }, []);
 
   const handleItemsGet = async () => {
-    const id = '_:fdb-1741331661549-OLdSTBgl';
+    const id = '_:fdb-1741339951325-4YsfDT3j';
     getMappingResource(id)
       .then((res) => {
         console.log(res);
@@ -52,7 +52,7 @@ const Page = () => {
 
   const handleUpload = async ( files) => {
     console.log('ff',files)
-    uploadMappingResource({id: "_:fdb-1741102007324-13LOVVxX",...files})
+    uploadMappingResource({id: "_:fdb-1741339951325-4YsfDT3j",...files})
   }
 
   return (

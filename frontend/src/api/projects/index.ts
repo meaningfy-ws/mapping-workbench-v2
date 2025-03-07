@@ -25,5 +25,6 @@ export const getProjects = async () => {
       '@id': '?s',
       '@type': 'projects',
     },
+    depth:2
   });
 };

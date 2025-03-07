@@ -28,7 +28,7 @@ const flureeProxy = await new FlureeClient({
     host: FLUREE_HOST,
     port: FLUREE_PORT,
     ledger: FLUREE_LEDGER,
-    create: !checkLedgerExists()
+    create: false
 }).connect()
 
 export const getRequest =

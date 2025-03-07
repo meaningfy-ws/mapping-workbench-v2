@@ -7,7 +7,6 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Seo } from 'src/components/seo';
 import { useDialog } from 'src/hooks/use-dialog';
-import { useRouter } from 'src/hooks/use-router';
 import { Layout as AppLayout } from 'src/layouts';
 import { usePageView } from 'src/hooks/use-page-view';
 import useItemsSearch from 'src/hooks/use-items-search';
@@ -19,7 +18,6 @@ import {getMappingResource, uploadMappingResource} from '../../api/mapping-resou
 const Page = () => {
   const [view, setView] = useState('grid');
   const [state, setState] = useState({
-    collection: {},
     items: [],
     itemsCount: 0,
   });
@@ -27,8 +25,6 @@ const Page = () => {
   const uploadDialog = useDialog();
   const itemsSearch = useItemsSearch(state.items, ['title']);
 
-  const router = useRouter();
-  // const {id} = router.query;
 
   usePageView();
 
@@ -44,7 +40,7 @@ const Page = () => {
         console.log(res);
         setState({
           items: res,
-          count: res.length,
+          itemsCount: res.length,
         });
       })
       .catch((err) => console.error(err));
@@ -65,7 +61,7 @@ const Page = () => {
           spacing={4}
         >
           <Stack spacing={1}>
-            <Typography variant="h4">{`Assets Manager: ${state.collection}`}</Typography>
+            <Typography variant="h4">{`Mapping Resources`}</Typography>
           </Stack>
           <Stack
             alignItems="center"
@@ -92,7 +88,6 @@ const Page = () => {
           <ItemList
             count={itemsSearch.count}
             items={itemsSearch.pagedItems}
-            collection={state.collection}
             onPageChange={itemsSearch.handlePageChange}
             onRowsPerPageChange={itemsSearch.handleRowsPerPageChange}
             page={itemsSearch.state.page}

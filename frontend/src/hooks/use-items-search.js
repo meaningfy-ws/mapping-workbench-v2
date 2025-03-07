@@ -8,7 +8,7 @@ const useItemsSearch = (items, searchColumns, newFilters, sort) => {
             column: "",
             direction: "desc"
         },
-        page: 1,
+        page: 0,
         rowsPerPage: 25
     });
 

@@ -27,6 +27,8 @@ export const ItemList = (props) => {
         onGetItems
     } = props;
 
+    console.log('page',page)
+
     const content = view === 'grid' ?
         <Box sx={{p: 3}}>
             <Box
@@ -38,7 +40,7 @@ export const ItemList = (props) => {
             >
                 {items.map((item) => (
                     <ItemListCard
-                        key={item._id}
+                        key={item?.['@id']}
                         item={item}
                         collection={collection}
                         sectionApi={sectionApi}

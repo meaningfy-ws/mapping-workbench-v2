@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-const useItemsSearch = (items, sectionApi, searchColumns, newFilters, sort) => {
+const useItemsSearch = (items, searchColumns, newFilters, sort) => {
     const [state, setState] = useState({
         search: [],
         filters: newFilters ?? {},
@@ -8,8 +8,8 @@ const useItemsSearch = (items, sectionApi, searchColumns, newFilters, sort) => {
             column: "",
             direction: "desc"
         },
-        page: sectionApi.DEFAULT_PAGE,
-        rowsPerPage: sectionApi.DEFAULT_ROWS_PER_PAGE
+        page: 1,
+        rowsPerPage: 25
     });
 
     const {show, ...filters} = state.filters
@@ -25,6 +25,7 @@ const useItemsSearch = (items, sectionApi, searchColumns, newFilters, sort) => {
         return returnItem
     }) : items
 
+  console.log(searchItems)
 
     const filteredItems = searchItems.filter((item) => {
         let returnItem = item;

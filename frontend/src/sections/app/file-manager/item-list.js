@@ -87,7 +87,7 @@ export const ItemList = (props) => {
                     onRowsPerPageChange={onRowsPerPageChange}
                     page={page}
                     rowsPerPage={rowsPerPage}
-                    rowsPerPageOptions={sectionApi.DEFAULT_ROWS_PER_PAGE_SELECTION}
+                    rowsPerPageOptions={[5, 10, 25, 50, { value: -1, label: 'All' }]}
                     showFirstButton
                     showLastButton
                 >

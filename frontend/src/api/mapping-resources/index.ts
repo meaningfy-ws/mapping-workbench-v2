@@ -1,28 +1,17 @@
 import { post } from '../app';
-import {Project} from "../../models/project";
+import { Project } from '../../models/project';
 
-export const addMappingResource = async (values: Project) => {
-  return post('/api/post', { insert: { ...values, '@type': 'projects' } });
+export const uploadMappingResource = async (values) => {
+  const { id, ...others } = values
+  return post('/api/post', { insert: { '@id': id, ...others } });
 };
 
-export const deleteMappingResource = async (id:string) => {
-  return post('/api/post', {
-    delete: { '@id': id, '?p0': '?o0' },
-    where: { '@id': id, '?p0': '?o0' },
-  });
-};
-
-export const updateMappingResource = async (values:Project) => {
-  const { '@id': id, ...other } = values;
-  return deleteMappingResource(id).then((res) => addMappingResource(other));
-};
-
-export const getMappingResource = async () => {
+export const getMappingResource = async (id) => {
   return post('/api/get', {
-    select: { '?s': ['*'] },
+    select:  ['rdf_files'] ,
     where: {
-      '@id': '?s',
-      '@type': 'projects',
+      '@id': id,
+      // '@type': 'projects',
     },
   });
 };

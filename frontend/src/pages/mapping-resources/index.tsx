@@ -13,7 +13,11 @@ import useItemsSearch from 'src/hooks/use-items-search';
 import { ItemList } from 'src/sections/app/file-manager/item-list';
 import { ItemSearch } from 'src/sections/app/files-form/item-search';
 import { FileUploader } from 'src/sections/app/file-manager/file-uploader';
-import {getMappingResource, uploadMappingResource} from '../../api/mapping-resources';
+import {
+  deleteResource,
+  getMappingResource,
+  uploadMappingResource,
+} from '../../api/mapping-resources';
 
 const Page = () => {
   const [view, setView] = useState('grid');
@@ -24,7 +28,6 @@ const Page = () => {
 
   const uploadDialog = useDialog();
   const itemsSearch = useItemsSearch(state.items, ['title']);
-
 
   usePageView();
 
@@ -46,10 +49,14 @@ const Page = () => {
       .catch((err) => console.error(err));
   };
 
-  const handleUpload = async ( files) => {
-    console.log('ff',files)
-    uploadMappingResource({id: "_:fdb-1741339951325-4YsfDT3j",...files})
-  }
+  const handleUpload = async (files) => {
+    console.log('ff', files);
+    uploadMappingResource({ id: '_:fdb-1741339951325-4YsfDT3j', ...files });
+  };
+
+  const handleDelete = async (id) => {
+    deleteResource(id);
+  };
 
   return (
     <>
@@ -93,6 +100,7 @@ const Page = () => {
             page={itemsSearch.state.page}
             rowsPerPage={itemsSearch.state.rowsPerPage}
             view={view}
+            handleDelete={handleDelete}
             // sectionApi={sectionApi}
             // fileResourcesApi={fileResourcesApi}
             // onGetItems={handleItemsGet}

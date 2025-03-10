@@ -26,7 +26,16 @@ export const useSections = () => {
           },
           {
             title: t(tokens.nav.projects),
-            path: paths.projects,
+            path: paths.projects.index,
+            icon: (
+              <SvgIcon fontSize="small">
+                <HomeSmileIcon />
+              </SvgIcon>
+            ),
+          },
+          {
+            title: t(tokens.nav.mappingResources),
+            path: paths.mappingResources.index,
             icon: (
               <SvgIcon fontSize="small">
                 <HomeSmileIcon />

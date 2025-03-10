@@ -14,6 +14,9 @@ import { Scrollbar } from 'src/components/scrollbar';
 import { MenuActionButton, MenuActions } from '../../components/menu-actions';
 import ConfirmDialog from '../../components/dialog/confirm-dialog';
 import { Project } from '../../models/project';
+import { CheckmarkIcon } from 'react-hot-toast';
+import { sessionApi } from '../../api/session';
+import { useRouter } from 'next/navigation';
 
 interface ProjectListTableProps {
   count: number;
@@ -44,6 +47,8 @@ export const ProjectListTable = (props: ProjectListTableProps) => {
 
   const [confirmOpen, setConfirmOpen] = useState(false);
 
+  const router = useRouter();
+
   const handleClose = () => {
     setMenuAnchor(null);
   };
@@ -52,6 +57,11 @@ export const ProjectListTable = (props: ProjectListTableProps) => {
     console.log('handleOpenEditor', item);
     handleClose();
     handleEditOpen(item);
+  };
+
+  const handleSetProject = (item: string) => {
+    sessionApi.setLocalSessionProject(item)
+    router.refresh();
   };
 
   return (
@@ -85,6 +95,12 @@ export const ProjectListTable = (props: ProjectListTableProps) => {
                       anchor={menuAnchor && item['@id'] === menuAnchor[1] && menuAnchor[0]}
                       setAnchor={(e) => setMenuAnchor([e, item['@id']])}
                     >
+                      <MenuActionButton
+                        id="select_package_button"
+                        onClick={() => handleSetProject(item['@id'])}
+                        title="Select"
+                        icon={<CheckmarkIcon />}
+                      />
                       <MenuActionButton
                         id="view_last_state_button"
                         onClick={() => handleOpenEditor(item)}

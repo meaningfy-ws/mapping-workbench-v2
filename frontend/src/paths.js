@@ -2,7 +2,12 @@ export const paths = {
   index: '/',
   checkout: '/checkout',
   contact: '/contact',
-  pricing: '/pricing',
+  mappingResources: {
+    index: '/mapping-resources',
+  },
+  projects: {
+    index: '/',
+  },
   auth: {
     auth0: {
       callback: '/auth/auth0/callback',
@@ -70,13 +75,6 @@ export const paths = {
       groupedLists: '/components/lists/grouped-lists',
       gridLists: '/components/lists/grid-lists',
     },
-    forms: '/components/forms',
-    modals: '/components/modals',
-    charts: '/components/charts',
-    buttons: '/components/buttons',
-    typography: '/components/typography',
-    colors: '/components/colors',
-    inputs: '/components/inputs',
   },
   docs: 'https://material-kit-pro-react-docs.devias.io',
   notAuthorized: '/401',

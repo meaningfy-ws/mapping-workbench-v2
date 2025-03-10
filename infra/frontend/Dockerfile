@@ -17,15 +17,13 @@ RUN npm install
 COPY . ./
 
 # Build the React application
-RUN npm run build
 
 # Install a lightweight HTTP server for serving React
-RUN npm install -g serve
-
+RUN npm run build
 
 
 # Start the frontend server
-CMD ["serve", "-s", "build", "-l", "3000"]
+CMD ["npm", "run", "start"]
 
 # Expose the correct port
 EXPOSE 3000

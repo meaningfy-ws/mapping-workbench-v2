@@ -2,12 +2,13 @@ import { serve } from "bun";
 import { FlureeClient } from "@fluree/fluree-client";
 
 const dbHost = process.env.DB_HOST || 'localhost';
+const createLedger = (process.env.CREATE_LEDGER === 'true');
 
 const client = await new FlureeClient({
   host: dbHost,
   port: 58090,
-  ledger: 'cryptids',
-  // create: true
+  ledger: 'mwb2',
+  create: createLedger
 }).connect();
 
 const server = serve({

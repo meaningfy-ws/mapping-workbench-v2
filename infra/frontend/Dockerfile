@@ -1,13 +1,13 @@
 # Use a Node image with React build support
 FROM node:18-alpine as build
+
 ARG ENV_FILE
 ARG ENVIRONMENT
-ARG HOST
-ARG MW_FRONTEND_SERVER_PORT
 ARG MW_BACKEND_PORT
 ARG MW_BACKEND_HOST
-ARG NODE_ENV
-ARG NODE_PATH
+
+# Create an application directory
+RUN mkdir -p /app
 
 WORKDIR /app
 

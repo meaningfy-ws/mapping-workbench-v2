@@ -4,6 +4,8 @@ ARG ENV_FILE
 ARG ENVIRONMENT
 ARG HOST
 ARG MW_FRONTEND_SERVER_PORT
+ARG MW_BACKEND_PORT
+ARG MW_BACKEND_HOST
 ARG NODE_ENV
 ARG NODE_PATH
 
@@ -16,7 +18,8 @@ RUN npm install
 # Copy the rest of the application
 COPY . ./
 
-# Build the React application
+RUN echo "MW_BACKEND_HOST=${MW_BACKEND_HOST}" >> ${ENV_FILE} \
+    && echo "MW_BACKEND_PORT=${MW_BACKEND_PORT}" >> ${ENV_FILE}
 
 # Install a lightweight HTTP server for serving React
 RUN npm run build

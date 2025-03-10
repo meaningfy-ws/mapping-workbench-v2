@@ -13,9 +13,9 @@ services:
     environment:
       - ENVIRONMENT=${ENVIRONMENT}
       - HOST=${MW_FRONTEND_SERVER_HOST}
-      - API_ADDRESS=https://api.mw.${SUBDOMAIN}${DOMAIN}
-      - MW_BACKEND_ADDRESS=${MW_BACKEND_ADDRESS}
-      - MW_FRONTEND_SERVER_PORT=${MW_FRONTEND_SERVER_PORT}
+      - MW_BACKEND_HOST=${MW_BACKEND_HOST}
+      - MW_BACKEND_PORT=${MW_BACKEND_PORT}
+      - ENV_FILE=.env
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.mw-frontend-${ENVIRONMENT}.rule=Host(`mw.${SUBDOMAIN}${DOMAIN}`)"

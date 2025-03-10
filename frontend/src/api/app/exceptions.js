@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 
-export class HTTPException extends AxiosError {
+export class HTTPException extends Error {
   constructor(error) {
     const response = error.response;
     super(

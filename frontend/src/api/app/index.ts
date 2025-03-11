@@ -93,4 +93,7 @@ const deletE = (endpoint, data = null) => {
   return request(METHOD.DELETE as Method, endpoint, data);
 };
 
+const api = { delete: deletE, update, put, create, post, get };
+
+export default api;
 export { deletE, update, put, create, post, get };

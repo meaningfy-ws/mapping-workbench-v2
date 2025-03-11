@@ -1,4 +1,5 @@
- export interface MappingResources {
-    file_name: string;
-    "@id"?:string;
+export interface MappingResources {
+  '@id'?: string;
+  file_name: string;
+  content: string;
 }

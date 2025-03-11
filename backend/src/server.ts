@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 
 import authenticateUser from "./controllers/authMiddleware.js";
 import {decodeJWT, userLogin, userRegister} from "./controllers/userController.js";
-import {getRequest, postRequest} from "./controllers/flureeProxy.js";
+import {deleteRequest, getRequest, postRequest, putRequest} from "./controllers/flureeProxy.js";
 
 dotenv.config()
 
@@ -20,6 +20,8 @@ app.post('/api/login', userLogin)
 app.post('/api/register', userRegister)
 app.post('/api/get', authenticateUser, getRequest)
 app.post('/api/post', authenticateUser, postRequest)
+app.put('/api/put', authenticateUser, putRequest)
+app.delete('/api/delete', authenticateUser, deleteRequest)
 
 app.listen(PORT, () => {
     console.log(`MWB2 Backend is listening on port ${PORT}`);

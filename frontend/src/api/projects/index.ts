@@ -1,35 +1,25 @@
-import { post } from '../app';
+import api from '../app';
 import { Project } from '../../models/project';
 
 export const addProject = async (values: Project) => {
-  return post('/api/post', { insert: { ...values, '@type': 'projects' } });
+  return api.post('/api/post', { insert: { ...values, '@type': 'projects' } });
 };
 
 export const deleteProject = async (id: string) => {
-  return post('/api/post', {
-    delete: { '@id': id, '?p0': '?o0' },
-    where: { '@id': id, '?p0': '?o0' },
-  });
+  return api.delete('/api/delete', { id });
 };
 
 export const updateProject = async (values: Project) => {
-  const { '@id': id, ...other } = values;
-  // return deleteProject(id).then((res) => addProject(other));
-  return post('/api/post', {
-    delete: { '@id': id, '?p': '?o' },
-    insert: { ...values },
-    where: { '@id': id, '?p': '?o' },
-  });
-  // addProject(values);
+  return api.put('/api/put', { ...values, '@type': 'projects' });
 };
 
 export const getProjects = async () => {
-  return post('/api/get', {
-    select: { '?s': ['*'] },
+  return api.post('/api/get', {
+    select: { '?s': ['@id', 'title', 'identifier', 'description', 'start_date', 'end_date'] },
     where: {
       '@id': '?s',
       '@type': 'projects',
     },
-    depth: 2,
+    // depth: 2,
   });
 };

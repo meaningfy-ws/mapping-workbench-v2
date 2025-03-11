@@ -33,7 +33,7 @@ const flureeProxy = await new FlureeClient({
 
 
 export const putRequest =
-        async (req: Request, res: Response): Promise<void> => {
+    async (req: Request, res: Response): Promise<void> => {
         try {
             const response = await upsertLedger({...req.body});
             res.json(response);
@@ -55,7 +55,7 @@ export const getRequest =
 
 
 export const postRequest =
-      async (req: Request, res: Response): Promise<void> => {
+    async (req: Request, res: Response): Promise<void> => {
         try {
             const response = await transactLedger({...req.body});
             res.json(response);
@@ -63,6 +63,19 @@ export const postRequest =
             res.status(500).json({error: (error as Error).message});
         }
     };
+
+
+export const deleteRequest =
+    async (req: Request, res: Response): Promise<void> => {
+        try {
+            console.log(req.body)
+            const response = await deleteLedger(req.body.id);
+            res.json(response);
+        } catch (error) {
+            res.status(500).json({error: (error as Error).message});
+        }
+    };
+
 /**
  * Query the Fluree ledger
  * @param query - FlureeQL query object
@@ -97,6 +110,19 @@ const transactLedger = async (transaction: object) => {
 const upsertLedger = async (transaction: any[]) => {
     try {
         return await flureeProxy.upsert(transaction).send();
+    } catch (error) {
+        throw new Error(`Transaction failed: ${(error as Error).message}`);
+    }
+};
+
+/**
+ * Perform a delete in Fluree ledger
+ * @param id - Transaction id
+ * @returns Transaction result
+ */
+const deleteLedger = async (id: string) => {
+    try {
+        return await flureeProxy.delete(id).send();
     } catch (error) {
         throw new Error(`Transaction failed: ${(error as Error).message}`);
     }

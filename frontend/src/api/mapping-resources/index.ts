@@ -1,21 +1,24 @@
-import { post } from '../app';
+import api from '../app';
+import { MappingResources } from '../../models/mapping-resources';
 
-export const uploadMappingResource = async (values) => {
-  const { id, ...others } = values;
-  return post('/api/post', { insert: { '@id': id, ...others } });
+export const uploadMappingResource = async ({
+  id,
+  files,
+}: {
+  id: string;
+  files: MappingResources[];
+}) => {
+  return api.post('/api/post', { insert: { '@id': id, ...files } });
 };
 
 export const deleteResource = async (id: string) => {
-  return post('/api/post', {
-    delete: { '@id': id, '?p0': '?o0' },
-    where: { '@id': id, '?p0': '?o0' },
-  });
+  return api.delete('/api/delete', { id });
 };
 
 export const getMappingResources = async (id: string) => {
-  return post('/api/get', {
+  return api.post('/api/get', {
     select: {
-      '?s': ['*', { rdf_files: ['*'] }],
+      '?s': ['@id', 'format', 'title'],
     },
     where: {
       '@id': id,
@@ -26,17 +29,11 @@ export const getMappingResources = async (id: string) => {
   });
 };
 
-
 export const getMappingResource = async (id: string) => {
-  return post('/api/get', {
-    select: {
-      '?s': ['*', { rdf_files: ['*'] }],
-    },
+  return api.post('/api/get', {
+    select: [ 'title' ],
     where: {
       '@id': id,
-      rdf_files: '?s',
-      '@type': 'projects',
     },
-    depth: 2,
   });
 };

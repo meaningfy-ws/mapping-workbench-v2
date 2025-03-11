@@ -18,7 +18,8 @@ import {
   getMappingResources,
   uploadMappingResource,
 } from '../../api/mapping-resources';
-import {sessionApi} from "../../api/session";
+import { sessionApi } from '../../api/session';
+import { MappingResources } from '../../models/mapping-resources';
 
 const Page = () => {
   const [view, setView] = useState('grid');
@@ -50,8 +51,8 @@ const Page = () => {
       .catch((err) => console.error(err));
   };
 
-  const handleUpload = async (files) => {
-    uploadMappingResource({ id: sessionApi.getSessionProject(), ...files });
+  const handleUpload = async (files: MappingResources[]) => {
+    uploadMappingResource({ id: sessionApi.getSessionProject(), files });
   };
 
   const handleDelete = async (id) => {

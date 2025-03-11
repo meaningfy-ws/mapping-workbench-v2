@@ -9,7 +9,6 @@ const config = {
     return config;
   },
   env: {
-    MW_BACKEND_PORT: process.env.MW_BACKEND_PORT,
     MW_BACKEND_HOST: process.env.MW_BACKEND_HOST,
   },
 };

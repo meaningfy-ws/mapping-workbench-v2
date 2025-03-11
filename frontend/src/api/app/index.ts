@@ -10,7 +10,7 @@ const METHOD = {
 };
 const getUrl = (endpoint) => {
   // return `${this.config.address}${this.config.baseUrl}$
-  return `${process.env.MW_BACKEND_HOST}:${process.env.MW_BACKEND_PORT}${endpoint}`;
+  return `${process.env.MW_BACKEND_HOST}${endpoint}`;
 };
 
 const sessionStorage = () => window.sessionStorage;

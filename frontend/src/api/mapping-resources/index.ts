@@ -31,9 +31,18 @@ export const getMappingResources = async (id: string) => {
 
 export const getMappingResource = async (id: string) => {
   return api.post('/api/get', {
-    select: [ 'title' ],
+    select: {
+      '?s': [
+        {
+          rdf_files: ['title', 'format', 'content'],
+        },
+      ],
+    },
     where: {
-      '@id': id,
+      '@id': '?s',
+      rdf_files: {
+        '@id': '_:fdb-1741686777829-Xi5k9pK-',
+      },
     },
   });
 };

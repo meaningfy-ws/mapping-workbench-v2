@@ -28,8 +28,20 @@ const flureeProxy = await new FlureeClient({
     host: FLUREE_HOST,
     port: FLUREE_PORT,
     ledger: FLUREE_LEDGER,
-    create: true
+    create: false
 }).connect()
+
+
+export const putRequest =
+        async (req: Request, res: Response): Promise<void> => {
+        try {
+            const response = await upsertLedger({...req.body});
+            res.json(response);
+        } catch (error) {
+            res.status(500).json({error: (error as Error).message});
+        }
+    };
+
 
 export const getRequest =
     async (req: Request, res: Response): Promise<void> => {
@@ -72,6 +84,19 @@ const queryLedger = async (query: object) => {
 const transactLedger = async (transaction: object) => {
     try {
         return await flureeProxy.transact(transaction).send();
+    } catch (error) {
+        throw new Error(`Transaction failed: ${(error as Error).message}`);
+    }
+};
+
+/**
+ * Perform a upsert in Fluree ledger
+ * @param transaction - Transaction object
+ * @returns Transaction result
+ */
+const upsertLedger = async (transaction: any[]) => {
+    try {
+        return await flureeProxy.upsert(transaction).send();
     } catch (error) {
         throw new Error(`Transaction failed: ${(error as Error).message}`);
     }

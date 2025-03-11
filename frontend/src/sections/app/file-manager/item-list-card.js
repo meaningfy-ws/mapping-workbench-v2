@@ -22,9 +22,12 @@ export const ItemListCard = (props) => {
   const popover = usePopover();
 
   const handleEdit = (item_id) => {
+    console.log(item_id)
     router.push({
-      pathname: paths.app[sectionApi.section].resource_manager.edit,
-      query: { id: collection._id, fid: item_id },
+      pathname: paths.mappingResources.edit,
+      query: { id: item_id },
+      // pathname: paths.app[sectionApi.section].resource_manager.edit,
+      // query: { id: collection._id, fid: item_id },
     });
   };
 
@@ -62,7 +65,7 @@ export const ItemListCard = (props) => {
           }}
         >
           <Typography
-            onClick={() => handleEdit?.(item._id)}
+            onClick={() => handleEdit?.(item['@id'])}
             sx={{ cursor: 'pointer' }}
             variant="subtitle2"
           >
@@ -83,7 +86,7 @@ export const ItemListCard = (props) => {
             }}
           >
             <Box
-              onClick={() => handleEdit?.(item._id)}
+              onClick={() => handleEdit?.(item['@id'])}
               sx={{
                 display: 'inline-flex',
                 cursor: 'pointer',
@@ -124,7 +127,7 @@ export const ItemListCard = (props) => {
       <ItemMenu
         anchorEl={popover.anchorRef.current}
         onClose={popover.handleClose}
-        onDelete={() =>handleDelete(item['@id'])}
+        onDelete={() => handleDelete(item['@id'])}
         onEdit={() => handleEdit?.(item._id)}
         open={popover.open}
       />

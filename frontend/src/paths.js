@@ -4,6 +4,7 @@ export const paths = {
   contact: '/contact',
   mappingResources: {
     index: '/mapping-resources',
+    edit: '/mapping-resources/[id]/edit'
   },
   projects: {
     index: '/',

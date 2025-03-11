@@ -15,9 +15,10 @@ import { ItemSearch } from 'src/sections/app/files-form/item-search';
 import { FileUploader } from 'src/sections/app/file-manager/file-uploader';
 import {
   deleteResource,
-  getMappingResource,
+  getMappingResources,
   uploadMappingResource,
 } from '../../api/mapping-resources';
+import {sessionApi} from "../../api/session";
 
 const Page = () => {
   const [view, setView] = useState('grid');
@@ -37,8 +38,8 @@ const Page = () => {
   }, []);
 
   const handleItemsGet = async () => {
-    const id = '_:fdb-1741339951325-4YsfDT3j';
-    getMappingResource(id)
+    const id = sessionApi.getSessionProject();
+    getMappingResources(id)
       .then((res) => {
         console.log(res);
         setState({
@@ -50,8 +51,7 @@ const Page = () => {
   };
 
   const handleUpload = async (files) => {
-    console.log('ff', files);
-    uploadMappingResource({ id: '_:fdb-1741339951325-4YsfDT3j', ...files });
+    uploadMappingResource({ id: sessionApi.getSessionProject(), ...files });
   };
 
   const handleDelete = async (id) => {

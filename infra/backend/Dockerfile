@@ -29,8 +29,7 @@ COPY . ./
 # Debugging: Check installed modules
 RUN ls -la node_modules || true
 
-# Expose the port (ensure default is set)
-EXPOSE ${PORT}
+
 
 
 
@@ -38,4 +37,6 @@ EXPOSE ${PORT}
 # Start the application
 CMD ["sh", "-c", "npm run start"]
 
+# Expose the port (ensure default is set)
+EXPOSE ${PORT}
 

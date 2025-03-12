@@ -8,12 +8,10 @@ import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
 import Box from '@mui/system/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 
 import { FileDropzone } from 'src/components/file-dropzone';
-import { sessionApi } from '../../../api/session';
 import { useRouter } from 'next/navigation';
 
 export const FileUploader = (props) => {
@@ -64,14 +62,13 @@ export const FileUploader = (props) => {
       console.log('fd', formData);
       getFileContent(file).then((res) =>
         onUpload({
-          rdf_files: [
+          rdf_files:
             {
               title: file.name,
               format,
-              file,
               content: res,
             },
-          ],
+
         }).finally(() => {
           setProgress((e) => e + incStep);
           if (index + 1 === files.length) {

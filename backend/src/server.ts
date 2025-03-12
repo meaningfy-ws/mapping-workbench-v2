@@ -13,7 +13,7 @@ const PORT = process.env.MW_BACKEND_PORT;
 const app = express();
 
 app.use(cors())
-app.use(express.json({limit: '300kb'}))
+app.use(express.json({limit: '3000kb'}))
 
 app.post('/api/me', decodeJWT)
 app.post('/api/login', userLogin)

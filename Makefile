@@ -107,3 +107,15 @@ vault-installed: #; @which vault1 > /dev/null
         exit 1; \
 	fi
 # Get secrets in dotenv format
+
+dev-dotenv-file:
+	@ echo "Creating DEV .env file ... "
+	@ echo VAULT_ADDR=${VAULT_ADDR} > ${ENV_FILE}
+	@ echo VAULT_TOKEN=${VAULT_TOKEN} >> ${ENV_FILE}
+	@ vault kv get -format="json" mapping-workbench-v2-dev/app | jq -r ".data.data | keys[] as \$$k | \"\(\$$k)=\(.[\$$k])\"" >> ${ENV_FILE}
+
+staging-dotenv-file:
+	@ echo "Creating STAGING .env file ... "
+	@ echo VAULT_ADDR=${VAULT_ADDR} > ${ENV_FILE}
+	@ echo VAULT_TOKEN=${VAULT_TOKEN} >> ${ENV_FILE}
+	@ vault kv get -format="json" mapping-workbench-v2-staging/app | jq -r ".data.data | keys[] as \$$k | \"\(\$$k)=\(.[\$$k])\"" >> ${ENV_FILE}

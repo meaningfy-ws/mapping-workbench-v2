@@ -12,7 +12,7 @@ import Box from '@mui/system/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 
 import { FileDropzone } from 'src/components/file-dropzone';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 
 export const FileUploader = (props) => {
   const { onClose, open = false, onGetItems, onUpload, disableSelectFormat } = props;
@@ -21,7 +21,6 @@ export const FileUploader = (props) => {
 
   const [files, setFiles] = useState([]);
   const [format, setFormat] = useState(defaultFormatValue);
-  const [type, setType] = useState('');
   const [progress, setProgress] = useState(0);
   const [uploading, setUploading] = useState(false);
 
@@ -40,55 +39,25 @@ export const FileUploader = (props) => {
     });
 
   const handleUpload = async () => {
+    let uploadData = [];
     setUploading(true);
     const incStep = 100 / files.length;
     files.forEach((file, index) => {
-      const formData = new FormData();
-      formData.append('title', file.name);
-      formData.append('format', format);
-      // if (sectionApi.hasFileResourceType) {
-      //     formData.append("type", type);
-      // }
-      formData.append('file', file);
-      formData.append('content', file.content);
-      // formData.append("project", sessionApi.getSessionProject());
-      const getFileContent = (file) =>
-        new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = (event) => resolve(event.target.result);
-          reader.onerror = reject;
-          reader.readAsText(file);
-        });
-      console.log('fd', formData);
-      getFileContent(file).then((res) =>
-        onUpload({
-          rdf_files:
-            {
-              title: file.name,
-              format,
-              content: res,
-            },
-
-        }).finally(() => {
+      getFileContent(file)
+        .then((res) => {
+          uploadData.push({ title: file.name, format, content: res });
+        })
+        .finally(() => {
           setProgress((e) => e + incStep);
           if (index + 1 === files.length) {
             setProgress(0);
-            setUploading(false);
-            // onGetItems ? onGetItems() : router.reload();
-            onClose();
+            onUpload({ rdf_files: uploadData }).then((res) => {
+              setUploading(false);
+              onGetItems ? onGetItems() : router.reload();
+              onClose();
+            });
           }
-        })
-      );
-      // sectionApi.createCollectionFileResource(collectionId, formData)
-      //     .finally(() => {
-      //         setProgress(e => e + incStep)
-      //         if (index + 1 === files.length) {
-      //             setProgress(0)
-      //             setUploading(false)
-      //             onGetItems ? onGetItems() : router.reload()
-      //             onClose()
-      //         }
-      //     })
+        });
     });
   };
 
@@ -163,30 +132,7 @@ export const FileUploader = (props) => {
           disabled={disableSelectFormat}
           value={format}
           sx={{ mb: 3 }}
-        >
-          {/*{Object.keys(sectionApi.FILE_RESOURCE_FORMATS).map((key) => (*/}
-          {/*    <MenuItem key={key} value={key}>*/}
-          {/*        {sectionApi.FILE_RESOURCE_FORMATS[key]}*/}
-          {/*    </MenuItem>*/}
-          {/*))}*/}
-        </TextField>
-        {/*{sectionApi.hasFileResourceType && (*/}
-        {/*    <TextField*/}
-        {/*        fullWidth*/}
-        {/*        label="Type"*/}
-        {/*        onChange={e => setType(e.target.value)}*/}
-        {/*        select*/}
-        {/*        value={type}*/}
-        {/*        sx={{mb: 3}}*/}
-        {/*    >*/}
-        {/*        {Object.keys(sectionApi.FILE_RESOURCE_TYPES)?.map((key) => (*/}
-        {/*            <MenuItem key={key}*/}
-        {/*                      value={key}>*/}
-        {/*                {sectionApi.FILE_RESOURCE_TYPES[key]}*/}
-        {/*            </MenuItem>*/}
-        {/*        ))}*/}
-        {/*    </TextField>*/}
-        {/*)}*/}
+        />
         <FileDropzone
           accept={{ '*/*': [] }}
           caption="Max file size is 3 MB"
@@ -206,4 +152,6 @@ export const FileUploader = (props) => {
 FileUploader.propTypes = {
   onClose: PropTypes.func,
   open: PropTypes.bool,
+  onGetItems: PropTypes.func,
+  onUpload: PropTypes.func,
 };

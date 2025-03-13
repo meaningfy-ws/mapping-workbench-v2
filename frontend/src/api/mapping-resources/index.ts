@@ -15,6 +15,11 @@ export const deleteResource = async (id: string) => {
   return api.delete('/api/delete', { id });
 };
 
+export const updateMappingResource = async (values: MappingResources) => {
+  return api.put('/api/put', { ...values });
+};
+
+
 export const getMappingResources = async (id: string) => {
   return api.post('/api/get', {
     select: {

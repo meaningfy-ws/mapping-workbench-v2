@@ -89,8 +89,6 @@ const Page = () => {
             onFiltersChange={(e) => itemsSearch.handleSearchItems([e])}
             onSortChange={itemsSearch.handleSortChange}
             onViewChange={setView}
-            // sortBy={itemsSearch.state}
-            // sortDir={itemsSearch.state}
             view={view}
           />
           <ItemList
@@ -101,10 +99,8 @@ const Page = () => {
             page={itemsSearch.state.page}
             rowsPerPage={itemsSearch.state.rowsPerPage}
             view={view}
+            onGetItems={handleItemsGet}
             handleDelete={handleDelete}
-            // sectionApi={sectionApi}
-            // fileResourcesApi={fileResourcesApi}
-            // onGetItems={handleItemsGet}
           />
         </Stack>
       </Stack>
@@ -113,9 +109,7 @@ const Page = () => {
         onClose={uploadDialog.handleClose}
         open={uploadDialog.open}
         onUpload={handleUpload}
-        // onGetItems={handleItemsGet}
-        // collectionId={id}
-        // sectionApi={fileResourcesApi}
+        onGetItems={handleItemsGet}
       />
     </>
   );

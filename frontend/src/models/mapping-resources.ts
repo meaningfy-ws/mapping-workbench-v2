@@ -1,5 +1,6 @@
 export interface MappingResources {
   '@id'?: string;
-  file_name: string;
+  title: string;
   content: string;
+  format: string;
 }

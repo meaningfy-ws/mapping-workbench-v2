@@ -15,19 +15,14 @@ export const ItemList = (props) => {
   const {
     count = 0,
     items = [],
-    collection,
-    sectionApi,
-    fileResourcesApi,
     onPageChange = () => {},
     onRowsPerPageChange,
     page = 0,
     rowsPerPage = 0,
     view = 'grid',
-    onGetItems,
-    handleDelete,
+    onGetItems = () => {},
+    handleDelete = () => {},
   } = props;
-
-  console.log('page', page);
 
   const content =
     view === 'grid' ? (
@@ -43,9 +38,6 @@ export const ItemList = (props) => {
             <ItemListCard
               key={item?.['@id']}
               item={item}
-              collection={collection}
-              sectionApi={sectionApi}
-              fileResourcesApi={fileResourcesApi}
               onGetItems={onGetItems}
               handleDelete={handleDelete}
             />
@@ -104,13 +96,13 @@ export const ItemList = (props) => {
 };
 
 ItemList.propTypes = {
-  items: PropTypes.array,
-  collection: PropTypes.object,
-  sectionApi: PropTypes.object,
   count: PropTypes.number,
+  items: PropTypes.array,
   onPageChange: PropTypes.func,
   onRowsPerPageChange: PropTypes.func,
   page: PropTypes.number,
   rowsPerPage: PropTypes.number,
   view: PropTypes.oneOf(['grid', 'list']),
+  onGetItems: PropTypes.func,
+  handleDelete: PropTypes.func
 };

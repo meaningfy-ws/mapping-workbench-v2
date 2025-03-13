@@ -65,7 +65,7 @@ export const CodeMirrorCompare = ({value, previousValue, lang, label, style, nam
     )
 }
 
-const CodeMirrorDefault = ({value, onChange, lang, label, disabled, style, name}) => {
+const CodeMirrorDefault = ({value, onChange, lang, label, disabled = false, style, name}) => {
     const theme = useTheme();
 
     return (

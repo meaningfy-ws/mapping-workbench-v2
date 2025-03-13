@@ -1,233 +1,221 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
 
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
-import Paper from '@mui/material/Paper';
-import Divider from '@mui/material/Divider';
-import Checkbox from '@mui/material/Checkbox';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
 import Grid from '@mui/material/Unstable_Grid2';
-import Typography from '@mui/material/Typography';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Stack from '@mui/material/Stack';
+import CircularProgress from '@mui/material/CircularProgress';
+import MenuItem from '@mui/material/MenuItem';
+import TextField from '@mui/material/TextField';
 
-import { Seo } from 'src/components/seo';
-import { useRouter } from 'next/router';
-import { usePageView } from 'src/hooks/use-page-view';
-import { Layout as AppLayout } from 'src/layouts';
+import { paths } from 'src/paths';
+import { RouterLink } from 'src/components/router-link';
 import { FormTextField } from 'src/components/form/text-field';
-import { getMappingResource } from '../../../api/mapping-resources';
-import CodeMirrorDefault from "../../../components/form/codeMirrorDefault";
+import { toastError, toastLoad, toastSuccess } from 'src/components/app-toast';
+import CodeMirrorDefault from 'src/components/form/codeMirrorDefault';
+import { Layout as AppLayout } from '../../../layouts';
+import { getMappingResource, updateMappingResource } from '../../../api/mapping-resources';
+import { useRouter } from 'next/router';
+import { MappingResources } from '../../../models/mapping-resources';
 
-const useItem = (id) => {
-  const [item, setItem] = useState(null);
-
-  const handleItemGet = (id) => {
-    getMappingResource(id)
-      .then((res) => setItem(res))
-      .catch((err) => console.error(err));
-  };
-
-  useEffect(
-    () => {
-      id && handleItemGet(id);
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [id]
-  );
-
-  return item;
-};
-
-const ExtraForm = (props) => {
-  const { item, formik, compare_items } = props;
-
-  const [showCompare, setShowCompare] = useState(false);
-
-  const handleCompareChange = (e) => {
-    formik.setFieldValue('compare_item', e.target.value);
-  };
-  const handleTransformTestDataChange = useCallback(
-    (event) => {
-      formik.setFieldValue('transform_test_data', event.target.checked);
-    },
-    [formik]
-  );
-
-  return (
-    <Stack gap={3}>
-      <Grid
-        xs={12}
-        md={12}
-      >
-        <FormTextField
-          formik={formik}
-          name="identifier"
-          label="Identifier"
-          required
-        />
-      </Grid>
-      <Divider />
-      <Paper
-        sx={{
-          alignItems: 'flex-start',
-          display: 'flex',
-          px: 2,
-        }}
-        variant="outlined"
-      >
-        <FormControlLabel
-          sx={{
-            width: '100%',
-          }}
-          control={
-            <Checkbox
-              checked={formik.values.transform_test_data}
-              onChange={handleTransformTestDataChange}
-            />
-          }
-          label="Transform Test Data"
-          value=""
-        />
-      </Paper>
-      <Grid
-        xs={12}
-        md={12}
-      >
-        <CodeMirrorDefault
-          label="RDF Manifestation"
-          style={{ resize: 'vertical', overflow: 'auto', height: 600 }}
-          value={formik.values.rdf_manifestation}
-          onChange={(value) => formik.setValues('rdf_manifestation', value)}
-          lang="TTL"
-        />
-      </Grid>
-    </Stack>
-  );
-};
-
-const useFileHistory = (sectionApi, id) => {
-  const [compareItems, setCompareItems] = useState([]);
-
-  useEffect(() => {
-    id && handleItemHistoryGet(id);
-  }, [id]);
-
-  const handleItemHistoryGet = (id) => {
-    sectionApi
-      .getFileHistory(id)
-      .then((res) => setCompareItems(res))
-      .catch((err) => console.error(err));
-  };
-
-  return compareItems;
-};
-
-const Page = () => {
+export const Page = () => {
   const router = useRouter();
   const { id } = router.query;
+  const [data, setData] = useState<MappingResources>({
+    ['@id']: '',
+    title: '',
+    content: '',
+    format: '',
+  });
 
-  const item = useItem(id);
-  // const compare_items = useFileHistory(sectionApi, fid).slice(1);
-  // const item = formState.item;
+  useEffect(() => {
+    id && getDate(id);
+  }, [id]);
 
-  usePageView();
+  const getDate = (id) => {
+    getMappingResource(id)
+      .then((res) => setData(res[0]))
+      .catch((err) => console.error(err));
+  };
 
-  if (!item) {
-    return;
-  }
+  const initialValues = {
+    '@id': data['@id'],
+    title: data.title ?? '',
+    content: data.content ?? '',
+    filename: data.title ?? '',
+    format: data.format ?? '',
+  };
 
-  // const extra_form_fields = {
-  //   identifier: item.identifier || '',
-  //   rdf_manifestation: item.rdf_manifestation || '',
-  //   transform_test_data: false,
-  //   mapping_package_id: null,
-  //   compare_items: compare_items,
-  // };
+  const formik = useFormik({
+    initialValues: initialValues,
+    enableReinitialize: true,
+    validationSchema: Yup.object({
+      title: Yup.string().max(255).required('Title is required'),
+      description: Yup.string().max(2048),
+      format: Yup.string().max(255).required('Format is required'),
+    }),
+    onSubmit: async (values, helpers) => {
+      const toastId = toastLoad('Updating...');
+
+      updateMappingResource(values)
+        .then((res) => {
+          helpers.setStatus({ success: true });
+          helpers.setSubmitting(false);
+          router.push(paths.mappingResources.index);
+          toastSuccess('Updated', toastId);
+        })
+        .catch((err) => {
+          console.error(err);
+          toastError(err, toastId);
+          helpers.setStatus({ success: false });
+          helpers.setErrors({ submit: err.message });
+          helpers.setSubmitting(false);
+        });
+    },
+  });
+
+  const getFileContent = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (event) => resolve(event.target.result);
+      reader.onerror = reject;
+      reader.readAsText(file);
+    });
+
+  const handleFile = (e) => {
+    console.log(e);
+    getFileContent(e.target.files[0])
+      .then((res) => formik.setFieldValue('content', res))
+      .catch((err) => console.error(err));
+  };
 
   return (
-    <>
-      <Seo title={`Mapping Resources Edit`} />
-      <Stack spacing={4}>
-        <Stack spacing={4}>
-          <Stack
-            alignItems="flex-start"
-            direction={{
-              xs: 'column',
-              md: 'row',
-            }}
-            justifyContent="space-between"
-            spacing={4}
+    <form
+      encType="multipart/form-data"
+      onSubmit={formik.handleSubmit}
+    >
+      <Card>
+        <CardHeader title={'Edit'} />
+        <CardContent sx={{ pt: 0 }}>
+          <Grid
+            container
+            spacing={3}
           >
-            <Stack
-              alignItems="center"
-              direction="row"
-              spacing={2}
+            <Grid
+              xs={12}
+              md={12}
             >
-              <Stack spacing={1}>
-                <Typography variant="h4">{item.title}</Typography>
-                <Stack
-                  alignItems="center"
-                  direction="row"
-                  spacing={1}
+              <FormTextField
+                formik={formik}
+                name="title"
+                label="Title"
+                required
+              />
+            </Grid>
+
+            <Grid
+              xs={12}
+              md={12}
+            >
+              <TextField
+                error={!!(formik.touched.format && formik.errors.format)}
+                fullWidth
+                helperText={formik.touched.format && formik.errors.format}
+                onBlur={formik.handleBlur}
+                label="Format"
+                onChange={(e) => {
+                  formik.setFieldValue('format', e.target.value);
+                }}
+                select
+                required
+                value={formik.values.format}
+              >
+                <MenuItem
+                  key={'RFD'}
+                  value={'RDF'}
                 >
-                  <Chip
-                    label={item._id}
-                    size="small"
-                  />
-                </Stack>
-                <Stack gap={3}>
-                  <Grid
-                    xs={12}
-                    md={12}
-                  >
-                    {/*<FormTextField*/}
-                    {/*  formik={formik}*/}
-                    {/*  name="identifier"*/}
-                    {/*  label="Identifier"*/}
-                    {/*  required*/}
-                    {/*/>*/}
-                  </Grid>
-                  <Divider />
-                  <Paper
-                    sx={{
-                      alignItems: 'flex-start',
-                      display: 'flex',
-                      px: 2,
-                    }}
-                    variant="outlined"
-                  >
-                    {/*<FormControlLabel*/}
-                    {/*  sx={{*/}
-                    {/*    width: '100%',*/}
-                    {/*  }}*/}
-                    {/*  control={*/}
-                    {/*    <Checkbox*/}
-                    {/*      checked={formik.values.transform_test_data}*/}
-                    {/*      onChange={handleTransformTestDataChange}*/}
-                    {/*    />*/}
-                    {/*  }*/}
-                    {/*  label="Transform Test Data"*/}
-                    {/*  value=""*/}
-                    {/*/>*/}
-                  </Paper>
-                  <Grid
-                    xs={12}
-                    md={12}
-                  >
-                    <CodeMirrorDefault
-                      label="RDF Manifestation"
-                      style={{ resize: 'vertical', overflow: 'auto', height: 600 }}
-                      value={'formik.values.rdf_manifestation'}
-                      // onChange={(value) => formik.setValues('rdf_manifestation', value)}
-                      lang="TTL"
-                    />
-                  </Grid>
-                </Stack>
-              </Stack>
-            </Stack>
-          </Stack>
+                  RDF
+                </MenuItem>
+              </TextField>
+            </Grid>
+            <Grid
+              xs={12}
+              md={12}
+            >
+              <CodeMirrorDefault
+                value={formik.values.content}
+                label="Content"
+                name="Content"
+                lang={formik.values.format}
+                style={{ resize: 'vertical', overflow: 'auto', height: 600 }}
+                onChange={(value: string) => formik.setFieldValue('content', value)}
+              />
+            </Grid>
+            <Grid
+              xs={12}
+              md={12}
+            >
+              <Button
+                variant="contained"
+                component="label"
+              >
+                Upload File
+                <input
+                  type="file"
+                  name="file"
+                  onChange={handleFile}
+                />
+              </Button>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
+
+      <Card sx={{ mt: 3 }}>
+        <Stack
+          direction={{
+            xs: 'column',
+            sm: 'row',
+          }}
+          flexWrap="wrap"
+          spacing={3}
+          sx={{ p: 3 }}
+        >
+          <Button
+            disabled={formik.isSubmitting}
+            type="submit"
+            variant="contained"
+          >
+            {formik.isSubmitting && (
+              <CircularProgress
+                size={24}
+                sx={{
+                  color: 'primary',
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  marginTop: '-12px',
+                  marginLeft: '-12px',
+                }}
+              />
+            )}
+            Update
+          </Button>
+          <Button
+            color="inherit"
+            component={RouterLink}
+            disabled={formik.isSubmitting}
+            href={'#'}
+          >
+            Cancel
+          </Button>
         </Stack>
-      </Stack>
-    </>
+      </Card>
+    </form>
   );
 };
 

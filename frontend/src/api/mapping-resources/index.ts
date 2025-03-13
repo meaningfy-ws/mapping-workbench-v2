@@ -12,13 +12,27 @@ export const uploadMappingResource = async ({
 };
 
 export const deleteResource = async (id: string) => {
-  return api.delete('/api/delete', { id });
+  return api.post('/api/post', {
+    where: {
+      '@id': '?s',
+      rdf_files: {
+        '@id': id,
+        '?p': '?o',
+      },
+    },
+    delete: {
+      '@id': '?s',
+      rdf_files: {
+        '@id': id,
+        '?p': '?o',
+      },
+    },
+  });
 };
 
 export const updateMappingResource = async (values: MappingResources) => {
   return api.put('/api/put', { ...values });
 };
-
 
 export const getMappingResources = async (id: string) => {
   return api.post('/api/get', {

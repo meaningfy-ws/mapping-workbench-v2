@@ -130,5 +130,4 @@ export const ItemListCard = (props) => {
 
 ItemListCard.propTypes = {
   item: PropTypes.object.isRequired,
-  collection: PropTypes.object.isRequired,
 };

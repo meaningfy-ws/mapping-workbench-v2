@@ -18,23 +18,16 @@ import { useRouter } from 'src/hooks/use-router';
 
 export const ItemListCard = (props) => {
   const router = useRouter();
-  const { item, collection, sectionApi, fileResourcesApi, onGetItems, handleDelete } = props;
+  const { item, handleDelete } = props;
   const popover = usePopover();
 
   const handleEdit = (item_id) => {
-    console.log(item_id)
     router.push({
       pathname: paths.mappingResources.edit,
       query: { id: item_id },
-      // pathname: paths.app[sectionApi.section].resource_manager.edit,
-      // query: { id: collection._id, fid: item_id },
     });
   };
 
-  // const handleDelete = async () => {
-  //     fileResourcesApi.deleteFileResource(item._id)
-  //         .then(() => onGetItems ? onGetItems() : router.reload())
-  // }
   return (
     <>
       <Card
@@ -128,7 +121,7 @@ export const ItemListCard = (props) => {
         anchorEl={popover.anchorRef.current}
         onClose={popover.handleClose}
         onDelete={() => handleDelete(item['@id'])}
-        onEdit={() => handleEdit?.(item._id)}
+        onEdit={() => handleEdit?.(item['@id'])}
         open={popover.open}
       />
     </>

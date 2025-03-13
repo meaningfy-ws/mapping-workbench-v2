@@ -59,11 +59,8 @@ export const ItemList = (props) => {
               <TableBody>
                 {items.map((item) => (
                   <ItemListRow
-                    key={item._id}
+                    key={item['@id']}
                     item={item}
-                    collection={collection}
-                    sectionApi={sectionApi}
-                    fileResourcesApi={fileResourcesApi}
                     onGetItems={onGetItems}
                   />
                 ))}

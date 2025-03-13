@@ -87,7 +87,6 @@ export const Page = () => {
     });
 
   const handleFile = (e) => {
-    console.log(e);
     getFileContent(e.target.files[0])
       .then((res) => formik.setFieldValue('content', res))
       .catch((err) => console.error(err));

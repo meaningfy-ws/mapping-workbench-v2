@@ -13,26 +13,23 @@ import {usePopover} from 'src/hooks/use-popover';
 import {ItemIcon} from './item-icon';
 import {ItemMenu} from './item-menu';
 import {paths} from "../../../paths";
-import {useRouter} from "src/hooks/use-router";
+import {useRouter} from "next/router";
 
 export const ItemListRow = (props) => {
     const router = useRouter();
 
-    const {item, collection, sectionApi, fileResourcesApi, onGetItems} = props;
+    const {item, onGetItems ,onDelete} = props;
     const popover = usePopover();
 
     const handleEdit = (item_id) => {
         router.push({
           pathname: paths.mappingResources.edit,
           query: {id: item_id}
-            // pathname: paths.app[sectionApi.section].resource_manager.edit,
-            // query: {id: collection._id, fid: item_id}
-
         });
     }
 
     const handleDelete = async () => {
-        fileResourcesApi.deleteFileResource(item._id)
+        onDelete(item['@id'])
             .then(() => onGetItems ? onGetItems() : router.reload())
     };
 
@@ -83,7 +80,7 @@ export const ItemListRow = (props) => {
                         spacing={2}
                     >
                         <Box
-                            onClick={() => handleEdit?.(item._id)}
+                            onClick={() => handleEdit?.(item['@id'])}
                             sx={{cursor: 'pointer'}}
                         >
                             <ItemIcon
@@ -94,7 +91,7 @@ export const ItemListRow = (props) => {
                         <div>
                             <Typography
                                 noWrap
-                                onClick={() => handleEdit?.(item._id)}
+                                onClick={() => handleEdit?.(item['@id'])}
                                 sx={{cursor: 'pointer'}}
                                 variant="subtitle2"
                             >
@@ -139,7 +136,7 @@ export const ItemListRow = (props) => {
             <ItemMenu
                 anchorEl={popover.anchorRef.current}
                 onClose={popover.handleClose}
-                onEdit={() => handleEdit?.(item._id)}
+                onEdit={() => handleEdit?.(item['@id'])}
                 onDelete={handleDelete}
                 open={popover.open}
             />

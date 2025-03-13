@@ -62,6 +62,7 @@ export const ItemList = (props) => {
                     key={item['@id']}
                     item={item}
                     onGetItems={onGetItems}
+                    onDelete={handleDelete}
                   />
                 ))}
               </TableBody>

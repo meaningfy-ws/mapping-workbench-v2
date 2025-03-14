@@ -34,18 +34,22 @@ class AuthApi {
   async signIn(request) {
     try {
       const res = await post('/api/login', request);
-      return { accessToken: res };
+      // return { accessToken: res };
+      const accessToken = res;
+      return { accessToken };
     } catch (err) {
-      console.error('[Auth Api]: ', err);
+      console.error('[Auth Api]: ', err.message);
+      throw err
     }
   }
 
   async signUp(request) {
     try {
       const res = await post('/api/register', request);
-      return { accessToken: res };
+      const accessToken = res;
+      return { accessToken };
     } catch (err) {
-      console.error('[Auth Api]: ', err);
+      console.error('[Auth Api]: ', err.message);
     }
   }
 

@@ -27,7 +27,7 @@ const EditDrawer = ({open, values, handleAdd, handleEdit, handleClose}: EditDraw
             description: '',
             start_date: new Date(),
             end_date: new Date(),
-            '@type': 'project'
+            '@type': 'Project'
         }
     const [initialValues, setInitialValues] = useState<Project>(defaultValues)
 

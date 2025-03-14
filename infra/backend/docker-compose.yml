@@ -1,0 +1,37 @@
+version: '3.10'
+
+services:
+  mw-backend:
+    image: mw-backend-${ENVIRONMENT}
+    container_name: mw-backend-${ENVIRONMENT}
+    env_file:
+      - ../../.env
+    build:
+      context: ../../backend/
+      dockerfile: ../infra/backend/Dockerfile
+      args:
+        - ENVIRONMENT=${ENVIRONMENT}
+        - PORT=${MW_BACKEND_PORT}
+    ports:
+        - ${MW_BACKEND_PORT}:8000
+    networks:
+      - proxy-net
+      - fluree
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mw-backend-${ENVIRONMENT}.rule=Host(`api.mw.${SUBDOMAIN}${DOMAIN}`)"
+      - "traefik.http.services.mw-backend-${ENVIRONMENT}.loadbalancer.server.port=8000"
+      - "traefik.http.routers.mw-backend-${ENVIRONMENT}.entrypoints=web"
+      - "traefik.http.routers.mw-backend-${ENVIRONMENT}.middlewares=redirect@file"
+      - "traefik.http.routers.mw-backend-${ENVIRONMENT}-secured.rule=Host(`api.mw.${SUBDOMAIN}${DOMAIN}`)"
+      - "traefik.http.routers.mw-backend-${ENVIRONMENT}-secured.entrypoints=web-secured"
+      - "traefik.http.routers.mw-backend-${ENVIRONMENT}-secured.tls=true"
+      - "traefik.http.routers.mw-backend-${ENVIRONMENT}-secured.tls.certresolver=mytlschallenge"
+
+networks:
+  proxy-net:
+    external:
+      name: proxy-net
+  fluree:
+    internal: true
+    name: fluree-${ENVIRONMENT}

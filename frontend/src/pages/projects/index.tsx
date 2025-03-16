@@ -170,6 +170,7 @@ const Page = () => {
                 spacing={3}
               >
                 <Button
+                  id='add_button'
                   onClick={() => handleEditOpen()}
                   startIcon={<AddIcon />}
                 >

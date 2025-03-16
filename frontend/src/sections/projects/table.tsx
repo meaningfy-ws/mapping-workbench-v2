@@ -96,13 +96,13 @@ export const ProjectListTable = (props: ProjectListTableProps) => {
                       setAnchor={(e) => setMenuAnchor([e, item['@id']])}
                     >
                       <MenuActionButton
-                        id="select_package_button"
+                        id="select_button"
                         onClick={() => handleSetProject(item['@id'])}
                         title="Select"
                         icon={<CheckmarkIcon />}
                       />
                       <MenuActionButton
-                        id="view_last_state_button"
+                        id="edit_button"
                         onClick={() => handleOpenEditor(item)}
                         title="Edit"
                         icon={<BorderColorIcon />}

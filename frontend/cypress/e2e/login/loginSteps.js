@@ -1,6 +1,6 @@
 import { Given, When, Then} from 'cypress-cucumber-preprocessor/steps'
 
-const {username, password, homeURL} = Cypress.env()
+const {username, password, homeURL, homePageLabel} = Cypress.env()
 
 Given('I open login page', () => {
     cy.visit(homeURL)
@@ -13,5 +13,5 @@ When('I submit login', () => {
 })
 
 Then('I should see homepage', () => {
-    cy.title().should('eq', 'Projects List | Mapping Workbench 2')
+    cy.title().should('eq', homePageLabel)
 })

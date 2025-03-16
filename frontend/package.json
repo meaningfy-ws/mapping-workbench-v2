@@ -11,7 +11,8 @@
     "export": "next export",
     "lint": "next lint",
     "lint-fix": "next lint --fix",
-    "begin": "node server.mjs",
+    "cy:open": "cypress open",
+    "cy:tests": "cypress run",
     "format:write": "prettier --write \"**/*.{js,jsx,ts,tsx,mdx}\" --cache",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,mdx}\" --cache"
   },
@@ -21,6 +22,7 @@
     "@codemirror/lang-json": "^6.0.1",
     "@codemirror/lang-xml": "^6.1.0",
     "@codemirror/lang-yaml": "^6.1.2",
+    "@cypress/browserify-preprocessor": "^3.0.2",
     "@emotion/cache": "11.11.0",
     "@emotion/react": "11.11.1",
     "@emotion/server": "11.11.0",
@@ -52,6 +54,7 @@
     "codemirror-lang-sparql": "^2.0.0",
     "codemirror-lang-turtle": "^0.0.2",
     "cors": "^2.8.5",
+    "cypress-cucumber-preprocessor": "^4.3.1",
     "date-fns": "2.30.0",
     "draft-js": "0.11.7",
     "express": "^4.21.2",
@@ -107,10 +110,16 @@
     "@types/react-redux": "7.1.25",
     "@types/react-slick": "0.23.10",
     "@types/react-syntax-highlighter": "15.5.7",
+    "cypress": "^14.2.0",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.8",
     "eslint-config-prettier": "8.8.0",
     "prettier": "3.0.0",
     "typescript": "5.1.6"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true,
+    "step_definitions": "cypress/e2e/",
+    "commonPath": "cypress/e2e/common"
   }
 }

@@ -22,9 +22,9 @@ interface AuthRequest extends Request {
 
 const secret = process.env.JWT_SECRET
 
-const __dirname = path.resolve()
+const dirname = path.resolve()
 
-const usersFile = path.join(__dirname, "src/data/users.json");
+const usersFile = path.join(dirname, "src/data/users.json");
 
 export const loadUsers = async (): Promise<User[]> => {
     try {
@@ -38,8 +38,6 @@ export const loadUsers = async (): Promise<User[]> => {
 const saveUsers = async (users: User[]): Promise<void> => {
     await fs.writeFile(usersFile, JSON.stringify(users, null, 2), "utf-8");
 };
-
-const users: User[] = await loadUsers();
 
 
 export const decodeJWT = (req: AuthRequest, res: Response, next: NextFunction): void => {
@@ -55,8 +53,11 @@ export const decodeJWT = (req: AuthRequest, res: Response, next: NextFunction): 
         }
 };
 
-export const userLogin = (req: Request, res: Response): void => {
+export const userLogin = async (req: Request, res: Response): Promise<void> => {
     const {email, password} = req.body;
+
+    const users: User[] = await loadUsers();
+
 
     const user = users.find((u) => u.email === email);
     if (!user) {
@@ -75,8 +76,10 @@ export const userLogin = (req: Request, res: Response): void => {
 };
 
 
-export const userRegister = (req: Request, res: Response): void => {
+export const userRegister = async (req: Request, res: Response): Promise<void> => {
     const {email, username, password} = req.body;
+
+    const users: User[] = await loadUsers();
 
     // Check if user already exists
     if (users.find((u) => u.email === email)) {

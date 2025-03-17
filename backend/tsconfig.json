@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "target": "esNext",
-    "module": "NodeNext",
+    "target": "esnext",
+    "module": "esnext",
     "moduleResolution": "NodeNext",
     "rootDir": "./src",
     "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true
   }
 }

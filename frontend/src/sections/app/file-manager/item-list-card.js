@@ -64,7 +64,7 @@ export const ItemListCard = (props) => {
           >
             {item.title}
           </Typography>
-          <IconButton
+          <IconButton id='actions-menu-button'
             onClick={popover.handleOpen}
             ref={popover.anchorRef}
           >

@@ -5,8 +5,10 @@ import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
+import { useState } from 'react';
 
 import { Scrollbar } from 'src/components/scrollbar';
+import ConfirmDialog from '../../../components/dialog/confirm-dialog';
 import { ItemListCard } from './item-list-card';
 import { ItemListRow } from './item-list-row';
 import TablePagination from 'src/components/table-pagination-pages';
@@ -24,6 +26,13 @@ export const ItemList = (props) => {
     handleDelete = () => {},
   } = props;
 
+  const [confirmOpen, setConfirmOpen] = useState(false);
+
+  const onDelete = () => {
+    handleDelete(confirmOpen);
+    setConfirmOpen(false);
+  };
+
   const content =
     view === 'grid' ? (
       <Box sx={{ p: 3 }}>
@@ -39,7 +48,7 @@ export const ItemList = (props) => {
               key={item?.['@id']}
               item={item}
               onGetItems={onGetItems}
-              handleDelete={handleDelete}
+              handleDelete={() => setConfirmOpen(item['@id'])}
             />
           ))}
         </Box>
@@ -62,7 +71,7 @@ export const ItemList = (props) => {
                     key={item['@id']}
                     item={item}
                     onGetItems={onGetItems}
-                    onDelete={handleDelete}
+                    onDelete={() => setConfirmOpen(item['@id'])}
                   />
                 ))}
               </TableBody>
@@ -88,6 +97,16 @@ export const ItemList = (props) => {
         >
           {content}
         </TablePagination>
+        <ConfirmDialog
+          title="Delete It?"
+          open={!!confirmOpen}
+          setOpen={setConfirmOpen}
+          onConfirm={onDelete}
+          // footer={confirmDialogFooter}
+        >
+          <>Are you sure you want to delete it?</>
+          {/*<>{confirmDialogContent}</>*/}
+        </ConfirmDialog>
       </Stack>
     </Card>
   );
@@ -102,5 +121,5 @@ ItemList.propTypes = {
   rowsPerPage: PropTypes.number,
   view: PropTypes.oneOf(['grid', 'list']),
   onGetItems: PropTypes.func,
-  handleDelete: PropTypes.func
+  handleDelete: PropTypes.func,
 };

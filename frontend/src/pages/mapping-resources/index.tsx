@@ -76,7 +76,7 @@ const Page = () => {
             direction="row"
             spacing={3}
           >
-            <Button
+            <Button id='upload_button'
               onClick={uploadDialog.handleOpen}
               startIcon={<UploadIcon />}
             >

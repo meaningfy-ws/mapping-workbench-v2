@@ -169,6 +169,7 @@ export const AuthProvider = (props) => {
 
   const signOut = useCallback(async () => {
     sessionStorage.removeItem(STORAGE_KEY);
+    window.location.reload();
     dispatch({ type: ActionType.SIGN_OUT });
   }, [dispatch]);
 

@@ -14,6 +14,7 @@ module.exports = defineConfig({
     appURLPrefix: process.env.MW_BACKEND_SERVER_HOST + '/api/',
     homeURL: process.env.MW_FRONTEND_ADDRESS,
     tripleMapFragment: 'test_triple_map.ttl',
+    rmlFile: 'test.rml.ttl',
     mappingPacakgeName: 'Package EF10-EF24, SDK v1.3',
     packageFile: 'package_cn_v1.3_minimal.zip',
     homePageLabel: 'Projects List | Mapping Workbench 2',
@@ -25,43 +26,9 @@ module.exports = defineConfig({
     viewportHeight: 800,
     specPattern: [
       'cypress/e2e/login.feature',
-      // "cypress/e2e/scenarioOne.feature",
-      // "cypress/e2e/scenarioTwo.feature",
-      // "cypress/e2e/cleanUp.feature",
       'cypress/e2e/projects.feature',
       'cypress/e2e/projectCreate.feature',
-      //Source & Target
-      'cypress/e2e/testDataSuites.feature',
-      'cypress/e2e/ontologyFiles.feature',
-      'cypress/e2e/ontologyTerms.feature',
-      'cypress/e2e/ontologyNamespaces.feature',
-      //Element Definition
-      'cypress/e2e/fieldsDevelop.feature',
-      'cypress/e2e/fieldsTree.feature',
-      'cypress/e2e/fieldsOverview.feature',
-      //Conceptual Mappings
-      'cypress/e2e/conceptualMappingsDevelop.feature',
-      'cypress/e2e/conceptualMappingsReview.feature',
-      'cypress/e2e/conceptualMappingsOverview.feature',
-      //Technical Mappings
-      'cypress/e2e/tripleMapFragments.feature',
-      'cypress/e2e/valueMappingResources.feature',
-      //Quality Control
-      'cypress/e2e/sparqlTestSuites.feature',
-      'cypress/e2e/shaclTestSuites.feature',
-      //Mapping Packages
-      'cypress/e2e/mappingPackages.feature',
-      'cypress/e2e/mappingPackagesStates.feature',
-      //Activities
-      'cypress/e2e/activities.feature',
-
-      // "cypress/e2e/schemaFiles.feature",
-      // "cypress/e2e/removeTripleMap.feature",
-      // "cypress/e2e/transformTestData.feature",
-      // "cypress/e2e/conceptualMapping.feature",
-      // "cypress/e2e/termValidator.feature",
-      // "cypress/e2e/sparqlQueries.feature",
-      // "cypress/e2e/genericTripleMaps.feature",
+      'cypress/e2e/mappingResources.feature',
       'cypress/e2e/cleanUp.feature',
     ],
     video: false,

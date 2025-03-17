@@ -21,6 +21,7 @@ import { Layout as AppLayout } from '../../../layouts';
 import { getMappingResource, updateMappingResource } from '../../../api/mapping-resources';
 import { useRouter } from 'next/router';
 import { MappingResources } from '../../../models/mapping-resources';
+import {Seo} from "../../../components/seo";
 
 export const Page = () => {
   const router = useRouter();
@@ -93,128 +94,131 @@ export const Page = () => {
   };
 
   return (
-    <form
-      encType="multipart/form-data"
-      onSubmit={formik.handleSubmit}
-    >
-      <Card>
-        <CardHeader title={'Edit'} />
-        <CardContent sx={{ pt: 0 }}>
-          <Grid
-            container
-            spacing={3}
-          >
+    <>
+      <Seo title='App: Edit Resource Manager'/>
+      <form
+        encType="multipart/form-data"
+        onSubmit={formik.handleSubmit}
+      >
+        <Card>
+          <CardHeader title={'Edit'} />
+          <CardContent sx={{ pt: 0 }}>
             <Grid
-              xs={12}
-              md={12}
+              container
+              spacing={3}
             >
-              <FormTextField
-                formik={formik}
-                name="title"
-                label="Title"
-                required
-              />
-            </Grid>
-
-            <Grid
-              xs={12}
-              md={12}
-            >
-              <TextField
-                error={!!(formik.touched.format && formik.errors.format)}
-                fullWidth
-                helperText={formik.touched.format && formik.errors.format}
-                onBlur={formik.handleBlur}
-                label="Format"
-                onChange={(e) => {
-                  formik.setFieldValue('format', e.target.value);
-                }}
-                select
-                required
-                value={formik.values.format}
+              <Grid
+                xs={12}
+                md={12}
               >
-                <MenuItem
-                  key={'RFD'}
-                  value={'RDF'}
-                >
-                  RDF
-                </MenuItem>
-              </TextField>
-            </Grid>
-            <Grid
-              xs={12}
-              md={12}
-            >
-              <CodeMirrorDefault
-                value={formik.values.content}
-                label="Content"
-                name="Content"
-                lang={formik.values.format}
-                style={{ resize: 'vertical', overflow: 'auto', height: 600 }}
-                onChange={(value: string) => formik.setFieldValue('content', value)}
-              />
-            </Grid>
-            <Grid
-              xs={12}
-              md={12}
-            >
-              <Button
-                variant="contained"
-                component="label"
-              >
-                Upload File
-                <input
-                  type="file"
-                  name="file"
-                  onChange={handleFile}
+                <FormTextField
+                  formik={formik}
+                  name="title"
+                  label="Title"
+                  required
                 />
-              </Button>
-            </Grid>
-          </Grid>
-        </CardContent>
-      </Card>
+              </Grid>
 
-      <Card sx={{ mt: 3 }}>
-        <Stack
-          direction={{
-            xs: 'column',
-            sm: 'row',
-          }}
-          flexWrap="wrap"
-          spacing={3}
-          sx={{ p: 3 }}
-        >
-          <Button
-            disabled={formik.isSubmitting}
-            type="submit"
-            variant="contained"
+              <Grid
+                xs={12}
+                md={12}
+              >
+                <TextField
+                  error={!!(formik.touched.format && formik.errors.format)}
+                  fullWidth
+                  helperText={formik.touched.format && formik.errors.format}
+                  onBlur={formik.handleBlur}
+                  label="Format"
+                  onChange={(e) => {
+                    formik.setFieldValue('format', e.target.value);
+                  }}
+                  select
+                  required
+                  value={formik.values.format}
+                >
+                  <MenuItem
+                    key={'RFD'}
+                    value={'RDF'}
+                  >
+                    RDF
+                  </MenuItem>
+                </TextField>
+              </Grid>
+              <Grid
+                xs={12}
+                md={12}
+              >
+                <CodeMirrorDefault
+                  value={formik.values.content}
+                  label="Content"
+                  name="Content"
+                  lang={formik.values.format}
+                  style={{ resize: 'vertical', overflow: 'auto', height: 600 }}
+                  onChange={(value: string) => formik.setFieldValue('content', value)}
+                />
+              </Grid>
+              <Grid
+                xs={12}
+                md={12}
+              >
+                <Button
+                  variant="contained"
+                  component="label"
+                >
+                  Upload File
+                  <input
+                    type="file"
+                    name="file"
+                    onChange={handleFile}
+                  />
+                </Button>
+              </Grid>
+            </Grid>
+          </CardContent>
+        </Card>
+
+        <Card sx={{ mt: 3 }}>
+          <Stack
+            direction={{
+              xs: 'column',
+              sm: 'row',
+            }}
+            flexWrap="wrap"
+            spacing={3}
+            sx={{ p: 3 }}
           >
-            {formik.isSubmitting && (
-              <CircularProgress
-                size={24}
-                sx={{
-                  color: 'primary',
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  marginTop: '-12px',
-                  marginLeft: '-12px',
-                }}
-              />
-            )}
-            Update
-          </Button>
-          <Button
-            color="inherit"
-            component={RouterLink}
-            disabled={formik.isSubmitting}
-            href={'#'}
-          >
-            Cancel
-          </Button>
-        </Stack>
-      </Card>
-    </form>
+            <Button
+              disabled={formik.isSubmitting}
+              type="submit"
+              variant="contained"
+            >
+              {formik.isSubmitting && (
+                <CircularProgress
+                  size={24}
+                  sx={{
+                    color: 'primary',
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    marginTop: '-12px',
+                    marginLeft: '-12px',
+                  }}
+                />
+              )}
+              Update
+            </Button>
+            <Button
+              color="inherit"
+              component={RouterLink}
+              disabled={formik.isSubmitting}
+              href={'#'}
+            >
+              Cancel
+            </Button>
+          </Stack>
+        </Card>
+      </form>
+    </>
   );
 };
 

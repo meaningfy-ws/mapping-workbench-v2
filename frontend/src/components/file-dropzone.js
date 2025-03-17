@@ -144,6 +144,7 @@ export const FileDropzone = (props) => {
               Remove All
             </Button>
             <Button
+              id='file_upload_button'
               onClick={onUpload}
               size="small"
               type="button"

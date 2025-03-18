@@ -38,7 +38,7 @@
     "dev": "nodemon",
     "build": "tsc",
     "start": "node --loader ts-node/esm src/server.ts",
-    "test": "jest --coverage"
+    "test": "NODE_OPTIONS='--experimental-vm-modules' jest"
   },
   "keywords": [],
   "author": "",

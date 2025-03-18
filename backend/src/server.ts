@@ -1,8 +1,5 @@
 import app from "./app.ts";
 
-import dotenv from 'dotenv'
-dotenv.config()
-
 const PORT = process.env.MW_BACKEND_PORT;
 
 app.listen(PORT, () => {

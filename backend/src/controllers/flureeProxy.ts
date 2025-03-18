@@ -1,8 +1,5 @@
 import {Request, Response} from 'express';
 import {FlureeClient} from "@fluree/fluree-client";
-import dotenv from "dotenv";
-
-dotenv.config()
 
 const FLUREE_LEDGER = process.env.FLUREE_LEDGER
 const FLUREE_HOST = process.env.FLUREE_HOST

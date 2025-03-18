@@ -88,8 +88,8 @@ export const ProjectListTable = (props: ProjectListTableProps) => {
                   <TableCell>{item.title}</TableCell>
                   <TableCell>{item.identifier}</TableCell>
                   <TableCell>{item.description}</TableCell>
-                  <TableCell>{item.start_date.toString()}</TableCell>
-                  <TableCell>{item.end_date.toString()}</TableCell>
+                  <TableCell>{item.start_date?.toString()}</TableCell>
+                  <TableCell>{item.end_date?.toString()}</TableCell>
                   <TableCell align="right">
                     <MenuActions
                       anchor={menuAnchor && item['@id'] === menuAnchor[1] && menuAnchor[0]}

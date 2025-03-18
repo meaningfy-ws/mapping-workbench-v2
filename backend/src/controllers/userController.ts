@@ -4,9 +4,6 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import {jwtDecode, JwtPayload} from "jwt-decode";
 import fs from 'fs/promises'
-import dotenv from "dotenv";
-
-dotenv.config()
 
 interface User {
     id: number;

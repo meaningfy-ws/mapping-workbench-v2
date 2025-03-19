@@ -42,7 +42,7 @@
     "@reduxjs/toolkit": "1.9.5",
     "@untitled-ui/icons-react": "0.1.1",
     "apexcharts": "3.41.0",
-    "aws-amplify": "5.3.3",
+    "aws-amplify": "5.3.27",
     "axios": "^1.7.9",
     "cors": "^2.8.5",
     "date-fns": "2.30.0",

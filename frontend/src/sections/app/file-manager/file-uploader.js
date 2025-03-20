@@ -51,7 +51,7 @@ export const FileUploader = (props) => {
           setProgress((e) => e + incStep);
           if (index + 1 === files.length) {
             setProgress(0);
-            onUpload({ rdf_files: uploadData }).then((res) => {
+            onUpload(uploadData).then((res) => {
               setUploading(false);
               onGetItems ? onGetItems() : router.reload();
               onClose();

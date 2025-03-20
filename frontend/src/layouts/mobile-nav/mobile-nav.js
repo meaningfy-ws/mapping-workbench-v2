@@ -1,3 +1,4 @@
+import Typography from '@mui/material/Typography';
 import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
@@ -11,7 +12,6 @@ import { RouterLink } from 'src/components/router-link';
 import { Scrollbar } from 'src/components/scrollbar';
 import { usePathname } from 'src/hooks/use-pathname';
 import { paths } from 'src/paths';
-import { TenantSwitch } from '../tenant-switch';
 import { MobileNavSection } from './mobile-nav-section';
 
 const MOBILE_NAV_WIDTH = 280;
@@ -158,7 +158,12 @@ export const MobileNav = (props) => {
             >
               <Logo size={32} />
             </Box>
-            <TenantSwitch sx={{ flexGrow: 1 }} />
+            <Typography
+              color="inherit"
+              variant="h7"
+            >
+              Mapping WorkBench 2
+            </Typography>
           </Stack>
           <Stack
             component="nav"

@@ -1,11 +1,8 @@
 import { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import File04Icon from '@untitled-ui/icons-react/build/esm/File04';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 import Stack from '@mui/material/Stack';
-import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
 
@@ -14,7 +11,6 @@ import { RouterLink } from 'src/components/router-link';
 import { Scrollbar } from 'src/components/scrollbar';
 import { usePathname } from 'src/hooks/use-pathname';
 import { paths } from 'src/paths';
-import { TenantSwitch } from '../tenant-switch';
 import { SideNavSection } from './side-nav-section';
 
 const SIDE_NAV_WIDTH = 280;
@@ -201,9 +197,14 @@ export const SideNav = (props) => {
                 width: 40,
               }}
             >
-              <Logo size={36}/>
+              <Logo size={36} />
             </Box>
-            <TenantSwitch sx={{ flexGrow: 1 }} />
+            <Typography
+              color="inherit"
+              variant="h7"
+            >
+              Mapping WorkBench 2
+            </Typography>
           </Stack>
           <Stack
             component="nav"

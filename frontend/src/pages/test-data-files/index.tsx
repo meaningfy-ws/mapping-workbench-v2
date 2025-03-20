@@ -62,7 +62,8 @@ const Page = () => {
   return (
     <>
       <Seo title="App: Resource Manager" />
-      <Stack spacing={4}>
+      <Stack spacing={4}
+             mx={2}>
         <Stack
           direction="row"
           justifyContent="space-between"

@@ -5,8 +5,10 @@ import SvgIcon from '@mui/material/SvgIcon';
 import HomeSmileIcon from 'src/icons/untitled-ui/duocolor/home-smile';
 import Lock01Icon from 'src/icons/untitled-ui/duocolor/lock-01';
 import XSquareIcon from 'src/icons/untitled-ui/duocolor/x-square';
+
 import DescriptionIcon from '@mui/icons-material/Description';
 import AbcIcon from '@mui/icons-material/Abc';
+import ChecklistIcon from '@mui/icons-material/Checklist';
 
 import { tokens } from 'src/locales/tokens';
 import { paths } from 'src/paths';
@@ -32,7 +34,7 @@ export const useSections = () => {
             path: paths.projects.index,
             icon: (
               <SvgIcon fontSize="small">
-                <HomeSmileIcon />
+                <ChecklistIcon />
               </SvgIcon>
             ),
           },

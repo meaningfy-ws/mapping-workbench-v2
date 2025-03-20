@@ -8,7 +8,7 @@ export const uploadMappingResource = async ({
   id: string;
   files: MappingResources[];
 }) => {
-  return api.post('/api/post', { insert: { '@id': id, ...files } });
+  return api.post('/api/post', { insert: { '@id': id, rdf_files: files } });
 };
 
 export const deleteResource = async (id: string) => {

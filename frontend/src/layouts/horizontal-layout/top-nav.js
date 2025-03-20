@@ -18,7 +18,6 @@ import { AccountButton } from '../account-button';
 import { ContactsButton } from '../contacts-button';
 import { LanguageSwitch } from '../language-switch';
 import { NotificationsButton } from '../notifications-button';
-import { TenantSwitch } from '../tenant-switch';
 import { TopNavSection } from './top-nav-section';
 
 const useCssVars = (color) => {

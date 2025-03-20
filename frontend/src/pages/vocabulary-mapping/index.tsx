@@ -62,7 +62,10 @@ const Page = () => {
   return (
     <>
       <Seo title="App: Resource Manager" />
-      <Stack spacing={4}>
+      <Stack
+        spacing={4}
+        mx={2}
+      >
         <Stack
           direction="row"
           justifyContent="space-between"
@@ -76,7 +79,8 @@ const Page = () => {
             direction="row"
             spacing={3}
           >
-            <Button id='upload_button'
+            <Button
+              id="upload_button"
               onClick={uploadDialog.handleOpen}
               startIcon={<UploadIcon />}
             >

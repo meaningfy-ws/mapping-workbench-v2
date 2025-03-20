@@ -20,6 +20,7 @@ import {
 } from '../../api/vocabulary-mapping';
 import { sessionApi } from '../../api/session';
 import { MappingResources } from '../../models/mapping-resources';
+import {paths} from "../../paths";
 
 const Page = () => {
   const [view, setView] = useState('grid');
@@ -101,6 +102,7 @@ const Page = () => {
             onPageChange={itemsSearch.handlePageChange}
             onRowsPerPageChange={itemsSearch.handleRowsPerPageChange}
             page={itemsSearch.state.page}
+            path={paths.vocabularyMapping.edit}
             rowsPerPage={itemsSearch.state.rowsPerPage}
             view={view}
             onGetItems={handleItemsGet}

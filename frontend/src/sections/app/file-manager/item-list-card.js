@@ -13,17 +13,16 @@ import { usePopover } from 'src/hooks/use-popover';
 
 import { ItemIcon } from './item-icon';
 import { ItemMenu } from './item-menu';
-import { paths } from '../../../paths';
 import { useRouter } from 'src/hooks/use-router';
 
 export const ItemListCard = (props) => {
   const router = useRouter();
-  const { item, handleDelete } = props;
+  const { item, handleDelete, path } = props;
   const popover = usePopover();
 
   const handleEdit = (item_id) => {
     router.push({
-      pathname: paths.mappingResources.edit,
+      pathname: path,
       query: { id: item_id },
     });
   };

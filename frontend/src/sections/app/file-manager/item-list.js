@@ -24,6 +24,7 @@ export const ItemList = (props) => {
     view = 'grid',
     onGetItems = () => {},
     handleDelete = () => {},
+    path,
   } = props;
 
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -47,6 +48,7 @@ export const ItemList = (props) => {
             <ItemListCard
               key={item?.['@id']}
               item={item}
+              path={path}
               onGetItems={onGetItems}
               handleDelete={() => setConfirmOpen(item['@id'])}
             />
@@ -69,6 +71,7 @@ export const ItemList = (props) => {
                 {items.map((item) => (
                   <ItemListRow
                     key={item['@id']}
+                    path={path}
                     item={item}
                     onGetItems={onGetItems}
                     onDelete={() => setConfirmOpen(item['@id'])}
@@ -122,4 +125,5 @@ ItemList.propTypes = {
   view: PropTypes.oneOf(['grid', 'list']),
   onGetItems: PropTypes.func,
   handleDelete: PropTypes.func,
+  path: PropTypes.string
 };

@@ -8,6 +8,7 @@ export const paths = {
   },
   testDataFiles: {
     index: '/test-data-files',
+    edit: '/test-data-files/[id]/edit'
   },
   projects: {
     index: '/',

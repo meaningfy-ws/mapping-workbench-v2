@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import * as Yup from 'yup';
-import {FormikErrors, FormikHelpers, useFormik} from 'formik';
+import {FormikHelpers, useFormik} from 'formik';
 
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -18,10 +18,10 @@ import { FormTextField } from 'src/components/form/text-field';
 import { toastError, toastLoad, toastSuccess } from 'src/components/app-toast';
 import CodeMirrorDefault from 'src/components/form/codeMirrorDefault';
 import { Layout as AppLayout } from '../../../layouts';
-import { getMappingResource, updateMappingResource } from '../../../api/vocabulary-mapping';
+import { getMappingResource, updateMappingResource } from '../../../api/test-data-files';
 import { useRouter } from 'next/router';
 import { MappingResources } from '../../../models/mapping-resources';
-import { Seo } from '../../../components/seo';
+import {Seo} from "../../../components/seo";
 
 export const Page = () => {
   const router = useRouter();
@@ -89,13 +89,13 @@ export const Page = () => {
 
   const handleFile = (e) => {
     getFileContent(e.target.files[0])
-      .then((res: string) => formik.setFieldValue('content', res))
+      .then((res) => formik.setFieldValue('content', res))
       .catch((err) => console.error(err));
   };
 
   return (
     <>
-      <Seo title="App: Edit Resource Manager" />
+      <Seo title='App: Edit Resource Manager'/>
       <form
         encType="multipart/form-data"
         onSubmit={formik.handleSubmit}

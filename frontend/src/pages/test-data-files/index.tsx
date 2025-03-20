@@ -20,6 +20,7 @@ import {
 } from '../../api/test-data-files';
 import { sessionApi } from '../../api/session';
 import { MappingResources } from '../../models/mapping-resources';
+import {paths} from "../../paths";
 
 const Page = () => {
   const [view, setView] = useState('grid');
@@ -100,6 +101,7 @@ const Page = () => {
             page={itemsSearch.state.page}
             rowsPerPage={itemsSearch.state.rowsPerPage}
             view={view}
+            path={paths.testDataFiles.edit}
             onGetItems={handleItemsGet}
             handleDelete={handleDelete}
           />

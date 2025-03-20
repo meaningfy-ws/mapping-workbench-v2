@@ -17,7 +17,7 @@ import {
   deleteResource,
   getMappingResources,
   uploadMappingResource,
-} from '../../api/mapping-resources';
+} from '../../api/vocabulary-mapping';
 import { sessionApi } from '../../api/session';
 import { MappingResources } from '../../models/mapping-resources';
 

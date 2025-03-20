@@ -4,7 +4,10 @@ export const paths = {
   contact: '/contact',
   mappingResources: {
     index: '/mapping-resources',
-    edit: '/mapping-resources/[id]/edit'
+    edit: '/mapping-resources/[id]/edit',
+  },
+  testDataFiles: {
+    index: '/test-data-files',
   },
   projects: {
     index: '/',

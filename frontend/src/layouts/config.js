@@ -5,6 +5,9 @@ import SvgIcon from '@mui/material/SvgIcon';
 import HomeSmileIcon from 'src/icons/untitled-ui/duocolor/home-smile';
 import Lock01Icon from 'src/icons/untitled-ui/duocolor/lock-01';
 import XSquareIcon from 'src/icons/untitled-ui/duocolor/x-square';
+import DescriptionIcon from '@mui/icons-material/Description';
+import AbcIcon from '@mui/icons-material/Abc';
+
 import { tokens } from 'src/locales/tokens';
 import { paths } from 'src/paths';
 
@@ -38,7 +41,16 @@ export const useSections = () => {
             path: paths.mappingResources.index,
             icon: (
               <SvgIcon fontSize="small">
-                <HomeSmileIcon />
+                <AbcIcon />
+              </SvgIcon>
+            ),
+          },
+          {
+            title: t(tokens.nav.testDataFiles),
+            path: paths.testDataFiles.index,
+            icon: (
+              <SvgIcon fontSize="small">
+                <DescriptionIcon />
               </SvgIcon>
             ),
           },

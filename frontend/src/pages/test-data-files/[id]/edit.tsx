@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import * as Yup from 'yup';
-import {FormikHelpers, useFormik} from 'formik';
+import { FormikHelpers, useFormik } from 'formik';
 
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -21,7 +21,7 @@ import { Layout as AppLayout } from '../../../layouts';
 import { getMappingResource, updateMappingResource } from '../../../api/test-data-files';
 import { useRouter } from 'next/router';
 import { MappingResources } from '../../../models/mapping-resources';
-import {Seo} from "../../../components/seo";
+import { Seo } from '../../../components/seo';
 
 export const Page = () => {
   const router = useRouter();
@@ -87,15 +87,19 @@ export const Page = () => {
       reader.readAsText(file);
     });
 
-  const handleFile = (e) => {
-    getFileContent(e.target.files[0])
-      .then((res) => formik.setFieldValue('content', res))
-      .catch((err) => console.error(err));
+  const handleFile = (e: ChangeEvent) => {
+    try {
+      const target = e.target as HTMLInputElement;
+      const res = getFileContent(target.files[0]);
+      formik.setFieldValue('content', res);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
     <>
-      <Seo title='App: Edit Resource Manager'/>
+      <Seo title="App: Edit Test Data Files" />
       <form
         encType="multipart/form-data"
         onSubmit={formik.handleSubmit}

@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import * as Yup from 'yup';
-import {FormikErrors, FormikHelpers, useFormik} from 'formik';
+import { FormikHelpers, useFormik } from 'formik';
 
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -87,10 +87,14 @@ export const Page = () => {
       reader.readAsText(file);
     });
 
-  const handleFile = (e) => {
-    getFileContent(e.target.files[0])
-      .then((res: string) => formik.setFieldValue('content', res))
-      .catch((err) => console.error(err));
+  const handleFile = (e: ChangeEvent) => {
+    try {
+      const target = e.target as HTMLInputElement;
+      const res = getFileContent(target.files[0]);
+      formik.setFieldValue('content', res);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

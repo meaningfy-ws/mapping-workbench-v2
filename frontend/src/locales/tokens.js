@@ -4,7 +4,7 @@ export const tokens = {
   },
   nav: {
     projects: 'nav.projects',
-    mappingResources: 'nav.mappingResources',
+    vocabularyMapping: 'nav.vocabularyMapping',
     testDataFiles: 'nav.testDataFiles',
     academy: 'nav.academy',
     account: 'nav.account',

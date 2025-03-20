@@ -69,7 +69,7 @@ const Page = () => {
           spacing={4}
         >
           <Stack spacing={1}>
-            <Typography variant="h4">{`Mapping Resources`}</Typography>
+            <Typography variant="h4">Test Data Files</Typography>
           </Stack>
           <Stack
             alignItems="center"

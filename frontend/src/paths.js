@@ -2,9 +2,9 @@ export const paths = {
   index: '/',
   checkout: '/checkout',
   contact: '/contact',
-  mappingResources: {
-    index: '/mapping-resources',
-    edit: '/mapping-resources/[id]/edit',
+  vocabularyMapping: {
+    index: '/vocabulary-mapping',
+    edit: '/vocabulary-mapping/[id]/edit',
   },
   testDataFiles: {
     index: '/test-data-files',

@@ -37,8 +37,8 @@ export const useSections = () => {
             ),
           },
           {
-            title: t(tokens.nav.mappingResources),
-            path: paths.mappingResources.index,
+            title: t(tokens.nav.vocabularyMapping),
+            path: paths.vocabularyMapping.index,
             icon: (
               <SvgIcon fontSize="small">
                 <AbcIcon />

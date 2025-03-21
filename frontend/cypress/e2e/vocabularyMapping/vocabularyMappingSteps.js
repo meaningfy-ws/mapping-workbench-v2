@@ -36,11 +36,11 @@ Then('I get success created', () => {
   cy.wait('@create').its('response.statusCode').should('eq', 200);
 });
 
-Then('I click on mapping resources', () => {
-  cy.get('#nav_mapping_resources').click();
+Then('I click on Vocabulary Mapping', () => {
+  cy.get('#nav_vocabulary_mapping').click();
 });
 
-Then('I get redirected to mapping resources page', () => {
+Then('I get redirected to Vocabulary Mapping page', () => {
   cy.title().should('eq', 'App: Resource Manager | Mapping Workbench 2');
 });
 

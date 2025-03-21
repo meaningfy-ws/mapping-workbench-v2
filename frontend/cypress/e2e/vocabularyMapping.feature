@@ -8,11 +8,10 @@ Feature: Entry Projects
 
     When I open actions menu
     When I select project
-    Then I click on mapping resources
-    Then I get redirected to mapping resources page
+    Then I click on Vocabulary Mapping
+    Then I get redirected to Vocabulary Mapping page
 
-
-  Scenario: Upload Mapping Resources
+  Scenario: Upload Vocabulary Mapping
 
     When I click on upload resource button
     Then I select file

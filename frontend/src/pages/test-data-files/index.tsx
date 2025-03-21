@@ -62,7 +62,7 @@ const Page = () => {
 
   return (
     <>
-      <Seo title="App: Resource Manager" />
+      <Seo title="App: Test Data Files" />
       <Stack spacing={4}
              mx={2}>
         <Stack
